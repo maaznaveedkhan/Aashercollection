@@ -25,19 +25,39 @@
                     <table class="table">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Product Name</th>
-                                <th scope="col">Price</th>
+                                {{-- <th scope="col">#</th> --}}
+                                <th scope="col">Order No</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Date</th>
+                                <th scope="col">Total Products</th>
+                                <th scope="col">Total Amount</th>
+                                <th scope="col">Product Name</th>
+                                <th scope="col">Detail</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($orders->order_items as $item)
+                       @php
+                           use App\Models\Product;
+
+                       @endphp
+                            @foreach ($orders as $order)
                             <tr>
-                                <th scope="row">{{ $item->id }}</th>
-                                <td>{{ $item->product_id }}</td>
-                                <td>Rs. {{ $item->order_id }}</td>
+                                <td>{{ $order->order_number }}</td>
+                                <td>{{ $order->status }}</td>
+                                <td>{{ $order->item_count }}</td>
+                                <td>{{ $order->total }}</td>
+                                <td>
+                                    
+                                       
+                                    @foreach($order->order_items as $orderitem)
+                                        @php
+                                        $product = Product::findOrFail($orderitem->product_id);
+                                        @endphp
+                                       {{$product->name}}
+                                    @endforeach
+                                </td>
+                                <td>
+                                    <a href="{{route('order_detail',$order->id)}}" class="button">View Detail</a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>

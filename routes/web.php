@@ -46,7 +46,8 @@ Route::group(['middleware' => ['user', 'auth']], function () {
     Route::get('user/home', [HomeController::class, 'user_dashboard'])->name('user_dashboard');
     Route::get('user/add_info', [App\Http\Controllers\UserInfoController::class, 'index'])->name('add_info');
     Route::post('update_info/{id}', [App\Http\Controllers\UserInfoController::class, 'add_info'])->name('update_info');
-    Route::get('user/my_orders', [App\Http\Controllers\OrderController::class, 'my_orders'])->name('my_orders');
+    Route::get('user/my_orders', [App\Http\Controllers\OrderController::class, 'orders'])->name('my_orders');
+    Route::get('user/order_detail/{id}', [App\Http\Controllers\OrderController::class, 'order_detail'])->name('order_detail');
 });
 // Admin Routes
 Route::group(['middleware' => ['admin', 'auth']], function () {

@@ -1,5 +1,8 @@
 @extends('user.layouts.appuser')
 @section('content')
+@php
+  use App\Models\Order;
+@endphp
 <!-- Sale & Revenue Start -->
 <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
@@ -7,8 +10,8 @@
             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                 <i class="fa fa-chart-line fa-3x text-primary"></i>
                 <div class="ms-3">
-                    <p class="mb-2">Today Sale</p>
-                    <h6 class="mb-0">$1234</h6>
+                    <p class="mb-2">Total Orders</p>
+                    <h6 class="mb-0">{{ count(Order::where('user_id',Auth::user()->id)->get()) }}</h6>
                 </div>
             </div>
         </div>
@@ -16,8 +19,8 @@
             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                 <i class="fa fa-chart-bar fa-3x text-primary"></i>
                 <div class="ms-3">
-                    <p class="mb-2">Total Sale</p>
-                    <h6 class="mb-0">$1234</h6>
+                    <p class="mb-2">Pending Orders</p>
+                    <h6 class="mb-0">{{ count(Order::where('status','cancelled')->where('user_id',Auth::user()->id)->get()) }}</h6>
                 </div>
             </div>
         </div>
@@ -25,8 +28,8 @@
             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                 <i class="fa fa-chart-area fa-3x text-primary"></i>
                 <div class="ms-3">
-                    <p class="mb-2">Today Revenue</p>
-                    <h6 class="mb-0">$1234</h6>
+                    <p class="mb-2">Delivered Orders</p>
+                    <h6 class="mb-0">{{ count(Order::where('status','cancelled')->where('user_id',Auth::user()->id)->get()) }}</h6>
                 </div>
             </div>
         </div>
@@ -34,8 +37,8 @@
             <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                 <i class="fa fa-chart-pie fa-3x text-primary"></i>
                 <div class="ms-3">
-                    <p class="mb-2">Total Revenue</p>
-                    <h6 class="mb-0">$1234</h6>
+                    <p class="mb-2">Cancelled Orders</p>
+                    <h6 class="mb-0">{{ count(Order::where('status','cancelled')->where('user_id',Auth::user()->id)->get()) }}</h6>
                 </div>
             </div>
         </div>
@@ -45,7 +48,7 @@
 
 
 <!-- Sales Chart Start -->
-<div class="container-fluid pt-4 px-4">
+{{-- <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
         <div class="col-sm-12 col-xl-6">
             <div class="bg-light text-center rounded p-4">
@@ -66,12 +69,12 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <!-- Sales Chart End -->
 
 
 <!-- Recent Sales Start -->
-<div class="container-fluid pt-4 px-4">
+{{-- <div class="container-fluid pt-4 px-4">
     <div class="bg-light text-center rounded p-4">
         <div class="d-flex align-items-center justify-content-between mb-4">
             <h6 class="mb-0">Recent Salse</h6>
@@ -140,12 +143,12 @@
             </table>
         </div>
     </div>
-</div>
+</div> --}}
 <!-- Recent Sales End -->
 
 
 <!-- Widgets Start -->
-<div class="container-fluid pt-4 px-4">
+{{-- <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
         <div class="col-sm-12 col-md-6 col-xl-4">
             <div class="h-100 bg-light rounded p-4">
@@ -262,6 +265,6 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 <!-- Widgets End -->
 @endsection
