@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -44,6 +45,12 @@ class CategoryController extends Controller
         return redirect()->route('admin_categories')->with('success', 'Category has been delete!');
     }
 
+    public function popular_categories($id){
+        $category = Category::find($id);
+        $products = Product::where('category_id',$category)->get();
+        return view('frontend.popular_categories');
+    }
+
     public function about_us()
     {
         return view('frontend.aboutus');
@@ -52,5 +59,9 @@ class CategoryController extends Controller
     public function contact_us()
     {
         return view('frontend.contactus');
+    }
+
+    public function privacy_policy(){
+        return view('frontend.privacy_policy');
     }
 }

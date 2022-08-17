@@ -1,6 +1,5 @@
 <!doctype html>
 <html class="no-js" lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -19,6 +18,10 @@
 
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
+    @php
+    use App\Models\Category;
+        $categories = Category::all();
+    @endphp
 
 </head>
 
@@ -339,7 +342,7 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="logo">
-                                <a href="index.html"><img src="{{ asset('frontend/img/logo/logo.png') }}"
+                                <a href="index.html"><img src="{{ asset('frontend/img/logo.jpg') }}"
                                         alt=""></a>
                             </div>
                         </div>
@@ -552,7 +555,7 @@
                             <div class="main_menu">
                                 <nav>
                                     <ul>
-                                        <li class="active"><a href="{{ route('/') }}">Home </a>
+                                        <li class=""><a href="{{ route('/') }}">Home </a>
                                             {{-- <ul class="sub_menu pages">
                                                 <li><a href="index.html">Home 1</a></li>
                                                 <li><a href="index-2.html">Home 2</a></li>
@@ -568,9 +571,12 @@
                                         <li class="mega_items"><a href="shop.html">shop <i
                                                     class="fa fa-angle-down"></i></a>
                                             <ul class="mega_menu">
-                                                <li><a href="#">Shop Layouts</a>
+                                                <li><a href="#">Categories</a>
                                                     <ul>
-                                                        <li><a href="shop-fullwidth.html">Full Width</a></li>
+                                                        @foreach ($categories as $item)
+                                                        <li><a href="{{ route('popular_categories',$item->id) }}">{{ $item->title }}</a></li>
+                                                        @endforeach
+                                                        
                                                         <li><a href="shop-fullwidth-list.html">Full Width list</a></li>
                                                         <li><a href="shop-right-sidebar.html">Right Sidebar </a></li>
                                                         <li><a href="shop-right-sidebar-list.html"> Right Sidebar
@@ -578,7 +584,7 @@
                                                         <li><a href="shop-list.html">List View</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="#">other Pages</a>
+                                                {{-- <li><a href="#">other Pages</a>
                                                     <ul>
                                                         <li><a href="portfolio.html">portfolio</a></li>
                                                         <li><a href="portfolio-details.html">portfolio details</a></li>
@@ -608,30 +614,28 @@
 
                                                     </ul>
                                                 </li>
-                                                <li class="banner_menu"><a href="#"><img
-                                                            src="{{ asset('frontend/img/bg/banner1.jpg') }}"
-                                                            alt=""></a></li>
+                                                <li class="banner_menu"><a href="#"><img src="{{ asset('frontend/img/bg/banner1.jpg') }}" alt=""></a></li> --}}
                                             </ul>
                                         </li>
-                                        <li><a href="blog.html">blog <i class="fa fa-angle-down"></i></a>
+                                        {{-- <li><a href="blog.html">blog <i class="fa fa-angle-down"></i></a>
                                             <ul class="sub_menu pages">
                                                 <li><a href="blog-details.html">blog details</a></li>
                                                 <li><a href="blog-sidebar.html">blog Sidebar</a></li>
                                                 <li><a href="blog-fullwidth.html">blog fullwidth</a></li>
                                             </ul>
-                                        </li>
+                                        </li> --}}
                                         <li><a href="#">pages <i class="fa fa-angle-down"></i></a>
                                             <ul class="sub_menu pages">
                                                 <li><a href="{{ route('about_us') }}">About Us</a></li>
-                                                <li><a href="services.html">services</a></li>
-                                                <li><a href="faq.html">Frequently Questions</a></li>
+                                                <li><a href="services.html">Contact Us</a></li>
+                                                {{-- <li><a href="faq.html">Frequently Questions</a></li>
                                                 <li><a href="{{ route('login') }}">login</a></li>
                                                 <li><a href="my-account.html">my account</a></li>
                                                 <li><a href="wishlist.html">Wishlist</a></li>
                                                 <li><a href="404.html">Error 404</a></li>
-                                                <li><a href="compare.html">compare</a></li>
-                                                <li><a href="privacy-policy.html">privacy policy</a></li>
-                                                <li><a href="coming-soon.html">coming soon</a></li>
+                                                <li><a href="compare.html">compare</a></li> --}}
+                                                <li><a href="{{ route('privacy_policy') }}">privacy policy</a></li>
+                                                {{-- <li><a href="coming-soon.html">coming soon</a></li> --}}
                                             </ul>
                                         </li>
                                         <li><a href="#">Specials</a></li>
@@ -734,8 +738,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <div class="copyright_area">
-                            <p> &copy; 2021 <strong> Reid </strong> Mede with ❤️ by <a href="https://hasthemes.com/"
-                                    target="_blank"><strong>HasThemes</strong></a></p>
+                            <p> &copy; 2022 <strong> Aasheir Collection </strong> </p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">

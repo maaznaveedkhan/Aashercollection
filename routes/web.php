@@ -19,18 +19,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     $products = Product::paginate(20);
+    $popular_categories = Category::paginate(3);
    $categories = Category::with('products')->get();
     // dd($categories);
     // $categories = Category::all();
-    return view('frontend.index', compact('products', 'categories'));
+    return view('frontend.index', compact('products', 'categories','popular_categories'));
 })->name('/');
 Route::get('about_us', [App\Http\Controllers\CategoryController::class, 'about_us'])->name('about_us');
 Route::get('contact_us', [App\Http\Controllers\CategoryController::class, 'contact_us'])->name('contact_us');
 Route::get('produts_detail/{id}', [App\Http\Controllers\ProductController::class, 'product_detail'])->name('product_detail');
+Route::get('popular_categories/{id}', [App\Http\Controllers\CategoryController::class, 'popular_categories'])->name('popular_categories');
 Route::get('cart', [App\Http\Controllers\CartController::class, 'cart'])->name('cart');
 Route::get('add-to-cart/{id}', [App\Http\Controllers\CartController::class, 'addToCart'])->name('add.to.cart');
 Route::patch('update-cart', [App\Http\Controllers\CartController::class, 'update'])->name('update.cart');
 Route::delete('remove-from-cart', [App\Http\Controllers\CartController::class, 'remove'])->name('remove.from.cart');
+Route::get('privacy_policy', [App\Http\Controllers\CategoryController::class, 'privacy_policy'])->name('privacy_policy');
 Route::group(['middleware' => ['auth']], function () {
     //Checkout
     Route::get('checkout', [App\Http\Controllers\OrderController::class, 'checkout'])->name('checkout');

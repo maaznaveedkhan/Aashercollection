@@ -4,7 +4,21 @@
     <section class="banner_section banner_section_eight">
         <div class="container-fluid">
             <div class="row ">
+                @foreach ($popular_categories as $item)
                 <div class="col-lg-4 col-md-6">
+                    <div class="banner_area">
+                        <div class="banner_thumb">
+                            <a href="{{ route('popular_categories',$item->id) }}"><img src="{{ asset('images/category_images/'.$item->image) }}" alt="#"></a>
+                            <div class="banner_content">
+                               <h1>#{{ $item->title }}</h1>
+                               <p>Sale 10% Off Almost Everything</p>
+                                <a href="{{ route('popular_categories',$item->id) }}">Discover Now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+                {{-- <div class="col-lg-4 col-md-6">
                     <div class="banner_area">
                         <div class="banner_thumb">
                             <a href="shop.html"><img src="{{ asset('frontend/img/bg/banner29.jpg') }}" alt="#"></a>
@@ -39,7 +53,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
@@ -2400,52 +2414,13 @@
                             <div class="single_instagram">
                                 <a href="#"><img src="{{ asset('images/product_images/'.$item->product_thumbnail) }}" alt=""></a>
                                 <div class="instagram_icone">
-                                    <a class="instagram_pupop" href="{{ asset('frontend/img/about/intagram.png') }}"><i class="fa fa-instagram"></i></a>
+                                    <a class="instagram_pupop" href="{{ asset('images/product_images/'.$item->product_thumbnail) }}"><i class="fa fa-instagram"></i></a>
                                 </div>
                             </div>
                         </div>
                         @endforeach
                        
-                       <div class="col-lg-3">
-                           <div class="single_instagram">
-                               <a href="#"><img src="{{ asset('frontend/img/about/intagram1.png') }}" alt=""></a>
-                               <div class="instagram_icone">
-                                   <a class="instagram_pupop" href="{{ asset('frontend/img/about/intagram1.png') }}"><i class="fa fa-instagram"></i></a>
-                               </div>
-                           </div>
-                       </div>
-                       <div class="col-lg-3">
-                           <div class="single_instagram">
-                               <a href="#"><img src="{{ asset('frontend/img/about/intagram2.png') }}" alt=""></a>
-                               <div class="instagram_icone">
-                                   <a class="instagram_pupop" href="{{ asset('frontend/img/about/intagram2.png') }}"><i class="fa fa-instagram"></i></a>
-                               </div>
-                           </div>
-                       </div>
-                       <div class="col-lg-3">
-                           <div class="single_instagram">
-                               <a href="#"><img src="{{ asset('frontend/img/about/intagram3(1).png') }}" alt=""></a>
-                               <div class="instagram_icone">
-                                   <a class="instagram_pupop" href="{{ asset('frontend/img/about/intagram3(1).png') }}"><i class="fa fa-instagram"></i></a>
-                               </div>
-                           </div>
-                       </div>
-                       <div class="col-lg-3">
-                           <div class="single_instagram">
-                               <a href="#"><img src="{{ asset('frontend/img/about/intagram4(1).png') }}" alt=""></a>
-                               <div class="instagram_icone">
-                                   <a class="instagram_pupop" href="{{ asset('frontend/img/about/intagram4(1).png') }}"><i class="fa fa-instagram"></i></a>
-                               </div>
-                           </div>
-                       </div>
-                       <div class="col-lg-3">
-                           <div class="single_instagram">
-                               <a href="#"><img src="{{ asset('frontend/img/about/intagram1.png') }}" alt=""></a>
-                               <div class="instagram_icone">
-                                   <a class="instagram_pupop" href="{{ asset('frontend/img/about/intagram1.png') }}"><i class="fa fa-instagram"></i></a>
-                               </div>
-                           </div>
-                       </div>
+                       
                    </div>
                    <div class="col-12">
                        <div class="text_follow">
