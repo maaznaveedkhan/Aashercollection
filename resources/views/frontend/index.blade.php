@@ -80,7 +80,7 @@
                             <ul class="nav" role="tablist">
                                 @foreach ($categories as $key=>$item)
                                 <li>
-                                    <a class="active" data-bs-toggle="tab" href="#{{ $key }}" role="tab" aria-controls="clothing" aria-selected="true">{{ $item->title }}</a>
+                                    <a class="{{$key == 0 ? 'active':''}}" data-bs-toggle="tab" href="#{{ $key }}" role="tab" aria-controls="{{$key}}" aria-selected="{{$key == 0 ? 'true':''}}">{{ $item->title }}</a>
                                 </li>
                                 @endforeach
                                 {{-- <li>
@@ -101,7 +101,7 @@
                 </div>
                 <div class="tab-content">
                     @foreach ($categories as $key=>$item)
-                        <div class="tab-pane fade show active" id="{{ $key }}" role="tabpanel">
+                        <div class="tab-pane fade {{$key == 0 ? 'show active' : ''}}" id="{{ $key }}" role="tabpanel">
                             <div class="product_container">
                                 <div class="row product_rows_column4">
                                     @foreach ($item->products as $item)
@@ -267,7 +267,7 @@
                             </div>
                         </div>
                     @endforeach
-                      <div class="tab-pane fade show active" id="clothing" role="tabpanel">
+                      <div class="tab-pane fade" id="clothing" role="tabpanel">
                              <div class="product_container">
                                 <div class="row product_rows_column4">
                                     <div class="col-lg-3">
@@ -2395,14 +2395,17 @@
            <div class="instagram_home_block">
                 <div class="row">
                     <div class="instagram_wrapper instagram_column5 owl-carousel">
-                       <div class="col-lg-3">
-                           <div class="single_instagram">
-                               <a href="#"><img src="{{ asset('frontend/img/about/intagram.png') }}" alt=""></a>
-                               <div class="instagram_icone">
-                                   <a class="instagram_pupop" href="{{ asset('frontend/img/about/intagram.png') }}"><i class="fa fa-instagram"></i></a>
-                               </div>
-                           </div>
-                       </div>
+                        @foreach ($products as $item)
+                        <div class="col-lg-3">
+                            <div class="single_instagram">
+                                <a href="#"><img src="{{ asset('images/product_images/'.$item->product_thumbnail) }}" alt=""></a>
+                                <div class="instagram_icone">
+                                    <a class="instagram_pupop" href="{{ asset('frontend/img/about/intagram.png') }}"><i class="fa fa-instagram"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                       
                        <div class="col-lg-3">
                            <div class="single_instagram">
                                <a href="#"><img src="{{ asset('frontend/img/about/intagram1.png') }}" alt=""></a>

@@ -6,7 +6,7 @@ use App\Models\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class WomenSection extends Seeder
+class MenSectionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,11 +15,7 @@ class WomenSection extends Seeder
      */
     public function run()
     {
-        
-        Product::create([
-            'category_id' => 2,
-            'name' => 'A New Hope',
-            'short_description' => '1977'
-        ]);
+        //
+        Product::factory()->count(12)->create();
     }
 }

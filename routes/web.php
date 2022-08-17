@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    $products = Product::all();
+    $products = Product::paginate(20);
    $categories = Category::with('products')->get();
     // dd($categories);
     // $categories = Category::all();
