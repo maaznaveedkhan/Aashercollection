@@ -20,7 +20,7 @@
     <div class="row g-4">
         <div class="col-12">
             <div class="bg-light rounded h-100 p-4">
-                <h6 class="mb-4">New Orders</h6>
+                <h6 class="mb-4">Orders in Process</h6>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -69,8 +69,7 @@
                                 <td>
                                     <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">Actions</a>
                                     <div class="dropdown-menu bg-white border-0">
-                                        <a href="{{ route('approve_order',$order->id) }}" class="dropdown-item">Approve Order</a>
-                                        <a href="{{ route('cancel_order',$order->id) }}" class="dropdown-item">Reject Order</a>
+                                        <a href="{{ route('order_on_delivery',$order->id) }}" class="dropdown-item">Dispatch Order</a>
                                     </div>
                                 </td>
                             </tr>

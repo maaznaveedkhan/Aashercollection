@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -59,7 +60,8 @@ class HomeController extends Controller
         $on_deliverey_orders = Order::where('status','ondelivery')->get();
         $delivered_orders = Order::where('status','delivered')->get();
         $cancelled_orders = Order::where('status','cancelled')->get();
-        
-        return view('admin.admin_dashboard',compact('total_orders','pending_orders','orders_in_process','on_deliverey_orders','delivered_orders','cancelled_orders'));
+        $products = Product::all();
+        $categories = Category::all();
+        return view('admin.admin_dashboard',compact('total_orders','pending_orders','orders_in_process','on_deliverey_orders','delivered_orders','cancelled_orders','products','categories'));
     }
 }

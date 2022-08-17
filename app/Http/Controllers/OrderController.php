@@ -153,9 +153,30 @@ class OrderController extends Controller
     //Admin Order Section
     public function admin_orders()  
     {  
-        $orders = Order::all();
+        $orders = Order::where('status','pending')->get();
         
         return view('admin.new_orders', compact('orders'));
+    }
+
+    public function order_processing()  
+    {  
+        $orders = Order::where('status','processing')->get();
+        
+        return view('admin.orders_in_process', compact('orders'));
+    }
+
+    public function dispatched_orders()  
+    {  
+        $orders = Order::where('status','ondelivery')->get();
+        
+        return view('admin.orders_on_delivery', compact('orders'));
+    }
+
+    public function cancelled_orders()  
+    {  
+        $orders = Order::where('status','cancelled')->get();
+        
+        return view('admin.cancelled_orders', compact('orders'));
     }
 
     public function admin_delivered_orders()  
@@ -185,5 +206,37 @@ class OrderController extends Controller
             'details' => $details,
             'products' => $products   //returning all the details, orders for accessing the details from Orders, details for accessing all the product's id from that order (OrderProduct and products for getting access to all the products (Products)
         ));
+    }
+
+    public function approve_order($id){
+        $order = Order::find($id);
+        $order->status = 'processing';
+        $order->save();
+
+        return redirect()->back()->with('success','Order has been approved!');
+    }
+
+    public function cancel_order($id){
+        $order = Order::find($id);
+        $order->status = 'cancelled';
+        $order->save();
+
+        return redirect()->back()->with('success','Order has been cancelled!');
+    }
+
+    public function order_on_delivery($id){
+        $order = Order::find($id);
+        $order->status = 'ondelivery';
+        $order->save();
+
+        return redirect()->back()->with('success','Order has been dispatched!');
+    }
+
+    public function delivered_order($id){
+        $order = Order::find($id);
+        $order->status = 'delivered';
+        $order->save();
+
+        return redirect()->back()->with('success','Order has been delivered!');
     }
 }

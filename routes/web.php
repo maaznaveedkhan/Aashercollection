@@ -68,5 +68,13 @@ Route::group(['middleware' => ['admin', 'auth']], function () {
     //Order
     Route::get('admin/new_orders', [App\Http\Controllers\OrderController::class, 'admin_orders'])->name('admin_orders');
     Route::get('admin/order_detail/{id}', [App\Http\Controllers\OrderController::class, 'admin_order_detail'])->name('admin_order_detail');
+    Route::get('admin/orders_in_process', [App\Http\Controllers\OrderController::class, 'order_processing'])->name('admin_processing_orders');
+    Route::get('admin/dispatched_orders', [App\Http\Controllers\OrderController::class, 'dispatched_orders'])->name('admin_dispatched_orders');
+    Route::get('admin/cancelled_orders', [App\Http\Controllers\OrderController::class, 'cancelled_orders'])->name('admin_cancelled_orders');
     Route::get('admin/delivered_orders', [App\Http\Controllers\OrderController::class, 'admin_delivered_orders'])->name('admin_delivered_orders');
+    //Order Status
+    Route::get('admin/approve_order/{id}', [App\Http\Controllers\OrderController::class, 'approve_order'])->name('approve_order');
+    Route::get('admin/cancel_order/{id}', [App\Http\Controllers\OrderController::class, 'cancel_order'])->name('cancel_order');
+    Route::get('admin/order_on_delivery/{id}', [App\Http\Controllers\OrderController::class, 'order_on_delivery'])->name('order_on_delivery');
+    Route::get('admin/order_delviered/{id}', [App\Http\Controllers\OrderController::class, 'delivered_order'])->name('order_delviered');
 });

@@ -36,11 +36,11 @@
                         </div>
                         <div class="mb-3">
                             <label for="shortdescription" class="form-label">Short Description</label>
-                            <input type="text" name="short_description" class="form-control" id="exampleInputPassword1">
+                            <input type="text" name="short_description" required class="form-control" id="exampleInputPassword1">
                         </div>
                         <div class="mb-3">
                             <label for="longdescription" class="form-label">Long Description</label>
-                            <input type="text" name="long_description" class="form-control" id="exampleInputPassword1">
+                            <input type="text" name="long_description" required class="form-control" id="exampleInputPassword1">
                         </div>
                         <div class="mb-3">
                             <label for="longdescription" class="form-label">Select Category</label>
@@ -55,11 +55,11 @@
 
                         <div class="mb-3">
                             <label for="image" class="form-label">Product Thumbnail</label>
-                            <input type="file" name="product_thumbnail" class="form-control" id="exampleInputPassword1">
+                            <input type="file" required name="product_thumbnail" class="form-control" id="exampleInputPassword1">
                         </div>
                         <div class="mb-3">
                             <label for="image" class="form-label">Product Images</label>
-                            <input type="file" multiple name="product_images[]" class="form-control"
+                            <input type="file" required multiple name="product_images[]" class="form-control"
                                 id="exampleInputPassword1">
                         </div>
 
@@ -71,7 +71,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="longdescription" class="form-label">Select Gender</label>
-                            <select name="gender" class="form-select form-select-sm mb-3"
+                            <select name="gender" required class="form-select form-select-sm mb-3"
                                 aria-label=".form-select-sm example">
                                 <option selected>Select Gender </option>
                                 <option value="male">Male</option>
@@ -80,23 +80,23 @@
                         </div>
                         <div class="mb-3">
                             <label for="size" class="form-label">Price</label>
-                            <input type="text" name="price" class="form-control" id="exampleInputPassword1">
+                            <input type="text" required name="price" class="form-control" id="exampleInputPassword1">
                         </div>
                         <div class="mb-3">
                             <label for="size" class="form-label">Discounted Price</label>
-                            <input type="text" name="discounted_price" class="form-control" id="exampleInputPassword1">
+                            <input type="text" required name="discounted_price" class="form-control" id="exampleInputPassword1">
                         </div>
                         <div class="mb-3">
                             <label for="size" class="form-label">Size</label>
-                            <input type="text" name="size" class="form-control" id="exampleInputPassword1">
+                            <input type="text" required name="size" class="form-control" id="exampleInputPassword1">
                         </div>
                         <div class="mb-3">
                             <label for="size" class="form-label">Color</label>
-                            <input type="text" name="color" class="form-control" id="exampleInputPassword1">
+                            <input type="text" required name="color" class="form-control" id="exampleInputPassword1">
                         </div>
                         <div class="mb-3">
                             <label for="size" class="form-label">Delivery Charges</label>
-                            <input type="text" name="delivery_charges" class="form-control" id="exampleInputPassword1">
+                            <input type="text" required name="delivery_charges" class="form-control" id="exampleInputPassword1">
                         </div>
                         <button type="submit" class="btn btn-primary">Add</button>
                     </form>

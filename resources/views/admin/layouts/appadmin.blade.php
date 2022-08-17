@@ -80,6 +80,9 @@
                                 class="fa fa-shopping-bag me-2"></i>Orders</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="{{ route('admin_orders') }}" class="dropdown-item">New Orders</a>
+                            <a href="{{ route('admin_processing_orders') }}" class="dropdown-item">Orders in Process</a>
+                            <a href="{{ route('admin_dispatched_orders') }}" class="dropdown-item">Orders on Delivery</a>
+                            <a href="{{ route('admin_cancelled_orders') }}" class="dropdown-item">Cancelled Orders</a>
                             <a href="{{ route('admin_delivered_orders') }}" class="dropdown-item">Delivered Orders</a>
                         </div>
                     </div>
