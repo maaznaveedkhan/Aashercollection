@@ -17,28 +17,37 @@ class OrderController extends Controller
     //
     public function orders()  
     {  
-        
         $user_id = Auth::user()->id;
-        $orders = DB::table('orders')->join('order_items', 'orders.order_number', 'order_items.order_id')
-                    ->join('products', 'products.id', 'order_items.product_id')
-                    ->where('order_items.user_id', $user_id)->select( 'products.*')->get();
-                    dd( $orders);
-        $orders = Order::where('user_id', $user_id)->get(); 
+        $orders = Order::where('user_id', $user_id)->get();
+        // DB::select("select `products.*`, `orders.*` from `products` inner join on `orders` orders.order_numer = order_items.order_id  inner join on order_items order_items.order_id = orders.order_number where orders.user_id = 3 " )->get();
+        // DB::table('orders')->join('order_items', 'orders.order_number', '=','order_items.order_id')
+        //             ->join('products', 'products.id','=', 'order_items.product_id')
+        //             // ->where('order_items.user_id', '=',$user_id)
+        //             ->where('orders.user_id', '=',$user_id)
+        //             // ->where('order_items.order_id','=','orders.order_number')
+        //             // ->where('order_items.product_id', '=','products.id')
+        //             ->select('order_items.*', 'orders.*', 'products.*')
+        //             ->distinct('order_items.id')
+        //             ->get();
+                    // dd($orders);
+                    // return $orders;
+        // $orders = Order::where('user_id', $user_id)->get(); 
         // return $order_id = $orders->order_number;
-        foreach ($orders as $item) {
-            $order_id = $item->order_number;
-        }
-      $order_items = OrderItem::with('products')->where('order_id',$order_id)->get();
-        foreach ($order_items as $single_item) {
-            $product_id = $single_item->product_id;
-        }
-        $products = Product::where('id',$product_id)->get();
+    //     foreach ($orders as $item) {
+    //         $order_id = $item->order_number;
+    //     }
+    //   $order_items = OrderItem::with('products')->where('order_id',$order_id)->get();
+    //     foreach ($order_items as $single_item) {
+    //         $product_id = $single_item->product_id;
+    //     }
+    //     $products = Product::where('id',$product_id)->get();
         return view('user.my_orders', compact('orders'));
     }
     public function my_orders(){
         
         //   $orders = Order::with('products')->get();
-           $orders = Order::where('user_id',Auth::id())->get();
+            $orders = Order::with('order_items')->where('user_id',Auth::id())->get();
+            $order_items = OrderItem::with('products')->where('user_id',Auth::id())->get();
         // dd($orders);
         //   $order_number = $orders->order_number; 
         //    $order_no =  Order::with('order_items')->where('user_id',Auth::id())->pluck('order_number');
@@ -46,7 +55,7 @@ class OrderController extends Controller
         //    echo "<pre>";
             // return $orders[0]->order_items[0]->products;
       
-        return view('user.my_orders',compact('orders'));
+        return view('user.my_orders',compact('orders','order_items'));
     }
 
     public function order_detail($id) {
@@ -84,10 +93,10 @@ class OrderController extends Controller
     
        
        $total = 0;
-       $quantity = 0; 
+       $total_quantity = 0;
        foreach ($oldCart as $productId => $item) {
         $total = $total + ($item['price'] * $item['quantity']);
-        $quantity = $quantity + $item['quantity'];
+        $total_quantity = $total_quantity + $item['quantity'] ;
        }
     
         
@@ -101,7 +110,7 @@ class OrderController extends Controller
         $order->city = $request->city;
         $order->user_id = Auth::user()->id;
         $order->total = $total;
-        $order->item_count = $quantity;
+        $order->item_count = $total_quantity;
         $order->save();
     
         $orderProducts = [];
@@ -113,7 +122,7 @@ class OrderController extends Controller
                 'quantity' => $item['quantity'],
                 'price' => $item['price'] * $item['quantity']
             ];
-            $total = $total + ($item['price'] * $item['quantity']);
+            // $total = $total + ($item['price'] * $item['quantity']);
         }
         // return $total;
         $user_id = Auth::user()->id;
@@ -141,4 +150,40 @@ class OrderController extends Controller
         return redirect()->route('/')->with('success','Your Order has been placed...');
     }
 
+    //Admin Order Section
+    public function admin_orders()  
+    {  
+        $orders = Order::all();
+        
+        return view('admin.new_orders', compact('orders'));
+    }
+
+    public function admin_delivered_orders()  
+    {  
+        $orders = Order::where('status','delivered')->get();
+        
+        return view('admin.delivered_orders', compact('orders'));
+    }
+
+    public function admin_order_detail($id){
+        $orders = Order::where('id', $id)->first();
+        $order_id = $orders->order_number;
+          $details = OrderItem::where('order_id', $order_id)->get();    //for an order with the same id we can have multiple products => array
+             $product_id = OrderItem::where('order_id', $order_id)->get(['product_id']);    //accessing the product from the linked table
+
+         $items = array();
+        $products = array();
+        foreach($details as $detail){
+            $items[] = $detail->product_id;    //an array with all the details from the specific order
+
+            $prod = Product::findOrFail($detail->product_id);   //we add the products with the corresponding id in our products array
+            $products[] = $prod;
+        }
+        // dd($items);
+        return view('admin.order_detail', array(
+            'orders' => $orders,
+            'details' => $details,
+            'products' => $products   //returning all the details, orders for accessing the details from Orders, details for accessing all the product's id from that order (OrderProduct and products for getting access to all the products (Products)
+        ));
+    }
 }

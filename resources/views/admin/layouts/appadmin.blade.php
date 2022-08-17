@@ -75,7 +75,14 @@
                             <a href="{{ route('admin_prod_form') }}" class="dropdown-item">Add Product</a>
                         </div>
                     </div>
-                    <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
+                                class="fa fa-shopping-bag me-2"></i>Orders</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="{{ route('admin_orders') }}" class="dropdown-item">New Orders</a>
+                            <a href="{{ route('admin_delivered_orders') }}" class="dropdown-item">Delivered Orders</a>
+                        </div>
+                    </div>
                 </div>
             </nav>
         </div>

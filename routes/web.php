@@ -65,4 +65,8 @@ Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::get('admin/view_product/{id}', [App\Http\Controllers\ProductController::class, 'view_product'])->name('view_product');
     Route::get('admin/edit_product/{id}', [App\Http\Controllers\ProductController::class, 'edit_product'])->name('edit_product');
     Route::post('update_product/{id}', [App\Http\Controllers\ProductController::class, 'update_product'])->name('update_product');
+    //Order
+    Route::get('admin/new_orders', [App\Http\Controllers\OrderController::class, 'admin_orders'])->name('admin_orders');
+    Route::get('admin/order_detail/{id}', [App\Http\Controllers\OrderController::class, 'admin_order_detail'])->name('admin_order_detail');
+    Route::get('admin/delivered_orders', [App\Http\Controllers\OrderController::class, 'admin_delivered_orders'])->name('admin_delivered_orders');
 });

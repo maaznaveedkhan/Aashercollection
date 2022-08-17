@@ -74,6 +74,7 @@
             <div class="checkout_form">
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
+                        {{-- @if ($user_info->isEmpty()) --}}
                         <form action="{{route('placeorder')}}" method="post">
                             @csrf
                             <h3>Billing Details</h3>
@@ -173,7 +174,6 @@
                                                     </select>
                                                 </div>
                                             </div> --}}
-
                                             <div class="col-12 mb-20">
                                                 <label>Street address  <span>*</span></label>
                                                 <input placeholder="House number and street name" type="text">
@@ -197,7 +197,6 @@
                                              <div class="col-lg-6">
                                                 <label> Email Address   <span>*</span></label>
                                                   <input type="text">
-
                                             </div>
                                         </div>
                                     </div>
@@ -215,6 +214,8 @@
                                 </div>
                             </div>
                         </form>
+                    
+                    {{-- @endif --}}
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <form action="#">
