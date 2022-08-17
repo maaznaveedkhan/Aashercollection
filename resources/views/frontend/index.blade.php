@@ -65,7 +65,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="welcome_about_inner">
-                        <a href="#"><img src="{{ asset('frontend/img/logo/logo-2.png') }}" alt=""></a>
+                        <a href="#"><img src="{{ asset('frontend/img/logo2_new.png') }}" alt=""></a>
                         <p>Eget scelerisque, mollis blandit et risus mauris phasellus ac. Felis amet dui metus purus mauris a, commodo amet 
                             phasellus id erat nec, pellentesque a, dictum orci porttitor et. Quis ac fames est ut, proin adipiscing in morbi elementum amet ligula. Habitant pellentesque laoreet lacus quisque consequat tincidunt diam vivamus sapien.</p>
                         <p class="author">Silvester  <span>/ CEO</span></p>   
