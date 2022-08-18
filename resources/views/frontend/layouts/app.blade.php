@@ -342,7 +342,7 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="logo">
-                                <a href="{{ route('/') }}"><img src="{{ asset('frontend/img/logo.jpg') }}"
+                                <a href="{{ route('/') }}"><img height="280" width="280" src="{{ asset('frontend/img/logo.jpg') }}"
                                         alt=""></a>
                             </div>
                         </div>

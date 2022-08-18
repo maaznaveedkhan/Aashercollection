@@ -95,5 +95,9 @@ Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::get('new_messages', [App\Http\Controllers\ContactController::class, 'new_messages'])->name('admin_new_messages');
     Route::get('old_messages', [App\Http\Controllers\ContactController::class, 'old_messages'])->name('admin_old_messages');
     Route::get('view_message/{id}',[App\Http\Controllers\ContactController::class, 'message_detail'])->name('view_message');
-
+    //Insta Post
+    Route::get('admin/insta_us', [App\Http\Controllers\InstaPostController::class, 'index'])->name('admin_instas');
+    Route::get('admin/insta_form', [App\Http\Controllers\InstaPostController::class, 'insta_form'])->name('admin_insta_form');
+    Route::post('add_insta', [App\Http\Controllers\InstaPostController::class, 'add_insta'])->name('add_insta');
+    Route::get('delete_insta/{id}', [App\Http\Controllers\instaPostController::class, 'destroy'])->name('delete_insta');
 });
