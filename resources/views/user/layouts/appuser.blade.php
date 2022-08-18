@@ -65,7 +65,7 @@
                     <a href="{{ route('home') }}" class="nav-item nav-link "><i
                             class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <a href="{{ route('my_orders') }}" class="nav-item nav-link "><i
-                        class="fa fa-th me-2"></i>My Orders</a>
+                        class="fa fa-shopping-bag me-2"></i>My Orders</a>
                     <a href="{{ route('add_info') }}" class="nav-item nav-link "><i
                             class="fa fa-file-alt me-2"></i>Account Settings</a>
                     {{-- <div class="nav-item dropdown">

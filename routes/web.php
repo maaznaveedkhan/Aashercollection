@@ -30,6 +30,8 @@ Route::get('contact_us', [App\Http\Controllers\ContactController::class, 'contac
 Route::post('new_message', [App\Http\Controllers\ContactController::class, 'new_message'])->name('new_message');
 Route::get('produts_detail/{id}', [App\Http\Controllers\ProductController::class, 'product_detail'])->name('product_detail');
 Route::get('popular_categories/{id}', [App\Http\Controllers\CategoryController::class, 'popular_categories'])->name('popular_categories');
+// Route::get('/search','ProductController@index');
+// Route::get('/search_results','SearchController@search');
 Route::get('cart', [App\Http\Controllers\CartController::class, 'cart'])->name('cart');
 Route::get('add-to-cart/{id}', [App\Http\Controllers\CartController::class, 'addToCart'])->name('add.to.cart');
 Route::patch('update-cart', [App\Http\Controllers\CartController::class, 'update'])->name('update.cart');

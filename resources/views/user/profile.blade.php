@@ -6,6 +6,21 @@
             <div class="col-md-12">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Basic Form</h6>
+                    @if (count($errors) > 0)
+                        <div class="alert alert-danger">
+                            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
                     <form method="POST" action="{{ route('update_info', Auth::user()->id) }}" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">

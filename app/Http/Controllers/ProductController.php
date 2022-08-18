@@ -136,4 +136,25 @@ class ProductController extends Controller
         $products = Product::inRandomOrder()->limit(8)->get();
         return view('frontend.product_detail', compact('product_detail','products'));
     }
+
+    public function search(Request $request)
+    {
+        if($request->ajax())
+        {
+        $output="";
+        $products=Product::where('title','LIKE','%'.$request->search."%")->get();
+        if($products)
+            {
+            foreach ($products as $key => $product) {
+            $output.='<tr>'.
+            '<td>'.$product->id.'</td>'.
+            '<td>'.$product->title.'</td>'.
+            '<td>'.$product->description.'</td>'.
+            '<td>'.$product->price.'</td>'.
+            '</tr>';
+            }
+            return Response($output);
+            }
+        }
+    }
 }
