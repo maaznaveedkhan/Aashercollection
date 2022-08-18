@@ -78,16 +78,10 @@
                 <form action="#">
                     <select class="select_option" name="select">
                         <option selected value="1">All Categories</option>
-                        <option value="2">Accessories</option>
-                        <option value="3">Bridge</option>
-                        <option value="4">Hub</option>
-                        <option value="5">Repeater</option>
-                        <option value="6">Switch</option>
-                        <option value="7">Video Games</option>
-                        <option value="8">PlayStation 3</option>
-                        <option value="9">PlayStation 4</option>
-                        <option value="10">Xbox 360</option>
-                        <option value="11">Xbox One</option>
+                        @foreach ($categories as $item)
+                            <option value=""><a href="{{ route('popular_categories',$item->id) }}">{{ $item->title }}</a></option>
+                        @endforeach
+                        
                     </select>
                     <input placeholder="Search entire store here..." type="text">
                     <button type="submit"><i class="ion-ios-search-strong"></i></button>
@@ -97,66 +91,85 @@
                 <div class="middel_links">
                     <ul>
                         <li><a href="{{ route('login') }}">Login</a></li>
-                        <li>/</li>
-                        <li><a href="login.html">Register</a></li>
+                        {{-- <li>/</li>
+                        <li><a href="login.html">Register</a></li> --}}
                     </ul>
 
                 </div>
                 <div class="cart_link">
-                    <a href="#"><i class="fa fa-shopping-basket"></i>2 item(s)</a>
+                    {{-- <a href="#"><i class="fa fa-shopping-basket"></i>2 item(s)</a> --}}
+                    <a href="#"><i
+                        class="fa fa-shopping-basket"></i>{{ count((array) session('cart')) }}item(s)</a>
                     <!--mini cart-->
-                    <div class="mini_cart">
-                        <div class="cart_item top">
-                            <div class="cart_img">
-                                <a href="#"><img src="{{ asset('frontend/img/s-product/product.jpg') }}"
-                                        alt=""></a>
-                            </div>
-                            <div class="cart_info">
-                                <a href="#">Apple iPhone SE 16GB</a>
+                        <div class="mini_cart">
+                            @if (! Session :: has ('cart') || empty (Session :: get ('cart')))
+                                <p>Not Products Found...</p>
+                            @else
+                                @if (session('cart'))
+                                    @foreach (session('cart') as $id => $details)
+                                        <div class="cart_item top">
+                                            <div class="cart_img">
+                                                <a href="#"><img src="{{ asset('images/product_images/'.$details['image'])  }}"
+                                                        alt=""></a>
+                                            </div>
+                                            <div class="cart_info">
+                                                <a href="#">{{ $details['name'] }}</a>
 
-                                <span>1x $60.00</span>
+                                                <span>{{ $details['quantity'] }}x {{ $details['price'] }}</span>
 
-                            </div>
-                            <div class="cart_remove">
-                                <a href="#"><i class="ion-android-close"></i></a>
-                            </div>
-                        </div>
-                        <div class="cart_item bottom">
-                            <div class="cart_img">
-                                <a href="#"><img src="{{ asset('frontend/img/s-product/product2.jpg') }}"
-                                        alt=""></a>
-                            </div>
-                            <div class="cart_info">
-                                <a href="#">Marshall Portable Bluetooth</a>
-                                <span> 1x $160.00</span>
-                            </div>
-                            <div class="cart_remove">
-                                <a href="#"><i class="ion-android-close"></i></a>
-                            </div>
-                        </div>
-                        <div class="cart__table">
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-left">Sub-Total :</td>
-                                        <td class="text-right">$150.00</td>
-                                    </tr>
+                                            </div>
+                                            <div class="cart_remove">
+                                                <a href="#"><i class="ion-android-close"></i></a>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endif
+                                    {{-- <div class="cart_item bottom">
+                                        <div class="cart_img">
+                                            <a href="#"><img src="{{ asset('frontend/img/s-product/product2.jpg') }}"
+                                                    alt=""></a>
+                                        </div>
+                                        <div class="cart_info">
+                                            <a href="#">Marshall Portable Bluetooth</a>
+                                            <span> 1x $160.00</span>
+                                        </div>
+                                        <div class="cart_remove">
+                                            <a href="#"><i class="ion-android-close"></i></a>
+                                        </div>
+                                    </div> --}}
+                                    <div class="cart__table">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    @php $sub_total = 0 @endphp
+                                                    @foreach ((array) session('cart') as $id => $details)
+                                                        @php $sub_total += $details['price'] * $details['quantity'] @endphp
+                                                    @endforeach
+                                                    <td class="text-left">Sub-Total :</td>
+                                                    <td class="text-right">{{ $sub_total }}</td>
+                                                </tr>
+                                                <tr>
+                                                    @php $sub_total = 0 @endphp
+                                                    @if(session('cart'))
+                                                        @foreach ((array) session('cart') as $id => $details)
+                                                            @php $sub_total += $details['price'] * $details['quantity'] @endphp
+                                                        @endforeach
+                                                    @endif
+                                                    <td class="text-left">Total :</td>
+                                                    <td class="text-right">{{ $sub_total }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
-                                    <tr>
-                                        <td class="text-left">Total :</td>
-                                        <td class="text-right">$184.00</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                    <div class="cart_button view_cart">
+                                        <a href="{{ route('cart') }}">View Cart</a>
+                                    </div>
+                                    <div class="cart_button checkout">
+                                        <a href="{{ route('checkout') }}">Checkout</a>
+                                    </div>
+                            @endif
                         </div>
-
-                        <div class="cart_button view_cart">
-                            <a href="cart.html">View Cart</a>
-                        </div>
-                        <div class="cart_button checkout">
-                            <a href="checkout.html">Checkout</a>
-                        </div>
-                    </div>
                     <!--mini cart end-->
                 </div>
             </div>
@@ -180,38 +193,28 @@
                         <a href="#">Shop</a>
                         <ul class="sub-menu">
                             <li class="menu-item-has-children">
-                                <a href="#">Shop Layouts</a>
+                                <a href="#">Popular Categories</a>
                                 <ul class="sub-menu">
-                                    <li><a href="shop.html">shop</a></li>
-                                    <li><a href="shop-fullwidth.html">Full Width</a></li>
-                                    <li><a href="shop-fullwidth-list.html">Full Width list</a></li>
-                                    <li><a href="shop-right-sidebar.html">Right Sidebar </a></li>
-                                    <li><a href="shop-right-sidebar-list.html"> Right Sidebar list</a></li>
-                                    <li><a href="shop-list.html">List View</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu-item-has-children">
-                                <a href="#">other Pages</a>
-                                <ul class="sub-menu">
-                                    <li><a href="portfolio.html">portfolio</a></li>
-                                    <li><a href="portfolio-details.html">portfolio details</a></li>
-                                    <li><a href="cart.html">cart</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="my-account.html">my account</a></li>
+                                    @foreach ($categories as $item)
+                                    <li><a href="{{ route('popular_categories',$item->id) }}">{{ $item->title }}</a></li>
+                                    @endforeach
                                 </ul>
                             </li>
                             <li class="menu-item-has-children">
                                 <a href="#">Product Types</a>
                                 <ul class="sub-menu">
-                                    <li><a href="product-details.html">product details</a></li>
+                                    @foreach ($categories as $item)
+                                    <li><a href="{{ route('popular_categories',$item->id) }}">{{ $item->title }}</a></li>
+                                    @endforeach
+                                    {{-- <li><a href="product-details.html">product details</a></li>
                                     <li><a href="product-sidebar.html">product sidebar</a></li>
                                     <li><a href="product-grouped.html">product grouped</a></li>
-                                    <li><a href="variable-product.html">product variable</a></li>
+                                    <li><a href="variable-product.html">product variable</a></li> --}}
                                 </ul>
                             </li>
                         </ul>
                     </li>
-                    <li class="menu-item-has-children">
+                    {{-- <li class="menu-item-has-children">
                         <a href="#">blog</a>
                         <ul class="sub-menu">
                             <li><a href="blog.html">blog</a></li>
@@ -220,30 +223,27 @@
                             <li><a href="blog-fullwidth.html">blog fullwidth</a></li>
                         </ul>
 
-                    </li>
+                    </li> --}}
                     <li class="menu-item-has-children">
                         <a href="#">pages </a>
                         <ul class="sub-menu">
                             <li><a href="{{ route('about_us') }}">About Us</a></li>
-                            <li><a href="services.html">services</a></li>
-                            <li><a href="faq.html">Frequently Questions</a></li>
-                            <li><a href="contact.html">contact</a></li>
+                            {{-- <li><a href="{{ route('login') }}">services</a></li>
+                            <li><a href="{{ route('login') }}">Frequently Questions</a></li> --}}
+                            <li><a href="{{ route('contact_us') }}">contact</a></li>
                             <li><a href="{{ route('login') }}">login</a></li>
-                            <li><a href="wishlist.html">Wishlist</a></li>
-                            <li><a href="404.html">Error 404</a></li>
-                            <li><a href="compare.html">compare</a></li>
-                            <li><a href="privacy-policy.html">privacy policy</a></li>
-                            <li><a href="coming-soon.html">coming soon</a></li>
+                            <li><a href="{{ route('privacy_policy') }}">privacy policy</a></li>
+                            <li><a href="{{ route('terms') }}">terms & conditions</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children">
-                        <a href="my-account.html">my account</a>
+                        <a href="{{ route('home') }}">my account</a>
                     </li>
                     <li class="menu-item-has-children">
                         <a href="{{ route('about_us') }}">About Us</a>
                     </li>
                     <li class="menu-item-has-children">
-                        <a href="contact.html"> Contact Us</a>
+                        <a href="{{ route('contact_us') }}"> Contact Us</a>
                     </li>
                 </ul>
             </div>
@@ -300,7 +300,7 @@
                                     <li class=""><a href="{{ route('login') }}">Login</a></li>
                                 @endauth
 
-                                <li class="language"><a href="#"><img
+                                {{-- <li class="language"><a href="#"><img
                                             src="{{ asset('frontend/img/logo/language.png') }}" alt="">
                                         English <i class="ion-chevron-down"></i></a>
                                     <ul class="dropdown_language">
@@ -317,7 +317,7 @@
                                         <li><a href="#">EUR</a></li>
                                         <li><a href="#">BRL</a></li>
                                     </ul>
-                                </li>
+                                </li> --}}
 
                             </ul>
                         </div>
@@ -366,23 +366,23 @@
                                         @if (! Session :: has ('cart') || empty (Session :: get ('cart')))
                                             <p>Not Products Found...</p>
                                         @else
-                                        @if (session('cart'))
-                                            @foreach (session('cart') as $id => $details)
-                                                <div class="cart_item top">
-                                                    <div class="cart_img">
-                                                        <a href="#"><img src="{{ asset('images/product_images/'.$details['image'])  }}"
-                                                                alt=""></a>
+                                            @if (session('cart'))
+                                                @foreach (session('cart') as $id => $details)
+                                                    <div class="cart_item top">
+                                                        <div class="cart_img">
+                                                            <a href="#"><img src="{{ asset('images/product_images/'.$details['image'])  }}"
+                                                                    alt=""></a>
+                                                        </div>
+                                                        <div class="cart_info">
+                                                            <a href="{{ url('product_detail') }}">{{ $details['name'] }}</a>
+                                                            <span>{{ $details['quantity'] }}x Rs.{{ $details['price'] }}</span>
+                                                        </div>
+                                                        <div class="cart_remove">
+                                                            <a href="#"><i class="ion-android-close"></i></a>
+                                                        </div>
                                                     </div>
-                                                    <div class="cart_info">
-                                                        <a href="{{ url('product_detail') }}">{{ $details['name'] }}</a>
-                                                        <span>{{ $details['quantity'] }}x Rs.{{ $details['price'] }}</span>
-                                                    </div>
-                                                    <div class="cart_remove">
-                                                        <a href="#"><i class="ion-android-close"></i></a>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-                                        @endif
+                                                @endforeach
+                                            @endif
                                         {{-- <div class="cart_item bottom">
                                             <div class="cart_img">
                                                 <a href="#"><img
@@ -666,10 +666,10 @@
                                 <ul>
                                     <li><a href="{{ route('about_us') }}">About Us</a></li>
                                     <li><a href="#">Delivery Information</a></li>
-                                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                                    <li><a href="#">Terms & Conditions</a></li>
-                                    <li><a href="contact.html">Contact Us</a></li>
-                                    <li><a href="#">Returns</a></li>
+                                    <li><a href="{{ route('privacy_policy') }}">Privacy Policy</a></li>
+                                    <li><a href="{{ route('terms') }}">Terms & Conditions</a></li>
+                                    <li><a href="{{ route('contact_us') }}">Contact Us</a></li>
+                                    {{-- <li><a href="#">Returns</a></li> --}}
                                 </ul>
                             </div>
                         </div>
@@ -679,12 +679,12 @@
                             <h3>Extras</h3>
                             <div class="footer_menu">
                                 <ul>
-                                    <li><a href="#">Brands</a></li>
+                                    {{-- <li><a href="#">Brands</a></li>
                                     <li><a href="#">Gift Certificates</a></li>
                                     <li><a href="#">Affiliate</a></li>
                                     <li><a href="#">Specials</a></li>
-                                    <li><a href="contact.html">Site Map</a></li>
-                                    <li><a href="my-account.html">My Account</a></li>
+                                    <li><a href="contact.html">Site Map</a></li> --}}
+                                    <li><a href="{{ route('home') }}">My Account</a></li>
                                 </ul>
                             </div>
                         </div>

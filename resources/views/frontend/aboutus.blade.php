@@ -26,7 +26,7 @@
                 <div class="col-lg-6 col-md-12">
                     <div class="about_content">
                         <h1>Welcome To Aashier Collection!</h1>
-                        <p> {{ $item->description }}</p>
+                        <p> {!! $item->description !!}</p>
                         <div class="view__work">
                             <a href="{{ route('/') }}">view collection </a>
                         </div>

@@ -30,7 +30,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="shortdescription" class="form-label"> Description</label>
-                        <input type="text" name="description" required class="form-control" id="exampleInputPassword1">
+                        <textarea name="description" required class="ckeditor form-control" id="" cols="30" rows="10"></textarea>
+                        {{-- <input type="text" name="description" required class="form-control" id="exampleInputPassword1"> --}}
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Image</label>

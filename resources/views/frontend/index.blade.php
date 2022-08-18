@@ -136,8 +136,8 @@
                                                         <div class="action_button">
                                                             <ul>
                                                                 <li><a title="add to cart" href="{{ route('add.to.cart',$item->id) }}"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
-                                                                <li><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-                                                                <li><a href="compare.html" title="Add to Compare"><i class="fa fa-sliders" aria-hidden="true"></i></a></li>
+                                                                {{-- <li><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                                                <li><a href="compare.html" title="Add to Compare"><i class="fa fa-sliders" aria-hidden="true"></i></a></li> --}}
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -145,14 +145,19 @@
                                                     <div class="quick_button">
                                                         <a href="#" data-bs-toggle="modal" data-bs-target="#prod_det{{ $item->id }}" title="quick_view">+ quick view</a>
                                                     </div>
+                                                    @if (empty($item->discount))
+                                                        
+                                                    @else
                                                     <div class="product_sale">
-                                                        <span>-7%</span>
+                                                        <span>-{{$item->discount}}%</span>
                                                     </div>
+                                                    @endif
+                                                    
                                                 </div>
                                                 <div class="product_content">
                                                     <h3><a href="product-details.html">{{ $item->name }}</a></h3>
-                                                    <span class="current_price">£{{ $item->discounted_price }}</span>
-                                                    <span class="old_price">£{{ $item->price }}</span>
+                                                    <span class="current_price">Rs. {{ $item->discounted_price }}</span>
+                                                    <span class="old_price">Rs. {{ $item->price }}</span>
                                                 </div>
                                                 
                                             </div>
@@ -281,7 +286,7 @@
                             </div>
                         </div>
                     @endforeach
-                      <div class="tab-pane fade" id="clothing" role="tabpanel">
+                      {{-- <div class="tab-pane fade" id="clothing" role="tabpanel">
                              <div class="product_container">
                                 <div class="row product_rows_column4">
                                     <div class="col-lg-3">
@@ -2388,7 +2393,7 @@
                                     
                                 </div>
                             </div>
-                      </div> 
+                      </div>  --}}
                 </div>
             </div>
         </div>

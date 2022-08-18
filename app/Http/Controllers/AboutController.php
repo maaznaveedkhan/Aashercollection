@@ -13,6 +13,14 @@ class AboutController extends Controller
         $abouts = About::paginate(1);
         return view('frontend.aboutus',compact('abouts'));
     }
+
+    public function terms(){
+        return view('frontend.terms');
+    }
+
+    public function privacy_policy(){
+        return view('frontend.privacy_policy');
+    }
     public function index(){
         $abouts = About::all();
         return view('admin.about_us',compact('abouts'));

@@ -26,14 +26,16 @@ Route::get('/', function () {
     return view('frontend.index', compact('products', 'categories','popular_categories'));
 })->name('/');
 Route::get('about_us', [App\Http\Controllers\AboutController::class, 'about_us'])->name('about_us');
-Route::get('contact_us', [App\Http\Controllers\CategoryController::class, 'contact_us'])->name('contact_us');
+Route::get('contact_us', [App\Http\Controllers\ContactController::class, 'contact_us'])->name('contact_us');
+Route::post('new_message', [App\Http\Controllers\ContactController::class, 'new_message'])->name('new_message');
 Route::get('produts_detail/{id}', [App\Http\Controllers\ProductController::class, 'product_detail'])->name('product_detail');
 Route::get('popular_categories/{id}', [App\Http\Controllers\CategoryController::class, 'popular_categories'])->name('popular_categories');
 Route::get('cart', [App\Http\Controllers\CartController::class, 'cart'])->name('cart');
 Route::get('add-to-cart/{id}', [App\Http\Controllers\CartController::class, 'addToCart'])->name('add.to.cart');
 Route::patch('update-cart', [App\Http\Controllers\CartController::class, 'update'])->name('update.cart');
 Route::delete('remove-from-cart', [App\Http\Controllers\CartController::class, 'remove'])->name('remove.from.cart');
-Route::get('privacy_policy', [App\Http\Controllers\CategoryController::class, 'privacy_policy'])->name('privacy_policy');
+Route::get('privacy_policy', [App\Http\Controllers\AboutController::class, 'privacy_policy'])->name('privacy_policy');
+Route::get('terms&conditions', [App\Http\Controllers\AboutController::class, 'terms'])->name('terms');
 Route::group(['middleware' => ['auth']], function () {
     //Checkout
     Route::get('checkout', [App\Http\Controllers\OrderController::class, 'checkout'])->name('checkout');
@@ -85,4 +87,10 @@ Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::get('admin/about_form', [App\Http\Controllers\AboutController::class, 'about_form'])->name('admin_about_form');
     Route::post('add_about', [App\Http\Controllers\AboutController::class, 'add_about'])->name('add_about');
     Route::get('delete_about/{id}', [App\Http\Controllers\AboutController::class, 'destroy'])->name('delete_about');
+
+    Route::post('ckeditor/upload/project', [App\Http\Controllers\CKEditorController::class,'add_project'])->name('ckeditor-project-upload');
+    Route::get('new_messages', [App\Http\Controllers\ContactController::class, 'new_messages'])->name('admin_new_messages');
+    Route::get('old_messages', [App\Http\Controllers\ContactController::class, 'old_messages'])->name('admin_old_messages');
+    Route::get('view_message/{id}',[App\Http\Controllers\ContactController::class, 'message_detail'])->name('view_message');
+
 });

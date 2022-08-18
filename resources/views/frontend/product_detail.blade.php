@@ -85,23 +85,25 @@
 
                             <div class="product_variant color">
                                 <h3>color</h3>
-                                <select class="niceselect_option" id="color" name="produc_color">
+                                <h4>{{ $product_detail->color }}</h4>
+                                {{-- <select class="niceselect_option" id="color" name="produc_color">
                                     <option selected value="1">choose in option</option>
                                     <option value="2">choose in option2</option>
                                     <option value="3">choose in option3</option>
                                     <option value="4">choose in option4</option>
-                                </select>
+                                </select> --}}
                             </div>
                             <div class="product_variant size">
                                 <h3>size</h3>
-                                <select class="niceselect_option" id="color1" name="produc_color">
+                                <h4>{{ $product_detail->size }}</h4>
+                                {{-- <select class="niceselect_option" id="color1" name="produc_color">
                                     <option selected value="1">size</option>
                                     <option value="2">x</option>
                                     <option value="2">xl</option>
                                     <option value="3">md</option>
                                     <option value="4">xxl</option>
                                     <option value="4">s</option>
-                                </select>
+                                </select> --}}
                             </div>
                             <div class="product_variant quantity">
                                 {{-- <label>quantity</label>
@@ -113,14 +115,14 @@
                                 </form> --}}
 
                             </div>
-                            <div class=" product_d_action">
+                            {{-- <div class=" product_d_action">
                                 <ul>
                                     <li><a href="#" title="Add to wishlist"><i class="fa fa-heart-o"
                                                 aria-hidden="true"></i> Add to Wish List</a></li>
                                     <li><a href="#" title="Add to Compare"><i class="fa fa-sliders"
                                                 aria-hidden="true"></i> Compare this Product</a></li>
                                 </ul>
-                            </div>
+                            </div> --}}
 
                         </form>
                         <div class="priduct_social">
@@ -166,7 +168,7 @@
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="info" role="tabpanel">
                                 <div class="product_info_content">
-                                    <p>{{ $product_detail['long_description'] }}</p>
+                                    <p>{!! $product_detail['long_description'] !!}</p>
                                 </div>
                             </div>
 

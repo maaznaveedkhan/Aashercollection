@@ -7,7 +7,7 @@
                 <div class="col-12">
                     <div class="breadcrumb_content">
                         <ul>
-                            <li><a href="index.html">home</a></li>
+                            <li><a href="{{ route('/') }}">home</a></li>
                             <li>/</li>
                             <li>contact us</li>
                         </ul>
@@ -22,6 +22,21 @@
     <!--contact area start-->
     <div class="contact_area">
         <div class="container">
+            @if (count($errors) > 0)
+            <div class="alert alert-danger">
+                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="row">
                 <div class="col-lg-6 col-md-12">
                     <div class="contact_message content">
@@ -39,25 +54,30 @@
                 <div class="col-lg-6 col-md-12">
                     <div class="contact_message form">
                         <h3>Tell us your project</h3>
-                        <form id="contact-form" method="POST" action="https://whizthemes.com/mail-php/jaber/contact.php">
+                        <form action="{{ route('new_message') }}" method="POST">
+                            @csrf
                             <p>
                                 <label> Your Name (required)</label>
-                                <input name="name" placeholder="Name *" type="text">
+                                <input name="name" required placeholder="Name *" type="text">
+                            </p>
+                            <p>
+                                <label> Your Contact Number (required)</label>
+                                <input name="phone"  required placeholder="Phone Number *" type="text">
                             </p>
                             <p>
                                 <label> Your Email (required)</label>
-                                <input name="email" placeholder="Email *" type="email">
+                                <input name="email"  required placeholder="Email *" type="email">
                             </p>
                             <p>
                                 <label> Subject</label>
-                                <input name="subject" placeholder="Subject *" type="text">
+                                <input name="subject" required placeholder="Subject *" type="text">
                             </p>
                             <div class="contact_textarea">
                                 <label> Your Message</label>
-                                <textarea placeholder="Message *" name="message" class="form-control2"></textarea>
+                                <textarea placeholder="Message *" required name="message" class="form-control2"></textarea>
                             </div>
                             <button type="submit"> Send</button>
-                            <p class="form-messege"></p>
+                            {{-- <p class="form-messege"></p> --}}
                         </form>
 
                     </div>

@@ -59,12 +59,15 @@ class CategoryController extends Controller
 
     
 
-    public function contact_us()
-    {
-        return view('frontend.contactus');
-    }
+    function ajax_sort(Request $request){
 
-    public function privacy_policy(){
-        return view('frontend.privacy_policy');
+    $category_id = $request->category_id;
+    $select = $request->sort;
+    $data=array(
+        'category_id'=>$category_id,
+        'select'=>$select
+    );
+        
+    echo json_encode($data);
     }
 }

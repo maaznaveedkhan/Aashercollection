@@ -88,10 +88,18 @@
                     </div>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
-                                class="fa fa-shopping-bag me-2"></i>Information</a>
+                                class="fa fa-info-circle me-2"></i>Information</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="{{ route('admin_abouts') }}" class="dropdown-item">About Section</a>
                             <a href="{{ route('admin_about_form') }}" class="dropdown-item">Add About</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
+                                class="fa fa-envelope me-2"></i>Messages</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="{{ route('admin_new_messages') }}" class="dropdown-item">New Messages</a>
+                            <a href="{{ route('admin_old_messages') }}" class="dropdown-item">Responded Messages</a>
                         </div>
                     </div>
                 </div>
@@ -114,7 +122,7 @@
                     <input class="form-control border-0" type="search" placeholder="Search">
                 </form>
                 <div class="navbar-nav align-items-center ms-auto">
-                    <div class="nav-item dropdown">
+                    {{-- <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <i class="fa fa-envelope me-lg-2"></i>
                             <span class="d-none d-lg-inline-flex">Message</span>
@@ -179,7 +187,7 @@
                             <hr class="dropdown-divider">
                             <a href="#" class="dropdown-item text-center">See all notifications</a>
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                             <img class="rounded-circle me-lg-2" src="{{ asset('dashboard/img/user.jpg') }}" alt=""
@@ -243,6 +251,14 @@
 
     <!-- Template Javascript -->
     <script src="{{asset('dashboard/js/main.js')}}"></script>
+
+    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <script type="text/javascript">
+    CKEDITOR.replace('editor', {
+        filebrowserUploadUrl: "{{route('ckeditor-project-upload', ['_token' => csrf_token() ])}}",
+        filebrowserUploadMethod: 'form'
+    });
+    </script>
 </body>
 
 </html>

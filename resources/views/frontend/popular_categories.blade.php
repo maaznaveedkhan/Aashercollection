@@ -20,7 +20,10 @@
                             <h2>Product categories</h2>
                             <ul>
                                 @foreach ($categories as $item)
-                                    <li><a href="#">{{ $item->title }} <span>{{ count($item->products) }}</span></a> </li>
+                                    <li>
+                                        {{-- <button type="submit" id="cat-id">{{ $item->title }} <span>{{ count($item->products) }}</button> --}}
+                                        <a href="{{ route('popular_categories',$item->id) }}">{{ $item->title }} <span>{{ count($item->products) }}</span></a> 
+                                    </li>
                                 @endforeach
                                 {{-- <li><a href="#">Categories1 <span>6</span></a> </li>
                                 <li><a href="#"> Categories2 <span>10</span></a> </li>
@@ -31,7 +34,7 @@
                             </ul>
                         </div>
 
-                        <div class="widget_list widget_categories">
+                        {{-- <div class="widget_list widget_categories">
                             <h2>Manufacturer</h2>
                             <ul>
                                 <li><a href="#">Calvin Klein <span>6</span></a> </li>
@@ -73,7 +76,7 @@
                                     <li><a href="#">Shampoos</a></li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> --}}
 
                     </div>
                     <!--sidebar widget end-->
@@ -95,7 +98,7 @@
 
                             <button data-role="grid_list" type="button"  class="btn-list" data-bs-toggle="tooltip" title="List"></button>
                         </div>
-                        <div class=" niceselect_option">
+                        {{-- <div class=" niceselect_option">
                             <form class="select_option" action="#">
                                 <select name="orderby" id="short">
 
@@ -107,9 +110,9 @@
                                     <option value="6">Product Name: Z</option>
                                 </select>
                             </form>
-                        </div>
+                        </div> --}}
                         <div class="page_amount">
-                            <p>Showing {{($products->currentpage()-1)*$products->perpage()+1}} to {{$products->currentpage()*$products->perpage()}}
+                            <p>Showing {{($products->currentpage()-1)*$products->perpage()+1}}-{{$products->currentpage()*$products->perpage()}}
                                 of  {{$products->total()}} results</p>
                             {{-- <p>Showing 1–9 of 21 results</p> --}}
                         </div>
@@ -1054,4 +1057,30 @@
             
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    $("#cat-id").change(function() {
+        alert('button is working');
+    var category_id = $("").attr('data-id');
+    var sort = $(this).val();
+    var url = route('product.ajax_sort', cat_id);
+    var data = { sort: sort };
+    console.log(url);
+    $.ajax({
+        url: url,
+        method: 'GET',
+        data: data,
+        dataType: 'json',
+        success: function(data) {
+    
+            $(".result-sort").html(data.result);
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            alert(xhr.status);
+            alert(thrownError);
+        }
+
+    });
+    });
+</script>
 @endsection
