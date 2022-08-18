@@ -342,7 +342,7 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="logo">
-                                <a href="index.html"><img src="{{ asset('frontend/img/logo.jpg') }}"
+                                <a href="{{ route('/') }}"><img src="{{ asset('frontend/img/logo.jpg') }}"
                                         alt=""></a>
                             </div>
                         </div>
@@ -627,7 +627,7 @@
                                         <li><a href="#">pages <i class="fa fa-angle-down"></i></a>
                                             <ul class="sub_menu pages">
                                                 <li><a href="{{ route('about_us') }}">About Us</a></li>
-                                                <li><a href="services.html">Contact Us</a></li>
+                                                <li><a href="{{ route('contact_us') }}">Contact Us</a></li>
                                                 {{-- <li><a href="faq.html">Frequently Questions</a></li>
                                                 <li><a href="{{ route('login') }}">login</a></li>
                                                 <li><a href="my-account.html">my account</a></li>

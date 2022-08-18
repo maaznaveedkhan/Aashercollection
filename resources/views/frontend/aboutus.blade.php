@@ -7,7 +7,7 @@
                 <div class="col-12">
                     <div class="breadcrumb_content">
                         <ul>
-                            <li><a href="index.html">home</a></li>
+                            <li><a href="{{ route('/') }}">home</a></li>
                             <li>/</li>
                             <li>about us</li>
                         </ul>
@@ -21,17 +21,33 @@
     <!--about section area -->
     <div class="about_section">
         <div class="container">
+            @foreach ($abouts as $item)
             <div class="row">
                 <div class="col-lg-6 col-md-12">
                     <div class="about_content">
-                        <h1>Welcome To Reid Store!</h1>
-                        <p> Quibusdam perspiciatis pariatur magnam ducimus excepturi error libero provident animi laboriosam
-                            maiores ad explicabo ea laudantium nostrum dolor distinctio, quas fugiat doloribus, sit,
-                            possimus obcaecati ab quo vel commodi eum. Laudantium libero, voluptate rerum sunt hic,</p>
+                        <h1>Welcome To Aashier Collection!</h1>
+                        <p> {{ $item->description }}</p>
+                        <div class="view__work">
+                            <a href="{{ route('/') }}">view collection </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <div class="about_thumb">
+                        <img src="{{ asset('images/about_images/'.$item->image) }}" alt="">
+                    </div>
+                </div>
+            </div>
+            @endforeach
+            {{-- <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <div class="about_content">
+                        <h1>Welcome To Aashier Collection!</h1>
+                        <p> </p>
                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse numquam blanditiis quos, fuga,
                             aspernatur doloribus expedita, soluta dolore cumque.</p>
                         <div class="view__work">
-                            <a href="#">view work </a>
+                            <a href="#">view collection </a>
                         </div>
                     </div>
                 </div>
@@ -40,14 +56,14 @@
                         <img src="{{ asset('frontend/img/about/about1.jpg') }}" alt="">
                     </div>
                 </div>
-            </div>
+            </div> --}}
         </div>
     </div>
     <!--about section end-->
 
 
     <!--counterup area -->
-    <div class="counterup_section">
+    {{-- <div class="counterup_section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6">
@@ -96,11 +112,11 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!--counterup end-->
 
     <!--about progress bar -->
-    <div class="about_progressbar">
+    {{-- <div class="about_progressbar">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6 col-md-6">
@@ -161,6 +177,6 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!--about progress bar end -->
 @endsection

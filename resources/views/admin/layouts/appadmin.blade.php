@@ -86,6 +86,14 @@
                             <a href="{{ route('admin_delivered_orders') }}" class="dropdown-item">Delivered Orders</a>
                         </div>
                     </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
+                                class="fa fa-shopping-bag me-2"></i>Information</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="{{ route('admin_abouts') }}" class="dropdown-item">About Section</a>
+                            <a href="{{ route('admin_about_form') }}" class="dropdown-item">Add About</a>
+                        </div>
+                    </div>
                 </div>
             </nav>
         </div>

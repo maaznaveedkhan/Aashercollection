@@ -25,7 +25,7 @@ Route::get('/', function () {
     // $categories = Category::all();
     return view('frontend.index', compact('products', 'categories','popular_categories'));
 })->name('/');
-Route::get('about_us', [App\Http\Controllers\CategoryController::class, 'about_us'])->name('about_us');
+Route::get('about_us', [App\Http\Controllers\AboutController::class, 'about_us'])->name('about_us');
 Route::get('contact_us', [App\Http\Controllers\CategoryController::class, 'contact_us'])->name('contact_us');
 Route::get('produts_detail/{id}', [App\Http\Controllers\ProductController::class, 'product_detail'])->name('product_detail');
 Route::get('popular_categories/{id}', [App\Http\Controllers\CategoryController::class, 'popular_categories'])->name('popular_categories');
@@ -80,4 +80,9 @@ Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::get('admin/cancel_order/{id}', [App\Http\Controllers\OrderController::class, 'cancel_order'])->name('cancel_order');
     Route::get('admin/order_on_delivery/{id}', [App\Http\Controllers\OrderController::class, 'order_on_delivery'])->name('order_on_delivery');
     Route::get('admin/order_delviered/{id}', [App\Http\Controllers\OrderController::class, 'delivered_order'])->name('order_delviered');
+    //Details
+    Route::get('admin/about_us', [App\Http\Controllers\AboutController::class, 'index'])->name('admin_abouts');
+    Route::get('admin/about_form', [App\Http\Controllers\AboutController::class, 'about_form'])->name('admin_about_form');
+    Route::post('add_about', [App\Http\Controllers\AboutController::class, 'add_about'])->name('add_about');
+    Route::get('delete_about/{id}', [App\Http\Controllers\AboutController::class, 'destroy'])->name('delete_about');
 });

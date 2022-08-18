@@ -52,6 +52,7 @@ class ProductController extends Controller
         $product->long_description = $request->long_description;
         $product->price = $request->price;
         $product->discounted_price = $request->discounted_price;
+        $product->discount_in_percentage = (($product->price - $product->discounted_price)*100) /$product->price ;
         $product->size = $request->size;
         $product->gender = $request->gender;
         $product->color = $request->color;

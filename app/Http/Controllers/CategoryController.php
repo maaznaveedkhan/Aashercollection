@@ -46,15 +46,18 @@ class CategoryController extends Controller
     }
 
     public function popular_categories($id){
+        // $perPage = 15;
         $category = Category::find($id);
-        $products = Product::where('category_id',$category)->get();
-        return view('frontend.popular_categories');
+        $category =$category->id;
+        $categories = Category::with('products')->get();
+        $products = Product::where('category_id',$category)->paginate(5);
+        //  dd($products);
+        //  return  $products;
+        //  $products = Product::where('category_id',$category)->get();
+        return view('frontend.popular_categories',compact('products','categories'));
     }
 
-    public function about_us()
-    {
-        return view('frontend.aboutus');
-    }
+    
 
     public function contact_us()
     {

@@ -19,11 +19,14 @@
                         <div class="widget_list widget_categories">
                             <h2>Product categories</h2>
                             <ul>
-                                <li><a href="#">Categories1 <span>6</span></a> </li>
+                                @foreach ($categories as $item)
+                                    <li><a href="#">{{ $item->title }} <span>{{ count($item->products) }}</span></a> </li>
+                                @endforeach
+                                {{-- <li><a href="#">Categories1 <span>6</span></a> </li>
                                 <li><a href="#"> Categories2 <span>10</span></a> </li>
                                 <li><a href="#">Categories3 <span>4</span></a> </li>
                                 <li><a href="#"> Categories4 <span>4</span></a> </li>
-                                <li><a href="#">Categories5 <span>3</span></a> </li>
+                                <li><a href="#">Categories5 <span>3</span></a> </li> --}}
 
                             </ul>
                         </div>
@@ -93,7 +96,6 @@
                             <button data-role="grid_list" type="button"  class="btn-list" data-bs-toggle="tooltip" title="List"></button>
                         </div>
                         <div class=" niceselect_option">
-
                             <form class="select_option" action="#">
                                 <select name="orderby" id="short">
 
@@ -105,17 +107,80 @@
                                     <option value="6">Product Name: Z</option>
                                 </select>
                             </form>
-
-
                         </div>
                         <div class="page_amount">
-                            <p>Showing 1–9 of 21 results</p>
+                            <p>Showing {{($products->currentpage()-1)*$products->perpage()+1}} to {{$products->currentpage()*$products->perpage()}}
+                                of  {{$products->total()}} results</p>
+                            {{-- <p>Showing 1–9 of 21 results</p> --}}
                         </div>
                     </div>
                      <!--shop toolbar end-->
                     
                      <div class="row shop_wrapper">
-                        <div class="col-lg-4 col-md-4 col-12 ">
+                        @foreach ($products as $item)
+                            <div class="col-lg-4 col-md-4 col-12 ">
+                                <div class="single_product">
+                                    <div class="product_thumb">
+                                        <a class="primary_img" href="{{ route('product_detail',$item->id) }}"><img src="{{ asset('images/product_images/'.$item->product_thumbnail) }}" alt=""></a>
+                                        <a class="secondary_img" href="{{ route('product_detail',$item->id) }}"><img src="{{ asset('images/product_images/'.$item->product_thumbnail) }}" alt=""></a>
+                                        <div class="product_action">
+                                            <div class="hover_action">
+                                            <a  href="#"><i class="fa fa-plus"></i></a>
+                                                <div class="action_button">
+                                                    <ul>
+                                                        <li><a title="add to cart" href="{{ route('add.to.cart',$item->id) }}"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
+                                                        <li><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                                        <li><a href="compare.html" title="Add to Compare"><i class="fa fa-sliders" aria-hidden="true"></i></a></li>
+                                                    </ul>
+                                                </div>
+                                        </div>
+                                        </div>
+                                        <div class="quick_button">
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#modal_box" title="quick_view">+ quick view</a>
+                                        </div>
+
+                                        <div class="double_base">
+                                            @if(empty($item->discount_in_percentage))
+                                                
+                                            @else
+                                            <div class="product_sale">
+                                                <span>-{{ $item->discount_in_percentage }}%</span>
+                                            </div>
+                                            @endif
+                                            
+                                            <div class="label_product">
+                                                <span>new</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product_content grid_content">
+                                        <h3><a href="{{ route('product_detail',$item->id) }}">{{ $item->name }}</a></h3>
+                                        <span class="current_price">Rs. {{ $item->discounted_price }}</span>
+                                        <span class="old_price">Rs. {{ $item->price }}</span>
+                                    </div>
+                                    <div class="product_content list_content">
+                                        <h3><a href="{{ route('product_detail',$item->id) }}">{{ $item->name }}</a></h3>
+                                        <div class="product_ratting">
+                                            <ul>
+                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-star"></i></a></li>
+                                            </ul>
+                                        </div>
+                                        <div class="product_price">
+                                            <span class="current_price">Rs. {{ $item->discounted_price }}</span>
+                                            <span class="old_price">Rs. {{ $item->price }}</span>
+                                        </div>
+                                        <div class="product_desc">
+                                            <p>{{ $item->short_description }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                        {{-- <div class="col-lg-4 col-md-4 col-12 ">
                             <div class="single_product">
                                 <div class="product_thumb">
                                     <a class="primary_img" href="product-details.html"><img src="{{ asset('frontend/img/product/product15.jpg') }}" alt=""></a>
@@ -145,14 +210,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                
                                 <div class="product_content grid_content">
                                     <h3><a href="product-details.html">Marshall Portable  Bluetooth</a></h3>
                                     <span class="current_price">£60.00</span>
                                     <span class="old_price">£86.00</span>
                                 </div>
-                                
-                                
                                 <div class="product_content list_content">
                                     <h3><a href="product-details.html">Marshall Portable  Bluetooth</a></h3>
                                     <div class="product_ratting">
@@ -171,9 +233,7 @@
                                     <div class="product_desc">
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad, iure incidunt. Ab consequatur temporibus non eveniet inventore doloremque necessitatibus sed, ducimus quisquam, ad asperiores eligendi quia fugiat minus doloribus distinctio assumenda pariatur, quidem laborum quae quasi suscipit. Cupiditate dolor blanditiis rerum aliquid temporibus, libero minus nihil, veniam suscipit? Autem repellendus illo, amet praesentium fugit, velit natus? Dolorum perferendis reiciendis in quam porro ratione eveniet, tempora saepe ducimus, alias?</p>
                                     </div>
-
                                 </div>
-                                
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4 col-12 ">
@@ -966,11 +1026,16 @@
                                 </div>
                                 
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
-                  
-                    <div class="shop_toolbar t_bottom">
-                        <div class="pagination">
+                    <div class="d-flex justify-content-center">
+                        <ul>
+                            <li class="" style="">{!! $products->links() !!}</li>
+                        </ul>
+                    </div>
+                    
+                    {{-- <div class="shop_toolbar t_bottom"> --}}
+                        {{-- <div class="pagination">
                             <ul>
                                 <li class="current">1</li>
                                 <li><a href="#">2</a></li>
@@ -978,8 +1043,9 @@
                                 <li class="next"><a href="#">next</a></li>
                                 <li><a href="#">>></a></li>
                             </ul>
-                        </div>
-                    </div>
+                        </div> --}}
+
+                    {{-- </div> --}}
                     <!--shop toolbar end-->
                     <!--shop wrapper end-->
                 </div>

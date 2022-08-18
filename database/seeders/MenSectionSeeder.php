@@ -16,6 +16,6 @@ class MenSectionSeeder extends Seeder
     public function run()
     {
         //
-        Product::factory()->count(12)->create();
+        Product::factory()->count(1)->create();
     }
 }
