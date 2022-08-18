@@ -122,7 +122,7 @@
                                         <div class="col-lg-3">
                                             <div class="single_product">
                                                 <div class="product_thumb">
-                                                    <a class="primary_img" href="{{ route('product_detail',$item->id) }}"><img class="img-fluid" height="200" width="200" src="{{ asset('images/product_images/'.$item->product_thumbnail) }}" alt=""></a>
+                                                    <a class="primary_img" href="{{ route('product_detail',$item->id) }}"><img src="{{ asset('images/product_images/'.$item->product_thumbnail) }}" alt=""></a>
                                                     <a class="secondary_img" href="{{ route('product_detail',$item->id) }}">
                                                         @php
                                                             $images = json_decode($item->product_images);

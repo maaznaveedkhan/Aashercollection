@@ -36,6 +36,7 @@ Route::patch('update-cart', [App\Http\Controllers\CartController::class, 'update
 Route::delete('remove-from-cart', [App\Http\Controllers\CartController::class, 'remove'])->name('remove.from.cart');
 Route::get('privacy_policy', [App\Http\Controllers\AboutController::class, 'privacy_policy'])->name('privacy_policy');
 Route::get('terms&conditions', [App\Http\Controllers\AboutController::class, 'terms'])->name('terms');
+Route::get('faq', [App\Http\Controllers\AboutController::class, 'faq'])->name('faq');
 Route::group(['middleware' => ['auth']], function () {
     //Checkout
     Route::get('checkout', [App\Http\Controllers\OrderController::class, 'checkout'])->name('checkout');

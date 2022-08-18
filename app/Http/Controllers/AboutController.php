@@ -19,8 +19,13 @@ class AboutController extends Controller
     }
 
     public function privacy_policy(){
-        return view('frontend.privacy_policy');
+        return view('frontend.faq');
     }
+
+    public function faq(){
+        return view('frontend.faq');
+    }
+
     public function index(){
         $abouts = About::all();
         return view('admin.about_us',compact('abouts'));

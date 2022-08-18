@@ -50,12 +50,12 @@
                 <ul>
                     <li class="top_links"><a href="#">My Account <i class="ion-chevron-down"></i></a>
                         <ul class="dropdown_links">
-                            <li><a href="wishlist.html">My Wish List </a></li>
+                            {{-- <li><a href="wishlist.html">My Wish List </a></li> --}}
                             <li><a href="{{ route('home') }}">My Account </a></li>
                             <li><a href="{{ route('logout') }}">Log Out</a></li>
                         </ul>
                     </li>
-                    <li class="language"><a href="#"><img src="{{ asset('frontend/img/logo/language.png') }}"
+                    {{-- <li class="language"><a href="#"><img src="{{ asset('frontend/img/logo/language.png') }}"
                                 alt="">
                             English <i class="ion-chevron-down"></i></a>
                         <ul class="dropdown_language">
@@ -71,7 +71,7 @@
                             <li><a href="#">EUR</a></li>
                             <li><a href="#">BRL</a></li>
                         </ul>
-                    </li>
+                    </li> --}}
                 </ul>
             </div>
             <div class="search_bar">
@@ -228,8 +228,8 @@
                         <a href="#">pages </a>
                         <ul class="sub-menu">
                             <li><a href="{{ route('about_us') }}">About Us</a></li>
-                            {{-- <li><a href="{{ route('login') }}">services</a></li>
-                            <li><a href="{{ route('login') }}">Frequently Questions</a></li> --}}
+                            {{-- <li><a href="{{ route('login') }}">services</a></li> --}}
+                            <li><a href="{{ route('faq') }}">Frequently Questions</a></li>
                             <li><a href="{{ route('contact_us') }}">contact</a></li>
                             <li><a href="{{ route('login') }}">login</a></li>
                             <li><a href="{{ route('privacy_policy') }}">privacy policy</a></li>
@@ -513,12 +513,9 @@
                                         <li><a href="#">pages <i class="fa fa-angle-down"></i></a>
                                             <ul class="sub_menu pages">
                                                 <li><a href="{{ route('about_us') }}">About Us</a></li>
-                                                <li><a href="services.html">services</a></li>
-                                                <li><a href="faq.html">Frequently Questions</a></li>
+                                                <li><a href="{{ route('faq') }}">Frequently Questions</a></li>
                                                 <li><a href="{{ route('login') }}">login</a></li>
-                                                <li><a href="my-account.html">my account</a></li>
-                                                <li><a href="wishlist.html">Wishlist</a></li>
-                                                <li><a href="404.html">Error 404</a></li>
+                                                <li><a href="{{ route('about_us') }}">my account</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -626,19 +623,20 @@
                                         </li> --}}
                                         <li><a href="#">pages <i class="fa fa-angle-down"></i></a>
                                             <ul class="sub_menu pages">
-                                                <li><a href="{{ route('about_us') }}">About Us</a></li>
-                                                <li><a href="{{ route('contact_us') }}">Contact Us</a></li>
-                                                {{-- <li><a href="faq.html">Frequently Questions</a></li>
-                                                <li><a href="{{ route('login') }}">login</a></li>
-                                                <li><a href="my-account.html">my account</a></li>
-                                                <li><a href="wishlist.html">Wishlist</a></li>
+                                                {{-- <li><a href="{{ route('about_us') }}">About Us</a></li>
+                                                <li><a href="{{ route('contact_us') }}">Contact Us</a></li> --}}
+                                                 <li><a href="{{ route('faq') }}">Frequently Questions</a></li>
+                                                {{-- <li><a href="{{ route('login') }}">login</a></li> --}}
+                                                {{-- <li><a href="{{ route('home') }}">my account</a></li> --}}
+                                                {{-- <li><a href="wishlist.html">Wishlist</a></li>
                                                 <li><a href="404.html">Error 404</a></li>
                                                 <li><a href="compare.html">compare</a></li> --}}
                                                 <li><a href="{{ route('privacy_policy') }}">privacy policy</a></li>
+                                                <li><a href="{{ route('terms') }}">terms & conditions policy</a></li>
                                                 {{-- <li><a href="coming-soon.html">coming soon</a></li> --}}
                                             </ul>
                                         </li>
-                                        <li><a href="#">Specials</a></li>
+                                        {{-- <li><a href="#">Specials</a></li> --}}
                                         <li><a href="{{ route('about_us') }}">About us</a></li>
                                         <li><a href="{{ route('contact_us') }}">Contact Us</a></li>
 
