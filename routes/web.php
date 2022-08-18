@@ -100,4 +100,9 @@ Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::get('admin/insta_form', [App\Http\Controllers\InstaPostController::class, 'insta_form'])->name('admin_insta_form');
     Route::post('add_insta', [App\Http\Controllers\InstaPostController::class, 'add_insta'])->name('add_insta');
     Route::get('delete_insta/{id}', [App\Http\Controllers\instaPostController::class, 'destroy'])->name('delete_insta');
+    //Blog
+    Route::get('admin/blogs', [App\Http\Controllers\BlogController::class, 'index'])->name('admin_blogs');
+    Route::get('admin/blog_form', [App\Http\Controllers\BlogController::class, 'blog_form'])->name('admin_blog_form');
+    Route::post('add_blog', [App\Http\Controllers\BlogController::class, 'add_blog'])->name('add_blog');
+    Route::get('delete_blog/{id}', [App\Http\Controllers\BlogController::class, 'destroy'])->name('delete_blog');
 });

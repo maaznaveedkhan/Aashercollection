@@ -13,12 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('instagram_posts', function (Blueprint $table) {
+        Schema::create('blogs', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
-            $table->string('post_link')->nullable();
+            $table->string('description')->nullable();
             $table->string('image')->nullable();
-            $table->string('status')->nullable();
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('instagram_posts');
+        Schema::dropIfExists('blogs');
     }
 };

@@ -102,6 +102,22 @@
                             <a href="{{ route('admin_old_messages') }}" class="dropdown-item">Responded Messages</a>
                         </div>
                     </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
+                                class="fa fa-instagram me-2"></i>Instagram Posts</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="{{ route('admin_instas') }}" class="dropdown-item">All Posts</a>
+                            <a href="{{ route('admin_insta_form') }}" class="dropdown-item">Add New</a>
+                        </div>
+                    </div>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
+                                class="fa fa-instagram me-2"></i>Blogs</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="{{ route('admin_blogs') }}" class="dropdown-item">All Blogs</a>
+                            <a href="{{ route('admin_blog_form') }}" class="dropdown-item">Add New Blog</a>
+                        </div>
+                    </div>
                 </div>
             </nav>
         </div>

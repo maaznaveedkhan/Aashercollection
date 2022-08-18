@@ -47,4 +47,10 @@ class InstaPostController extends Controller
             ->route('admin_insta')
             ->with('success', 'Insta Post has been added!');
     }
+
+    public function destroy($id){
+        $insta = InstagramPost::find($id);
+        $insta->delete();
+        return redirect()->back()->with('success','Instagram Post has been deleted!');
+    }
 }
