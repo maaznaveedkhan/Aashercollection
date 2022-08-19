@@ -114,6 +114,7 @@
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
                                 class="fa fa-instagram me-2"></i>Blogs</a>
                         <div class="dropdown-menu bg-transparent border-0">
+                            <a href="{{ route('admin_blog_types') }}" class="dropdown-item">Add Blog Type</a>
                             <a href="{{ route('admin_blogs') }}" class="dropdown-item">All Blogs</a>
                             <a href="{{ route('admin_blog_form') }}" class="dropdown-item">Add New Blog</a>
                         </div>

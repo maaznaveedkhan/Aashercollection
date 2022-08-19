@@ -24,6 +24,16 @@
                 <form method="POST" action="{{ route('add_blog') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
+                        <label for="longdescription" class="form-label">Select Blog Type</label>
+                        <select name="blog_type_id" class="form-select form-select-sm mb-3"
+                            aria-label=".form-select-sm example">
+                            <option selected>Select Type </option>
+                            @foreach ($blog_types as $item)
+                                <option value="{{ $item->id }}">{{ $item->title }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
                         <input type="text" required name="title" required class="form-control"
                             id="exampleInputEmail1" aria-describedby="emailHelp">

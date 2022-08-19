@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\BlogType;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -23,7 +24,8 @@ class BlogController extends Controller
         return view('admin.blogs',compact('blogs'));
     }
     public function blog_form(){
-        return view('admin.add_blog');
+        $blog_types = BlogType::all();
+        return view('admin.add_blog',compact('blog_types'));
     }
 
     public function add_blog(Request $request)
@@ -46,7 +48,7 @@ class BlogController extends Controller
         }
         $blog->title = $request->title;
         $blog->description = $request->description;
-        $blog->type = 0;
+        $blog->type = $request->blog_type_id;
        
         // dd($blog);
         $blog->save();
