@@ -93,8 +93,10 @@
                         <div class="product_tab_button">
                             <ul class="nav" role="tablist">
                                 @foreach ($categories as $key=>$item)
-                                <li>
-                                    <a class="{{$key == 0 ? 'active':''}}" data-bs-toggle="tab" href="#{{ $key }}" role="tab" aria-controls="{{$key}}" aria-selected="{{$key == 0 ? 'true':''}}">{{ $item->title }}</a>
+                                <li >
+                                    <a class="{{ $item->id == 1 ? 'active' : '' }}" href="#home{{ $item->id }}" aria-controls="home{{$item->id}}" role="tab" aria-selected="true" data-bs-toggle="tab">{{ $item->title }}</a>
+                                    
+                                    {{-- <a class="{{$key == 0 ? 'active':''}}" data-bs-toggle="tab" href="#{{ $key }}" role="tab" aria-controls="{{$key}}" aria-selected="{{$key == 0 ? 'true':''}}">{{ $item->title }}</a> --}}
                                 </li>
                                 @endforeach
                                 {{-- <li>
@@ -115,7 +117,8 @@
                 </div>
                 <div class="tab-content">
                     @foreach ($categories as $key=>$item)
-                        <div class="tab-pane fade {{$key == 0 ? 'show active' : ''}}" id="{{ $key }}" role="tabpanel">
+                        {{-- <div class="tab-pane fade {{$key == 0 ? ' active' : ''}}" id="{{ $key }}" role="tabpanel"> --}}
+                        <div role="tabpanel" class="tab-pane fade {{ $item->id == 1 ? 'active' : ''  }}" id="home{{ $item->id }}" class="show active">
                             <div class="product_container">
                                 <div class="row product_rows_column4">
                                     @foreach ($item->products as $item)
@@ -2414,18 +2417,16 @@
            <div class="instagram_home_block">
                 <div class="row">
                     <div class="instagram_wrapper instagram_column5 owl-carousel">
-                        @foreach ($products as $item)
+                        @foreach ($instas as $item)
                         <div class="col-lg-3">
                             <div class="single_instagram">
-                                <a href="#"><img src="{{ asset('images/product_images/'.$item->product_thumbnail) }}" alt=""></a>
+                                <a href="#"><img src="{{ asset('images/insta_images/'.$item->image) }}" alt=""></a>
                                 <div class="instagram_icone">
-                                    <a class="instagram_pupop" href="{{ asset('images/product_images/'.$item->product_thumbnail) }}"><i class="fa fa-instagram"></i></a>
+                                    <a class="instagram_pupop" href="{{ asset('images/insta_images/'.$item->image) }}"><i class="fa fa-instagram"></i></a>
                                 </div>
                             </div>
                         </div>
                         @endforeach
-                       
-                       
                    </div>
                    <div class="col-12">
                        <div class="text_follow">

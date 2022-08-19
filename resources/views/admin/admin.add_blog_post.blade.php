@@ -20,8 +20,8 @@
     <div class="row g-4">
         <div class="col-sm-12 col-xl-12">
             <div class="bg-light rounded h-100 p-4">
-                <h6 class="mb-4">Add Insta Post </h6>
-                <form method="POST" action="{{ route('add_insta') }}" enctype="multipart/form-data">
+                <h6 class="mb-4">Add Blog </h6>
+                <form method="POST" action="{{ route('add_blog') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
@@ -29,20 +29,13 @@
                             id="exampleInputEmail1" aria-describedby="emailHelp">
                     </div>
                     <div class="mb-3">
-                        {{-- <label for="shortdescription" class="form-label"> Description</label>
-                        <textarea name="description" required class="ckeditor form-control" id="" cols="30" rows="10"></textarea> --}}
-                        {{-- <input type="text" name="description" required class="form-control" id="exampleInputPassword1"> --}}
-                    </div>
-                    <div class="mb-3">
-                        <label for="title" class="form-label">Instagram Link</label>
-                        <input type="text" required name="link" required class="form-control"
-                            id="exampleInputEmail1" aria-describedby="emailHelp">
+                        <label for="shortdescription" class="form-label"> Description</label>
+                        <textarea name="description" required class="ckeditor form-control" id="" cols="30" rows="10"></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="image" class="form-label">Image</label>
                         <input type="file" required name="image" class="form-control" id="exampleInputPassword1">
                     </div>
-                    
                     <button type="submit" class="btn btn-primary">Add</button>
                 </form>
             </div>

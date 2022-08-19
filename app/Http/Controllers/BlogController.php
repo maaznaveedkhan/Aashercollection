@@ -8,12 +8,22 @@ use Illuminate\Http\Request;
 class BlogController extends Controller
 {
     //
+    public function index(){
+        $blogs = Blog::all();
+        return view('frontend.blogs',compact('blogs'));
+    }
+
+    public function blog_detail($id){
+        $blog = Blog::find($id);
+        return view('frontend.blog_detail',compact('blog'));
+    }
+
     public function blogs(){
         $blogs = Blog::all();
         return view('admin.blogs',compact('blogs'));
     }
     public function blog_form(){
-        return view('admin.add_blog_post');
+        return view('admin.add_blog');
     }
 
     public function add_blog(Request $request)
@@ -36,14 +46,13 @@ class BlogController extends Controller
         }
         $blog->title = $request->title;
         $blog->description = $request->description;
-        $blog->link = $request->link;
-        $blog->status = 0;
+        $blog->type = 0;
        
         // dd($blog);
         $blog->save();
 
         return redirect()
-            ->route('admin_blog')
+            ->route('admin_blogs')
             ->with('success', 'blog has been added!');
     }
 

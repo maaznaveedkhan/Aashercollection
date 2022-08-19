@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Models\Category;
+use App\Models\InstagramPost;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -20,10 +21,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     $products = Product::paginate(20);
     $popular_categories = Category::paginate(3);
-   $categories = Category::with('products')->get();
+    $categories = Category::with('products')->get();
+    $instas = InstagramPost::paginate(10);
     // dd($categories);
     // $categories = Category::all();
-    return view('frontend.index', compact('products', 'categories','popular_categories'));
+    return view('frontend.index', compact('products', 'categories','popular_categories','instas'));
 })->name('/');
 Route::get('about_us', [App\Http\Controllers\AboutController::class, 'about_us'])->name('about_us');
 Route::get('contact_us', [App\Http\Controllers\ContactController::class, 'contact_us'])->name('contact_us');
@@ -36,6 +38,8 @@ Route::get('cart', [App\Http\Controllers\CartController::class, 'cart'])->name('
 Route::get('add-to-cart/{id}', [App\Http\Controllers\CartController::class, 'addToCart'])->name('add.to.cart');
 Route::patch('update-cart', [App\Http\Controllers\CartController::class, 'update'])->name('update.cart');
 Route::delete('remove-from-cart', [App\Http\Controllers\CartController::class, 'remove'])->name('remove.from.cart');
+Route::get('blogs', [App\Http\Controllers\BlogController::class, 'index'])->name('blogs');
+Route::get('blog_detail/{id}', [App\Http\Controllers\BlogController::class, 'blog_detail'])->name('blog_detail');
 Route::get('privacy_policy', [App\Http\Controllers\AboutController::class, 'privacy_policy'])->name('privacy_policy');
 Route::get('terms&conditions', [App\Http\Controllers\AboutController::class, 'terms'])->name('terms');
 Route::get('faq', [App\Http\Controllers\AboutController::class, 'faq'])->name('faq');
@@ -101,7 +105,7 @@ Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::post('add_insta', [App\Http\Controllers\InstaPostController::class, 'add_insta'])->name('add_insta');
     Route::get('delete_insta/{id}', [App\Http\Controllers\instaPostController::class, 'destroy'])->name('delete_insta');
     //Blog
-    Route::get('admin/blogs', [App\Http\Controllers\BlogController::class, 'index'])->name('admin_blogs');
+    Route::get('admin/blogs', [App\Http\Controllers\BlogController::class, 'blogs'])->name('admin_blogs');
     Route::get('admin/blog_form', [App\Http\Controllers\BlogController::class, 'blog_form'])->name('admin_blog_form');
     Route::post('add_blog', [App\Http\Controllers\BlogController::class, 'add_blog'])->name('add_blog');
     Route::get('delete_blog/{id}', [App\Http\Controllers\BlogController::class, 'destroy'])->name('delete_blog');

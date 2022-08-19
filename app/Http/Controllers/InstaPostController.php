@@ -36,15 +36,14 @@ class InstaPostController extends Controller
             $insta->image = $filename;
         }
         $insta->title = $request->title;
-        $insta->description = $request->description;
-        $insta->link = $request->link;
+        $insta->post_link = $request->link;
         $insta->status = 0;
-       
+    //    dd($insta);
         // dd($insta);
         $insta->save();
 
         return redirect()
-            ->route('admin_insta')
+            ->route('admin_instas')
             ->with('success', 'Insta Post has been added!');
     }
 

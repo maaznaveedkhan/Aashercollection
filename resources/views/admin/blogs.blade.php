@@ -41,10 +41,10 @@
                                     @else
                                         <th scope="row">{{ $item->id }}</th>
                                         <td>{{ $item->title }}</td>
-                                        <td>{{ $item->description }}</td>
+                                        <td>{!! Str::limit($item->description,50,$end="...") !!}</td>
                                         <td><img src="{{ asset('images/blog_images/'.$item->image) }}"
                                                 height="40px" width="40px" alt=""></td>
-                                        <td> {{ $item->type }}"</td>
+                                        {{-- <td> {{ $item->type }}"</td> --}}
                                         <td>
                                             <a href="{{ route('delete_blog',$item->id) }}" type="button"
                                                 class="btn btn-outline-danger m-2">Delete</a>

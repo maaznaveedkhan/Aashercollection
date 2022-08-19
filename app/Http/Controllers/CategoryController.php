@@ -50,7 +50,7 @@ class CategoryController extends Controller
         $category = Category::find($id);
         $category =$category->id;
         $categories = Category::with('products')->get();
-        $products = Product::where('category_id',$category)->paginate(5);
+        $products = Product::where('category_id',$category)->paginate(15);
         //  dd($products);
         //  return  $products;
         //  $products = Product::where('category_id',$category)->get();

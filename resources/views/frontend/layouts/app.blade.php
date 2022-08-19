@@ -591,9 +591,10 @@
                                             <ul class="sub_menu pages">
                                                 <li><a href="{{ route('faq') }}">Frequently Questions</a></li>
                                                 <li><a href="{{ route('privacy_policy') }}">privacy policy</a></li>
-                                                <li><a href="{{ route('terms') }}">terms & conditions policy</a></li>
+                                                <li><a href="{{ route('terms') }}">terms & conditions </a></li>
                                             </ul>
                                         </li>
+                                        <li><a href="{{ route('blogs') }}">Blogs </a></li>
                                     </ul>
                                 </nav>
                             </div>
