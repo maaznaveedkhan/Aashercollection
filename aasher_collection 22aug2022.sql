@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2022 at 01:59 PM
+-- Generation Time: Aug 22, 2022 at 01:59 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -46,18 +46,61 @@ INSERT INTO `abouts` (`id`, `title`, `description`, `image`, `created_at`, `upda
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `attributes`
+--
+
+CREATE TABLE `attributes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `blogs`
 --
 
 CREATE TABLE `blogs` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` longtext COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `blogs`
+--
+
+INSERT INTO `blogs` (`id`, `title`, `description`, `image`, `type`, `created_at`, `updated_at`) VALUES
+(1, 'Test Blog 1', '\n<p>Lorem ipsum dolor sit amet. Sed nihil tempore <em>Aut possimus ut consequatur consequuntur sed soluta natus</em> et accusamus modi. Eum nemo enim <strong>Ut odit</strong> quo quia cupiditate ut dicta aliquam.</p>\n\n<ul>\n	<li>Ab eaque minus ea minus possimus id nihil nobis.</li>\n	<li>Ut corrupti odit ea numquam accusantium.</li>\n</ul>\n\n<p>Et earum aperiam.</p>\n\n<p>Ea assumenda fuga ut omnis neque in consequuntur similique a expedita quasi.</p>\n\n<p>Sit velit voluptas!</p>\n\n<p>Ex esse quasi sed dolorum repellat.</p>\n\n<p>Et reprehenderit sunt.</p>\n\n<p>Et aliquid magnam ut nemo voluptatem.</p>\n\n<p>33 illo odio ut voluptatum quaerat.</p>\n\n<p>In galisum praesentium hic Quis consequatur ut obcaecati aperiam aut aliquam vero.</p>\n\n<blockquote>Et expedita similique vel ducimus animi et ullam excepturi aut quis quasi est error natus.</blockquote>\n\n<pre>\n<code>&lt;!-- Sit veritatis  ab possimus molestiae et distinctio velit? --&gt;\n&lt;praesentium&gt;Et distinctio consequatur.&lt;/praesentium&gt;\n&lt;itaque&gt;Nam eaque rerum.&lt;/itaque&gt;\n&lt;alias&gt;In assumenda adipisci?&lt;/alias&gt;\n</code></pre>\n\n<h2>Aut quaerat accusantium ad corporis mollitia ea delectus voluptates?</h2>\n\n<p>Cum delectus sapiente eum aliquid iure eum doloremque dolorum deserunt ipsam hic repellat voluptatem qui voluptatem velit ea voluptatibus quae. Et quia necessitatibus <em>Sit molestiae vel neque molestiae aut aliquid ratione</em>. Eveniet consequatur <strong>Est nemo vel numquam reprehenderit ut enim enim</strong>. Eum Quis dolorem aut sequi dignissimos aut debitis doloribus ex blanditiis obcaecati aut modi dolorum qui dolor expedita labore fugit.</p>\n\n<ol>\n	<li>At dolorum harum est commodi vero et repellat consequuntur.</li>\n	<li>Ut veniam voluptas aut enim aliquid.</li>\n	<li>Ad accusantium labore sed voluptatibus cupiditate At autem eveniet qui molestiae sint.</li>\n</ol>\n\n<h3>Vel sint odio et enim reiciendis nam quia accusamus.</h3>\n\n<p>At minima corporis <em>Et doloribus ex commodi minima est quisquam illo est assumenda commodi</em> vel cupiditate voluptatum non itaque reprehenderit? Id sint dolor et dignissimos impedit in modi omnis eos ducimus quae qui nulla nobis ut veritatis aperiam ab voluptatibus omnis. Et officiis consequuntur quo quaerat repellat est odio quasi sed quia sunt hic galisum quia. Sit porro aspernatur non incidunt aperiam hic perferendis saepe.</p>', '1660889360.jpg', '1', '2022-08-19 01:09:20', '2022-08-19 01:09:20'),
+(2, 'Test Blog 2', '<p>Lorem ipsum dolor sit amet. Cum amet veritatis <strong>Eos soluta aut praesentium tempora eos dolorem voluptas</strong>. Qui beatae obcaecati et nihil minima <em>33 voluptatem qui velit distinctio et molestiae sequi ad autem possimus</em> in quia commodi. In sapiente dignissimos <a href=\"https://www.loremipzum.com\" target=\"_blank\">Ex voluptatem aut alias eaque At voluptates galisum</a> sed consequatur nihil eos dolor voluptatibus id rerum veniam. Et expedita eaque aut quia aliquid aut deserunt galisum.</p>\r\n\r\n<ol>\r\n	<li>A odio voluptatem id totam nostrum eos perferendis eveniet qui ducimus atque.</li>\r\n	<li>Ex magnam provident in porro voluptatum.</li>\r\n	<li>Non rerum dolor ex repellat omnis ex recusandae similique et reiciendis asperiores.</li>\r\n</ol>\r\n\r\n<blockquote>Ex tempore sequi rem maxime nostrum ea odit architecto ut adipisci libero At voluptatum suscipit a eius doloribus.</blockquote>\r\n\r\n<pre>\r\n<code>&lt;!-- Sed quas voluptatem. --&gt;\r\n&lt;a&gt;Ut earum incidunt sed maxime laudantium.&lt;/a&gt;\r\n&lt;amet&gt;Nam possimus iusto.&lt;/amet&gt;\r\n&lt;aut&gt;Ad excepturi eligendi quo voluptatibus maxime!&lt;/aut&gt;\r\n&lt;ratione&gt;Sit veniam numquam.&lt;/ratione&gt;\r\n</code></pre>\r\n\r\n<p>In aliquid doloribus <em>Aut pariatur hic nulla illo sed ratione possimus</em> qui placeat maiores eos quidem dolorem At eligendi harum! Ut facilis dolorum eum aliquam enim 33 sapiente enim et laudantium expedita et suscipit omnis odit temporibus ut consequuntur corrupti. Ab modi quidem et voluptatem voluptas eum galisum autem id autem quia ab veniam tempora. Non molestiae voluptatum est velit repudiandae et excepturi dolore ut accusamus voluptas sed nihil nostrum ea doloremque possimus et repellat rerum.</p>\r\n\r\n<ul>\r\n	<li>Et dignissimos similique sed beatae totam.</li>\r\n	<li>Qui dolorem aliquid quo sint quisquam qui internos voluptatem.</li>\r\n	<li>In consequuntur possimus est possimus officia nihil galisum a asperiores laborum.</li>\r\n	<li>Quo quia laudantium est quibusdam facilis et debitis odit.</li>\r\n</ul>\r\n\r\n<p>Rem facere nobis <strong>In quia est consequatur libero quo voluptatem amet</strong>! Ut galisum ipsam <a href=\"https://www.loremipzum.com\" target=\"_blank\">Id enim sit amet impedit eos illum accusantium id voluptas sint</a>. Sit veniam enim et necessitatibus amet <em>Nam deserunt vel voluptatem nesciunt a nemo </em>. Ea recusandae doloribus ut ipsa ipsum sit dignissimos perspiciatis.</p>\r\n\r\n<p>Et provident autem qui internos inventore.</p>\r\n\r\n<p>Id repellendus sunt et sunt distinctio a deserunt quam et rerum quod.</p>\r\n\r\n<p>Non praesentium esse.</p>\r\n\r\n<p>In rerum fugiat et explicabo reiciendis.</p>', '1660889748.jpg', '2', '2022-08-19 01:15:48', '2022-08-19 01:15:48');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blog_types`
+--
+
+CREATE TABLE `blog_types` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `blog_types`
+--
+
+INSERT INTO `blog_types` (`id`, `title`, `created_at`, `updated_at`) VALUES
+(1, 'Fashion', '2022-08-19 02:55:11', '2022-08-19 02:55:11'),
+(2, 'Creative', '2022-08-19 02:55:56', '2022-08-19 02:55:56'),
+(3, 'Wordpress', '2022-08-19 02:56:23', '2022-08-19 02:56:23');
 
 -- --------------------------------------------------------
 
@@ -79,9 +122,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `title`, `description`, `image`, `created_at`, `updated_at`) VALUES
-(1, 'Sneakers', 'Men\'s Sneakers', '1660215091.jpg', '2022-08-11 05:51:31', '2022-08-11 05:51:31'),
-(2, 'Men\'s', 'Men\'s Men\'s Men\'s', '1660297515.jpg', '2022-08-12 04:45:15', '2022-08-12 04:45:15'),
-(3, 'Women\'s', 'Women\'s Shoes', '1660297536.jpg', '2022-08-12 04:45:36', '2022-08-12 04:45:36'),
+(1, 'Sneakers', 'Men\'s Sneakers', 'accessories.jpg', '2022-08-11 05:51:31', '2022-08-11 05:51:31'),
+(2, 'Men\'s', 'Men\'s Men\'s Men\'s', 'mens.jpg', '2022-08-12 04:45:15', '2022-08-12 04:45:15'),
+(3, 'Women\'s', 'Women\'s Shoes', 'women.jpg', '2022-08-12 04:45:36', '2022-08-12 04:45:36'),
 (4, 'Kids', 'Kids Shoes', '1660297573.jpg', '2022-08-12 04:46:13', '2022-08-12 04:46:13');
 
 -- --------------------------------------------------------
@@ -141,6 +184,17 @@ CREATE TABLE `instagram_posts` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `instagram_posts`
+--
+
+INSERT INTO `instagram_posts` (`id`, `title`, `post_link`, `image`, `status`, `created_at`, `updated_at`) VALUES
+(1, 'Post 1', 'https://www.instagram.com/', '1660888704.webp', '0', '2022-08-19 00:58:24', '2022-08-19 00:58:24'),
+(2, 'Post 2', 'https://www.instagram.com/', '1660888741.jpg', '0', '2022-08-19 00:59:01', '2022-08-19 00:59:01'),
+(3, 'Post 3', 'https://www.instagram.com/', '1660888760.jpg', '0', '2022-08-19 00:59:20', '2022-08-19 00:59:20'),
+(4, 'Post 4', 'https://www.instagram.com/', '1660888808.jpg', '0', '2022-08-19 01:00:08', '2022-08-19 01:00:08'),
+(5, 'Post 5', 'https://www.instagram.com/', '1660888847.jpg', '0', '2022-08-19 01:00:47', '2022-08-19 01:00:47');
+
 -- --------------------------------------------------------
 
 --
@@ -172,7 +226,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (21, '2022_08_18_064704_create_abouts_table', 8),
 (23, '2022_08_18_085331_create_contacts_table', 9),
 (26, '2022_08_18_112336_create_instagram_posts_table', 10),
-(27, '2022_08_18_115114_create_blogs_table', 11);
+(28, '2022_08_18_115114_create_blogs_table', 11),
+(29, '2022_08_19_072020_create_attributes_table', 12),
+(30, '2022_08_19_074144_create_blog_types_table', 12);
 
 -- --------------------------------------------------------
 
@@ -395,7 +451,8 @@ INSERT INTO `products` (`id`, `category_id`, `name`, `short_description`, `long_
 (152, '3', 'Mrs. Amber Reinger', 'Quod vitae voluptas esse inventore alias libero impedit. Aspernatur non nostrum eos ullam perferendis. Recusandae saepe tempora qui eaque commodi dolorem voluptates.', 'A ut adipisci provident molestiae. Numquam fugiat fugit quis quis et beatae saepe. Eos labore corrupti quia saepe. Dolorem omnis non suscipit dolorem. Reprehenderit sint voluptatem voluptates. Soluta eligendi minus voluptatum omnis minima aspernatur. Voluptas deleniti quam ut eligendi quam nemo optio itaque. Accusantium ea quo ut ut aspernatur nemo quo. Commodi unde est recusandae. Quisquam assumenda aut sit molestiae sed deleniti. Ipsa ad fugit quia sit adipisci ducimus autem. Enim ea totam illum nesciunt voluptas consequatur officia.', '2138', '1338', NULL, 'womentest.jpg', '', '[\"womentest.jpg\"]', '8', 'purple', '487', '2022-08-17 05:54:00', '2022-08-17 05:54:00'),
 (153, '3', 'Casper Nikolaus', 'Qui quia doloribus nobis aut ut. Voluptatem ad aspernatur vitae ut eum voluptas quae incidunt.', 'Debitis eum fuga blanditiis necessitatibus fugit voluptas voluptas quae. Impedit enim quis consectetur in quo. Libero velit possimus quos commodi cumque sint doloribus. Quibusdam suscipit autem corrupti molestiae quia laudantium sed. Quibusdam et laudantium voluptas fugit eos. Necessitatibus nihil enim rerum sunt. Expedita praesentium dolorem dolores temporibus officiis et deleniti. Molestiae saepe eius aut qui deserunt. Aut iure aut doloremque aut tenetur sed inventore. Eum molestiae laborum excepturi deleniti magnam veritatis at. Quam minima facilis tenetur aperiam nihil. Rerum accusantium quos commodi tenetur veritatis.', '2784', '1722', NULL, 'womentest.jpg', '', '[\"womentest.jpg\"]', '8', 'purple', '329', '2022-08-17 05:54:00', '2022-08-17 05:54:00'),
 (154, '3', 'Jaylon Crooks', 'Est quaerat laudantium quia excepturi perferendis. Quaerat non voluptatem iste error enim.', 'Facilis qui aut rerum asperiores voluptatem doloribus quod sunt. Eos eos dolorum ratione omnis perspiciatis. Consectetur in alias consequatur aut. Debitis non ducimus iusto accusamus qui quisquam earum. Laborum dolorem recusandae dolore. Blanditiis doloribus nihil ab delectus. Provident aut voluptas laboriosam sed iste et. Consequatur suscipit quod necessitatibus.', '2924', '689', NULL, 'womentest.jpg', '', '[\"womentest.jpg\"]', '8', 'purple', '314', '2022-08-18 00:24:56', '2022-08-18 00:24:56'),
-(155, '1', 'Sneakers', 'Camouflage Sneaker', 'Camouflage Sneaker', '2500', '1500', '40', '1660800616.jpg', 'male', '[\"55a966f3371d22c6178b62ed.jpg\",\"best-men-sneakers-balanciaga-triple-s-luxe-digital-780x520.jpg\"]', '10', 'Camouflage', '250', '2022-08-18 00:30:16', '2022-08-18 00:30:16');
+(155, '1', 'Sneakers', 'Camouflage Sneaker', 'Camouflage Sneaker', '2500', '1500', '40', '1660800616.jpg', 'male', '[\"55a966f3371d22c6178b62ed.jpg\",\"best-men-sneakers-balanciaga-triple-s-luxe-digital-780x520.jpg\"]', '10', 'Camouflage', '250', '2022-08-18 00:30:16', '2022-08-18 00:30:16'),
+(156, '1', 'Test Product', 'Test Product Test Product', '<p>dsfdsfdgdfbvdfgfgds fdsfdsfdsfdsfsdas</p>', '250000', '9500', '96.2', '1661142115.jpg', 'male', '[\"accessories.jpg\",\"55a966f3371d22c6178b62ed.jpg\",\"best-men-sneakers-balanciaga-triple-s-luxe-digital-780x520.jpg\"]', '10', 'Multi', '500', '2022-08-21 23:21:55', '2022-08-21 23:21:55');
 
 -- --------------------------------------------------------
 
@@ -471,9 +528,21 @@ ALTER TABLE `abouts`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `attributes`
+--
+ALTER TABLE `attributes`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `blogs`
 --
 ALTER TABLE `blogs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `blog_types`
+--
+ALTER TABLE `blog_types`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -569,10 +638,22 @@ ALTER TABLE `abouts`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `attributes`
+--
+ALTER TABLE `attributes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `blogs`
 --
 ALTER TABLE `blogs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `blog_types`
+--
+ALTER TABLE `blog_types`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -596,13 +677,13 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT for table `instagram_posts`
 --
 ALTER TABLE `instagram_posts`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -626,7 +707,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=156;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=157;
 
 --
 -- AUTO_INCREMENT for table `users`

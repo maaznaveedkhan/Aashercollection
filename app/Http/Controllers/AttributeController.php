@@ -17,7 +17,7 @@ class AttributeController extends Controller
             'name' => $request->attr_name,
             'value' => $request->attribute_values
         ];
-      Session::put('attributes', $data);
+      Session::put(' ', $data);
       return redirect()->route('admin_prod_form')->with('success','Attributes');
     //   return response()->json(['session successfully saved']);
     }

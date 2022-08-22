@@ -85,10 +85,10 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <label for="">Attribute Name</label>
-
+                                    
                                 </div>
-                                <div class="col-md-3">
-                                    <label for="">Attribute Values</label>
+                                <div class="col-md-6">
+                                    {{ session()->get('attributes') }}
                                     
                                 </div>
                             </div>
