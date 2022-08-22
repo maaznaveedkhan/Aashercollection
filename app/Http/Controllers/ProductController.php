@@ -187,7 +187,6 @@ class ProductController extends Controller
            
             return $output;
         }
-
         return view('frontend.search_results', compact('products','categories'));
     }
 

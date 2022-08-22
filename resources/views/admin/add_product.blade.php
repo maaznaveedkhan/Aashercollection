@@ -27,6 +27,17 @@
             <div class="col-sm-12 col-xl-12">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Add Product</h6>
+                    {{-- <div class=" dropdown">
+                        <a href="#" class=" dropdown-toggle" data-bs-toggle="dropdown"><i
+                                class="fa fa-instagram me-2"></i>Attribute </a>
+                        <div class="dropdown-menu bg-white border-0">
+                            <a href="{{ route('admin_blog_types') }}" class="dropdown-item">Select Box</a>
+                            <a href="{{ route('admin_blogs') }}" class="dropdown-item">Text</a>
+                            <a href="{{ route('admin_blog_form') }}" class="dropdown-item">Add New Blog</a>
+                        </div>
+                    </div> --}}
+                    {{-- <a class="btn" href="{{ route('admin_attribute_form') }}">Add Attribute</a> --}}
+                    {{-- <a class="btn" href="{{ route('admin_attribute_form') }}">Remove Attribute</a> --}}
                     <form method="POST" action="{{ route('add_product') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
@@ -103,9 +114,9 @@
                     </form>
                 </div>
             </div>
-            {{-- <div class="col-sm-12 col-xl-12">
+            <div class="col-sm-12 col-xl-12">
                 <div class="bg-light rounded h-100 p-4">
-                    <form>
+                    {{-- <form>
                         <label for="name">Framework:</label>
                         <input type="text" id="name" placeholder="Enter a framework" autocomplete="off">
             
@@ -117,7 +128,7 @@
                         </select>
                         <button id="btnRemove">Remove Selected Framework</button>
                     </form>
-                    <h6 class="mb-4">Add Color</h6>
+                    <h6 class="mb-4">Add Color</h6> --}}
                     <div class="mb-3">
                         <div class="row">
                             <div class="col-md-6">
@@ -138,7 +149,7 @@
                         </div>
                     </div> 
                 </div>
-            </div> --}}
+            </div>
             {{-- <div class="col-sm-12 col-xl-12">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Add Attribute</h6>

@@ -80,6 +80,9 @@ Route::group(['middleware' => ['admin', 'auth']], function () {
     Route::get('admin/view_product/{id}', [App\Http\Controllers\ProductController::class, 'view_product'])->name('view_product');
     Route::get('admin/edit_product/{id}', [App\Http\Controllers\ProductController::class, 'edit_product'])->name('edit_product');
     Route::post('update_product/{id}', [App\Http\Controllers\ProductController::class, 'update_product'])->name('update_product');
+    // Product Attributes
+    Route::get('admin/add_attribute', [App\Http\Controllers\AttributeController::class, 'attribute_form'])->name('admin_attribute_form');
+    Route::get('set-data', [App\Http\Controllers\AttributeController::class, 'setData'])->name('session.create');
     //Order
     Route::get('admin/new_orders', [App\Http\Controllers\OrderController::class, 'admin_orders'])->name('admin_orders');
     Route::get('admin/order_detail/{id}', [App\Http\Controllers\OrderController::class, 'admin_order_detail'])->name('admin_order_detail');
