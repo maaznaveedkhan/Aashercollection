@@ -75,7 +75,7 @@
                 </ul>
             </div>
             <div class="search_bar">
-                <form id="search_form" action="{{ route('search') }}" method="GET">
+                {{-- <form id="search_form" action="{{ route('search') }}" method="GET">
                     <select class="select_option" name="select">
                         <option selected value="1">All Categories</option>
                         @foreach ($categories as $item)
@@ -86,7 +86,7 @@
                     <input name="product" id="product" placeholder="Search entire store here..." type="text">
                     <button type="submit" id="search_button"><i class="ion-ios-search-strong"></i></button>
                 </form>
-                <div id="product_list"></div>
+                <div id="product_list"></div> --}}
             </div>
             <div class="cart_area">
                 <div class="middel_links">

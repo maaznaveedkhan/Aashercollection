@@ -174,8 +174,8 @@ class ProductController extends Controller
                 $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1">';
               
                 foreach ($data as $row){
-                    // $url = url('product_detail',$row->id);
-                    $output .= '<li class="list-group-item"><a href="">'.$row->name.'</a></li>';
+                    $url = route('product_detail',$row->id);
+                    $output .= '<li class="list-group-item"><a href="'.$url.'">'.$row->name.'</a></li>';
                 }
               
                 $output .= '</ul>';
