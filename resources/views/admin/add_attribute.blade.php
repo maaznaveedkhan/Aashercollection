@@ -41,9 +41,9 @@
                             
                         </select>
                     </div>
-                    <form>
+                    <form >
                         <input type="hidden" name="attr_name" id="attr_id" value="">
-                        <input type="hidden" name="attribute_values" value="">
+                        <input type="hidden" name="attribute_values" id="value_id" value="">
                         <button type="submit">Submit</button>
                     </form>
                 </div>
@@ -63,8 +63,8 @@
                 $("#attr_id").val(name);
                
              });
-            $("#add_value").click(function(){
             var attributes = new Array();
+            $("#add_value").click(function(){
             // var name = $('#attribute_name').val();
             var value =  $('#attribute_value').val();
                 optText = value;
@@ -72,8 +72,12 @@
                 // alert(optValue);
                 $('#selectId').append(`<option value="${optValue}">${optText}</option>`);
             alert(value);
+            attributes.push(value);
+            $("#value_id").val(attributes);
+            
             console.log(attributes);
             });
+            
             
 
 

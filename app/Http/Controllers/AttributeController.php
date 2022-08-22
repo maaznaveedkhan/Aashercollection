@@ -15,10 +15,11 @@ class AttributeController extends Controller
     
     public function setData(Request $request){
         $data = [
-            'name' => $request->name,
-            'value' => $request->value
+            'name' => $request->attr_name,
+            'value' => $request->attribute_values
         ];
       Session::put('user_data', $data);
-      return response()->json(['session successfully saved']);
+      return redirect()->back()>with('success','Attributes')
+    //   return response()->json(['session successfully saved']);
     }
 }
