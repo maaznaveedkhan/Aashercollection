@@ -36,7 +36,7 @@
                             <a href="{{ route('admin_blog_form') }}" class="dropdown-item">Add New Blog</a>
                         </div>
                     </div> --}}
-                    {{-- <a class="btn" href="{{ route('admin_attribute_form') }}">Add Attribute</a> --}}
+                    <a class="btn" href="{{ route('admin_attribute_form') }}">Add Attribute</a>
                     {{-- <a class="btn" href="{{ route('admin_attribute_form') }}">Remove Attribute</a> --}}
                     <form method="POST" action="{{ route('add_product') }}" enctype="multipart/form-data">
                         @csrf
@@ -80,6 +80,18 @@
                         @enderror
                         <div class="mb-3">
                             <div class="images-preview-div"> </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label for="">Attribute Name</label>
+
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="">Attribute Values</label>
+                                    
+                                </div>
+                            </div>
                         </div>
                         <div class="mb-3">
                             <label for="longdescription" class="form-label">Select Gender</label>

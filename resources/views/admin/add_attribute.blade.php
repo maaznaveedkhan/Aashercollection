@@ -41,7 +41,8 @@
                             
                         </select>
                     </div>
-                    <form >
+                    <form action="{{ route('session.create') }}" method="GET">
+                        @csrf
                         <input type="hidden" name="attr_name" id="attr_id" value="">
                         <input type="hidden" name="attribute_values" id="value_id" value="">
                         <button type="submit">Submit</button>
@@ -59,7 +60,7 @@
         $(document).ready(function(){
             $("#add_name").click(function(){
                 var name = $('#attribute_name').val();
-                alert(name);
+                // alert(name);
                 $("#attr_id").val(name);
                
              });
@@ -71,11 +72,11 @@
                 optValue = value;
                 // alert(optValue);
                 $('#selectId').append(`<option value="${optValue}">${optText}</option>`);
-            alert(value);
+            // alert(value);
             attributes.push(value);
             $("#value_id").val(attributes);
             
-            console.log(attributes);
+            // console.log(attributes);
             });
             
             

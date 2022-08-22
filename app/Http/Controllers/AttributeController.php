@@ -9,7 +9,6 @@ class AttributeController extends Controller
 {
     //
     public function attribute_form(){
-
         return view('admin.add_attribute');
     }
     
@@ -18,8 +17,8 @@ class AttributeController extends Controller
             'name' => $request->attr_name,
             'value' => $request->attribute_values
         ];
-      Session::put('user_data', $data);
-      return redirect()->back()>with('success','Attributes')
+      Session::put('attributes', $data);
+      return redirect()->route('admin_prod_form')->with('success','Attributes');
     //   return response()->json(['session successfully saved']);
     }
 }
