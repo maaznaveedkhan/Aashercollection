@@ -10,8 +10,10 @@ class BlogController extends Controller
 {
     //
     public function index(){
-        $blogs = Blog::all();
-        return view('frontend.blogs',compact('blogs'));
+
+        $blogs = Blog::paginate(5);
+        $blog_types = BlogType::all();
+        return view('frontend.blogs',compact('blogs','blog_types'));
     }
 
     public function blog_detail($id){
@@ -19,8 +21,16 @@ class BlogController extends Controller
         return view('frontend.blog_detail',compact('blog'));
     }
 
+    public function blog_type($id){
+        $blog_types = BlogType::all();
+        $blog_id = BlogType::find($id);
+        $type = $blog_id->id;
+         $blogs = Blog::where('type',$type)->paginate(5);
+        return view('frontend.blog_type',compact('blogs','blog_types'));
+    }
+
     public function blogs(){
-        $blogs = Blog::all();
+        $blogs = Blog::paginate(5);
         return view('admin.blogs',compact('blogs'));
     }
     public function blog_form(){
@@ -31,11 +41,10 @@ class BlogController extends Controller
     public function add_blog(Request $request)
     {
         // return $request;
-        // $validatedData = $request->validate([
-        //     'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
-        //     'product_images' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
+            $validatedData = $request->validate([
+            'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
 
-        //    ]);
+           ]);
 
        
         $blog = new Blog();

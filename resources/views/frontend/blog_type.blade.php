@@ -46,7 +46,7 @@
                     <!--categories end-->
                     
                      <!--recent post start-->
-                    <div class="sidebar_widget recent_post">
+                    {{-- <div class="sidebar_widget recent_post">
                         <h3 class="widget_title">Recent Posts</h3>
                         <div class="sidebar_post">
                             <div class="post_img">
@@ -88,11 +88,11 @@
                             </div>
                             
                         </div>     
-                    </div>
+                    </div> --}}
                     <!--recent post end-->
                     
                     <!--recent post start-->
-                    <div class="sidebar_widget recent_post">
+                    {{-- <div class="sidebar_widget recent_post">
                         <h3 class="widget_title">Comments</h3>
                         <div class="sidebar_post">
                             <div class="post_img">
@@ -149,7 +149,7 @@
                             <li><a href="#">Corporate</a></li>
                             <li><a href="#">Smart</a></li>
                         </ul>
-                    </div>
+                    </div> --}}
                     
                 </aside>
  
@@ -305,13 +305,13 @@
 <div class="blog_pagination">
     <div class="container">
         <div class="row">
-            <div class="d-flex justify-content-center">
-                <ul>
-                    <li class="" style="">{!! $blogs->links() !!}</li>
-                </ul>
-            </div>
-            {{-- <div class="col-12">
-                <div class="pagination">
+            <div class="col-12">
+                <div class="d-flex justify-content-center">
+                    <ul>
+                        <li class="" style="">{!! $blogs->links() !!}</li>
+                    </ul>
+                </div>
+                {{-- <div class="pagination">
                     <ul>
                         <li class="current">1</li>
                         <li><a href="#">2</a></li>
@@ -319,8 +319,8 @@
                         <li class="next"><a href="#">next</a></li>
                         <li><a href="#">>></a></li>
                     </ul>
-                </div>
-            </div> --}}
+                </div> --}}
+            </div>
         </div>
     </div>
 </div>

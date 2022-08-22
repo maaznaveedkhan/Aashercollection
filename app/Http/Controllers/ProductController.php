@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
 class ProductController extends Controller
@@ -12,7 +13,7 @@ class ProductController extends Controller
     //
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(10);
         return view('admin.products', compact('products'));
     }
 
@@ -137,24 +138,57 @@ class ProductController extends Controller
         return view('frontend.product_detail', compact('product_detail','products'));
     }
 
-    public function search(Request $request)
-    {
-        if($request->ajax())
-        {
-        $output="";
-        $products=Product::where('title','LIKE','%'.$request->search."%")->get();
-        if($products)
-            {
-            foreach ($products as $key => $product) {
-            $output.='<tr>'.
-            '<td>'.$product->id.'</td>'.
-            '<td>'.$product->title.'</td>'.
-            '<td>'.$product->description.'</td>'.
-            '<td>'.$product->price.'</td>'.
-            '</tr>';
+    // public function search(Request $request){
+    //     // Get the search value from the request
+    //     $search = $request->input('search');
+    //     $categories = Category::all();
+    
+    //     // Search in the title and body columns from the posts table
+    //     $products = Product::query()
+    //         ->where('name', 'LIKE', "%{$search}%")
+    //         ->orWhere('short_description', 'LIKE', "%{$search}%")
+    //         ->paginate(10);
+        
+    //     // Return the search view with the resluts compacted
+    //     return view('frontend.search_results', compact('products','categories'));
+    // }
+    public function search(Request $request){
+        // $search = $request->product;
+        
+
+        $categories = Category::all();
+        $products = Product::where('name', 'LIKE', $request->product.'%')
+                ->paginate(15);
+        
+        if($request->ajax()) {
+            if($request->product == ''){
+                return '';
             }
-            return Response($output);
+            $data = Product::where('name', 'LIKE', $request->product.'%')
+                ->get();
+           
+            $output = '';
+           
+            if (count($data)>0) {
+              
+                $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1">';
+              
+                foreach ($data as $row){
+                    // $url = url('product_detail',$row->id);
+                    $output .= '<li class="list-group-item"><a href="">'.$row->name.'</a></li>';
+                }
+              
+                $output .= '</ul>';
             }
+            else {
+             
+                $output .= '<li class="list-group-item">'.'No results'.'</li>';
+            }
+           
+            return $output;
         }
+
+        return view('frontend.search_results', compact('products','categories'));
     }
+
 }

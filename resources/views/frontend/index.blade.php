@@ -146,7 +146,7 @@
                                                     </div>
                                                     </div>
                                                     <div class="quick_button">
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#prod_det{{ $item->id }}" title="quick_view">+ quick view</a>
+                                                        <a href="#product_details{{$item->id}}" data-bs-toggle="modal" data-bs-target="#product_details{{$item->id}}" title="quick_view">+ quick view</a>
                                                     </div>
                                                     @if (empty($item->discount))
                                                         
@@ -164,130 +164,112 @@
                                                 </div>
                                                 
                                             </div>
-                                            <!-- modal area start-->
-                                            <div class="modal fade" id="prod_det{{ $item->id }}" tabindex="-1" role="dialog" aria-hidden="true">
-                                                <div class="modal-dialog modal-dialog-centered" role="document">
-                                                    <div class="modal-content">
-                                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                        <div class="modal_body">
-                                                            <div class="container">
-                                                                <div class="row">
-                                                                    <div class="col-lg-5 col-md-5 col-sm-12">
-                                                                        <div class="modal_tab">
-                                                                            <div class="tab-content product-details-large">
-                                                                                <div class="tab-pane fade show active" id="tab1" role="tabpanel">
-                                                                                    <div class="modal_tab_img">
-                                                                                        <a href="#"><img src="assets/img/product/product4.jpg"
-                                                                                                alt=""></a>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="tab-pane fade" id="tab2" role="tabpanel">
-                                                                                    <div class="modal_tab_img">
-                                                                                        <a href="#"><img src="assets/img/product/product6.jpg"
-                                                                                                alt=""></a>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="tab-pane fade" id="tab3" role="tabpanel">
-                                                                                    <div class="modal_tab_img">
-                                                                                        <a href="#"><img src="assets/img/product/product8.jpg"
-                                                                                                alt=""></a>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="tab-pane fade" id="tab4" role="tabpanel">
-                                                                                    <div class="modal_tab_img">
-                                                                                        <a href="#"><img src="assets/img/product/product2.jpg"
-                                                                                                alt=""></a>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="tab-pane fade" id="tab5" role="tabpanel">
-                                                                                    <div class="modal_tab_img">
-                                                                                        <a href="#"><img src="assets/img/product/product12.jpg"
-                                                                                                alt=""></a>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="modal_tab_button">
-                                                                                @php
-                                                                                    $images = json_decode($item->product_images)
-                                                                                @endphp
-                                                                                <ul class="nav product_navactive owl-carousel" role="tablist">
-                                                                                    @foreach ($images as $item)
-                                                                                    <li>
-                                                                                        <a class="nav-link active" data-bs-toggle="tab" href="#tab1"
-                                                                                            role="tab" aria-controls="tab1" aria-selected="false"><img
-                                                                                                src="{{ asset('images/product_images/' . $item) }}" alt=""></a>
-                                                                                    </li>
-                                                                                    @endforeach
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-lg-7 col-md-7 col-sm-12">
-                                                                        <div class="modal_right">
-                                                                            <div class="modal_title mb-10">
-                                                                                <h2>Test</h2>
-                                                                            </div>
-                                                                            <div class="modal_price mb-10">
-                                                                                <span class="new_price">Rs. 200</span>
-                                                                                <span class="old_price">Rs. 250</span>
-                                                                            </div>
-                                                                            <div class="modal_description mb-15">
-                                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia iste
-                                                                                    laborum
-                                                                                    ad impedit pariatur esse optio tempora sint ullam autem deleniti nam in quos
-                                                                                    qui
-                                                                                    nemo ipsum numquam, reiciendis maiores quidem aperiam, rerum vel recusandae
-                                                                                </p>
-                                                                            </div>
-                                                                            <div class="variants_selects">
-                                                                                <div class="variants_size">
-                                                                                    <h2>size</h2>
-                                                                                    <p>M</p>
-                                                                                </div>
-                                                                                <div class="variants_color">
-                                                                                    <h2>color</h2>
-                                                                                    <p>white</p>
-                                                                                </div>
-                                                                                <div class="modal_add_to_cart">
-                                                                                    <form action="#">
-                                                                                        <input min="0" max="100" step="2" value="1"
-                                                                                            type="number">
-                                                                                        <button type="submit">add to cart</button>
-                                                                                    </form>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="modal_social">
-                                                                                <h2>Share this product</h2>
-                                                                                <ul>
-                                                                                    <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a>
-                                                                                    </li>
-                                                                                    <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a>
-                                                                                    </li>
-                                                                                    <li class="pinterest"><a href="#"><i
-                                                                                                class="fa fa-pinterest"></i></a>
-                                                                                    </li>
-                                                                                    <li class="google-plus"><a href="#"><i
-                                                                                                class="fa fa-google-plus"></i></a></li>
-                                                                                    <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        <!-- modal area start-->
+                                           
                                         </div>
                                     @endforeach
                                 </div>
                             </div>
                         </div>
+                    @endforeach
+
+                    @foreach ($categories as $key => $item)
+                        @foreach ($item->products as $item)
+                             <!-- modal area start-->
+                             <div class="modal fade" id="product_details{{$item->id}}" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-content">
+                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                        <div class="modal_body">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-lg-5 col-md-5 col-sm-12">
+                                                        <div class="modal_tab">
+                                                            <div class="tab-content product-details-large">
+                                                                <div class="tab-pane fade show active" id="{{$item->id}}" role="tabpanel">
+                                                                    <div class="modal_tab_img">
+                                                                        <a href="#"><img src="{{ asset('images/product_images/' . $item->product_thumbnail) }}"
+                                                                                alt=""></a>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="tab-pane fade" id="tab2" role="tabpanel">
+                                                                    <div class="modal_tab_img">
+                                                                        <a href="#"><img src="assets/img/product/product6.jpg"
+                                                                                alt=""></a>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal_tab_button">
+                                                                @php
+                                                                    $images = json_decode($item->product_images)
+                                                                @endphp
+                                                                <ul class="nav product_navactive owl-carousel" role="tablist">
+                                                                    @foreach ($images as $element)
+                                                                    <li>
+                                                                        <a class="nav-link active" data-bs-toggle="tab" href="#{{$item->id}}"
+                                                                            role="tab" aria-controls="tab1" aria-selected="false"><img
+                                                                                src="{{ asset('images/product_images/' . $element) }}" alt=""></a>
+                                                                    </li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-7 col-md-7 col-sm-12">
+                                                        <div class="modal_right">
+                                                            <div class="modal_title mb-10">
+                                                                <h2>Test</h2>
+                                                            </div>
+                                                            <div class="modal_price mb-10">
+                                                                <span class="new_price">Rs. {{ $item->discounted_price }}</span>
+                                                                <span class="old_price">Rs. {{ $item->price }}</span>
+                                                            </div>
+                                                            <div class="modal_description mb-15">
+                                                                <p>{{ $item->short_description }}</p>
+                                                            </div>
+                                                            <div class="variants_selects">
+                                                                <div class="variants_size">
+                                                                    <h2>size</h2>
+                                                                    <p>{{ $item->size }}</p>
+                                                                </div>
+                                                                <div class="variants_color">
+                                                                    <h2>color</h2>
+                                                                    <p>{{ $item->color }}</p>
+                                                                </div>
+                                                                <div class="modal_add_to_cart">
+                                                                    <form action="{{ route('add.to.cart',$item->id) }}">
+                                                                        <input class=" quantity update-cart" min="1" max="100" value="1" type="number">
+                                                                        <button type="submit">add to cart</button>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal_social">
+                                                                <h2>Share this product</h2>
+                                                                <ul>
+                                                                    <li class="facebook"><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+                                                                    </li>
+                                                                    <li class="twitter"><a href="https://twitter.com/login"><i class="fa fa-twitter"></i></a>
+                                                                    </li>
+                                                                    <li class="pinterest"><a href="https://www.pinterest.com/"><i
+                                                                                class="fa fa-pinterest"></i></a>
+                                                                    </li>
+                                                                    <li class="google-plus"><a href="https://accounts.google.com/ServiceLogin?ltmpl=mobNH"><i
+                                                                                class="fa fa-google-plus"></i></a></li>
+                                                                    <li class="linkedin"><a href="https://www.linkedin.com/login"><i class="fa fa-linkedin"></i></a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- modal area start-->
+                        @endforeach
                     @endforeach
                       {{-- <div class="tab-pane fade" id="clothing" role="tabpanel">
                              <div class="product_container">
@@ -2438,8 +2420,52 @@
         </div>
     </section>
     <!--Instagram area end--> 
-    @php
-        
-    @endphp
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script type="text/javascript">
+    $( document ).ready(function() {
+//         $('.update-cart').on('input', function() {
+//     alert('changed');
+//   });
+        $('.update-cart').on('input',function (e) {
+            e.preventDefault();
+            var ele = $(this);
+            console.log(ele)
+            $.ajax({
+                url: '{{ route('update.cart') }}',
+                method: "patch",
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: ele.parents("tr").attr("data-id"),
+                    quantity: ele.parents("td").find(".quantity").val()
+                },
+                success: function (response) {
+                    console.log(response);
+                    // alert('Page is reloading');
+                    window.location.reload();
+                }
+            });
+        });
+
+        $(".remove-from-cart").on('input',function (e) {
+            e.preventDefault();
+            var ele = $(this);
+            if(confirm("Are you sure want to remove?")) {
+                $.ajax({
+                    url: '{{ route('remove.from.cart') }}',
+                    method: "DELETE",
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: ele.parents("tr").attr("data-id")
+                    },
+                    success: function (response) {
+                        window.location.reload();
+                    }
+                });
+            }
+        });
+
+    });
+    </script>
  
 @endsection

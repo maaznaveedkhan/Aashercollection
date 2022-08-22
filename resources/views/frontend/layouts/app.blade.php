@@ -75,7 +75,7 @@
                 </ul>
             </div>
             <div class="search_bar">
-                <form action="#">
+                <form id="search_form" action="{{ route('search') }}" method="GET">
                     <select class="select_option" name="select">
                         <option selected value="1">All Categories</option>
                         @foreach ($categories as $item)
@@ -83,16 +83,15 @@
                         @endforeach
                         
                     </select>
-                    <input placeholder="Search entire store here..." type="text">
-                    <button type="submit"><i class="ion-ios-search-strong"></i></button>
+                    <input name="product" id="product" placeholder="Search entire store here..." type="text">
+                    <button type="submit" id="search_button"><i class="ion-ios-search-strong"></i></button>
                 </form>
+                <div id="product_list"></div>
             </div>
             <div class="cart_area">
                 <div class="middel_links">
                     <ul>
                         <li><a href="{{ route('login') }}">Login</a></li>
-                        {{-- <li>/</li>
-                        <li><a href="login.html">Register</a></li> --}}
                     </ul>
 
                 </div>
@@ -334,11 +333,12 @@
                     <div class="row align-items-center">
                         <div class="col-lg-3">
                             <div class="search_bar">
-                                <form action="#">
-                                    <input placeholder="Search entire store here..." type="text">
-                                    <button type="submit"><i class="ion-ios-search-strong"></i></button>
+                                <form id="search_form" action="{{ route('search') }}" method="GET">
+                                    <input name="product" id="product" placeholder="Search entire store here..." type="text">
+                                    <button type="submit" id="search_button"><i class="ion-ios-search-strong"></i></button>
                                 </form>
                             </div>
+                            <div id="product_list"></div> 
                         </div>
                         <div class="col-lg-6">
                             <div class="logo">
@@ -618,7 +618,7 @@
                             <div class="footer_menu">
                                 <ul>
                                     <li><a href="{{ route('about_us') }}">About Us</a></li>
-                                    <li><a href="#">Delivery Information</a></li>
+                                    {{-- <li><a href="#">Delivery Information</a></li> --}}
                                     <li><a href="{{ route('privacy_policy') }}">Privacy Policy</a></li>
                                     <li><a href="{{ route('terms') }}">Terms & Conditions</a></li>
                                     <li><a href="{{ route('contact_us') }}">Contact Us</a></li>
@@ -867,7 +867,36 @@
     <!-- Main JS -->
     <script src="{{ asset('frontend/js/main.js') }}"></script>
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#product').on('keyup',function() {
+                alert ="ab";
+                var query = $(this).val(); 
+                $.ajax({
+                   
+                    url:"{{ route('search') }}",
+              
+                    type:"GET",
+                   
+                    data:{'product':query},
+                   
+                    success:function (data) {
+                      
+                        $('#product_list').html(data);
+                    }
+                })
+                // end of ajax call
+            });
 
+            
+            $(document).on('click', 'li', function(){
+              
+                var value = $(this).text();
+                $('#product').val(value);
+                $('#product_list').html("");
+            });
+        });
+    </script>>
 </body>
 
 </html>

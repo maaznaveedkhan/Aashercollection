@@ -40,9 +40,12 @@ Route::patch('update-cart', [App\Http\Controllers\CartController::class, 'update
 Route::delete('remove-from-cart', [App\Http\Controllers\CartController::class, 'remove'])->name('remove.from.cart');
 Route::get('blogs', [App\Http\Controllers\BlogController::class, 'index'])->name('blogs');
 Route::get('blog_detail/{id}', [App\Http\Controllers\BlogController::class, 'blog_detail'])->name('blog_detail');
+Route::get('blog_type/{id}', [App\Http\Controllers\BlogController::class, 'blog_type'])->name('blog_type');
 Route::get('privacy_policy', [App\Http\Controllers\AboutController::class, 'privacy_policy'])->name('privacy_policy');
 Route::get('terms&conditions', [App\Http\Controllers\AboutController::class, 'terms'])->name('terms');
 Route::get('faq', [App\Http\Controllers\AboutController::class, 'faq'])->name('faq');
+Route::get('search', [App\Http\Controllers\ProductController::class, 'search'])->name('search');
+
 Route::group(['middleware' => ['auth']], function () {
     //Checkout
     Route::get('checkout', [App\Http\Controllers\OrderController::class, 'checkout'])->name('checkout');

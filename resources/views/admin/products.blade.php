@@ -50,8 +50,17 @@
                                 </td>
                             </tr>
                             @endforeach
+                            
                         </tbody>
+                        <tfoot>
+                            <tr>
+                                
+                            </tr>
+                        </tfoot>
                     </table>
+                    <div class="d-flex justify-content-center">
+                        {!! $products->links() !!}
+                    </div>
                 </div>
             </div>
         </div>

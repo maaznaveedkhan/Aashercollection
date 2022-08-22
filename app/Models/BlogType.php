@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class BlogType extends Model
 {
     use HasFactory;
+
+    public function blogs(){
+        return $this->hasMany(Blog::class);
+    }
 }
