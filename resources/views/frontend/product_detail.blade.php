@@ -82,17 +82,31 @@
                             <div class="product_desc">
                                 <p>{{ $product_detail['short_description'] }} </p>
                             </div>
-
                             <div class="product_variant color">
-                                <h3>color</h3>
+                                <h3>Color</h3>
                                 <h4>{{ $product_detail->color }}</h4>
-                                {{-- <select class="niceselect_option" id="color" name="produc_color">
+                            </div>
+                            {{-- <div class="product_variant color">
+                                @php
+                                    $attribute_name = unserialize($product_detail->attribute_name)
+                                @endphp
+                                @foreach ($attribute_name as $item)
+                                    <h3>{{ $item }}</h3>
+                                @endforeach
+                                
+                                <select class="niceselect_option" id="color" name="produc_color">
                                     <option selected value="1">choose in option</option>
-                                    <option value="2">choose in option2</option>
+                                    @php
+                                        $attribute_values = unserialize($product_detail->attribute_values)
+                                    @endphp
+                                    @foreach ($attribute_values as $item)
+                                    <option value="3">{{ $item }}</option>
+                                    @endforeach
+                                    
                                     <option value="3">choose in option3</option>
                                     <option value="4">choose in option4</option>
-                                </select> --}}
-                            </div>
+                                </select>
+                            </div> --}}
                             <div class="product_variant size">
                                 <h3>size</h3>
                                 <h4>{{ $product_detail->size }}</h4>

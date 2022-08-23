@@ -20,9 +20,9 @@ class ProductController extends Controller
 
     public function prod_form()
     {
-        $session = Session::all();
+        $session_data = Session::get('attributes');
         $categories = Category::all();
-        return view('admin.add_product', compact('categories'));
+        return view('admin.add_product', compact('categories','session_data'));
     }
 
     public function add_product(Request $request)
@@ -59,11 +59,24 @@ class ProductController extends Controller
         $product->size = $request->size;
         $product->gender = $request->gender;
         $product->color = $request->color;
+        $attribute_name = array();
+        foreach(session()->get('attributes') as $item){
+           $attribute_name[]= $item['name'];
+        };
+        $attribute_name_array = $attribute_name;
+        $product->attribute_name = serialize($attribute_name_array);
+        
+        $attribute_values = array();
+        foreach(session()->get('attributes') as $item){
+           $attribute_values[]= $item['value'];
+        };
+        $attribute_value_array = $attribute_values;
+        $product->attribute_values = serialize($attribute_value_array);
         $product->delivery_charges = $request->delivery_charges;
         $product->product_images = json_encode($data);
         // dd($product);
         $product->save();
-
+        // return unserialize($product->attribute_values);
         return redirect()
             ->route('admin_products')
             ->with('success', 'Product has been added!');

@@ -45,7 +45,7 @@
                                             <span class="text-danger"><del>Rs.{{ $product['price'] }}</del></span></span>
                                     </div>
                                     <div class="product_desc">
-                                        <p>{{ $product['long_description'] }} </p>
+                                        <p>{!! $product['long_description'] !!} </p>
                                     </div>
 
                                     <div class="product_variant color">

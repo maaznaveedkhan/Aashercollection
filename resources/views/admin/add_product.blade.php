@@ -27,16 +27,8 @@
             <div class="col-sm-12 col-xl-12">
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Add Product</h6>
-                    {{-- <div class=" dropdown">
-                        <a href="#" class=" dropdown-toggle" data-bs-toggle="dropdown"><i
-                                class="fa fa-instagram me-2"></i>Attribute </a>
-                        <div class="dropdown-menu bg-white border-0">
-                            <a href="{{ route('admin_blog_types') }}" class="dropdown-item">Select Box</a>
-                            <a href="{{ route('admin_blogs') }}" class="dropdown-item">Text</a>
-                            <a href="{{ route('admin_blog_form') }}" class="dropdown-item">Add New Blog</a>
-                        </div>
-                    </div> --}}
-                    <a class="btn" href="{{ route('admin_attribute_form') }}">Add Attribute</a>
+                   
+                    {{-- <a class="btn" href="{{ route('admin_attribute_form') }}">Add Attribute</a> --}}
                     {{-- <a class="btn" href="{{ route('admin_attribute_form') }}">Remove Attribute</a> --}}
                     <form method="POST" action="{{ route('add_product') }}" enctype="multipart/form-data">
                         @csrf
@@ -81,18 +73,31 @@
                         <div class="mb-3">
                             <div class="images-preview-div"> </div>
                         </div>
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <div class="row">
-                                <div class="col-md-3">
-                                    <label for="">Attribute Name</label>
-                                    
+                                <div class="col-md-6">
+                                    <label for=""><h5 class="font-weight-bold text-black">Attribute Name</h5></label>
                                 </div>
                                 <div class="col-md-6">
-                                    {{ session()->get('attributes') }}
-                                    
+                                    <label for=""><h5 class="font-weight-bold text-black">Attribute Values</h5></label>
                                 </div>
+
                             </div>
                         </div>
+                        <div class="mb-3">
+                            <div class="row">
+                                @foreach (session()->get('attributes') as $item)
+                                    <div class="col-md-6">   
+                                        {{$item['name']}}
+                                        <hr>
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{$item['value']}}
+                                        <hr>
+                                    </div>
+                                @endforeach                               
+                            </div>
+                        </div> --}}
                         <div class="mb-3">
                             <label for="longdescription" class="form-label">Select Gender</label>
                             <select name="gender" required class="form-select form-select-sm mb-3"
@@ -126,56 +131,6 @@
                     </form>
                 </div>
             </div>
-            <div class="col-sm-12 col-xl-12">
-                <div class="bg-light rounded h-100 p-4">
-                    {{-- <form>
-                        <label for="name">Framework:</label>
-                        <input type="text" id="name" placeholder="Enter a framework" autocomplete="off">
-            
-                        <button id="btnAdd">Add</button>
-            
-                        <label for="list">Framework List:</label>
-                        <select id="list" name="list" multiple>
-            
-                        </select>
-                        <button id="btnRemove">Remove Selected Framework</button>
-                    </form>
-                    <h6 class="mb-4">Add Color</h6> --}}
-                    <div class="mb-3">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="title" class="form-label">Name the Attribute</label>
-                                <input type="text" id="attribute_name" name="" class="form-control"
-                                    id="exampleInputEmail1" aria-describedby="emailHelp">
-                                <button type="" onclick="attribute_name()"
-                                    class="btn btn-primary mt-2">Add</button>
-                                <p id="demo"></p>
-                            </div>
-                            <div class="col-md-6">
-                                <label for="title" class="form-label">Add Attribute Value</label>
-                                <input type="text" id="attribute_value" name="" class="form-control"
-                                    id="exampleInputEmail1" aria-describedby="emailHelp">
-                                <button type="" onclick="attribute_value()"
-                                    class="btn btn-primary mt-2">Add</button>
-                            </div>
-                        </div>
-                    </div> 
-                </div>
-            </div>
-            {{-- <div class="col-sm-12 col-xl-12">
-                <div class="bg-light rounded h-100 p-4">
-                    <h6 class="mb-4">Add Attribute</h6>
-                    <form method="POST" action="{{ route('add_product') }}" enctype="multipart/form-data">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="title" class="form-label">Attribute</label>
-                            <input type="text" required name="name" required class="form-control"
-                                id="exampleInputEmail1" aria-describedby="emailHelp">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Add</button>
-                    </form>
-                </div>
-            </div> --}}
         </div>
     </div>
     <!-- Form End -->

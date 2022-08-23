@@ -9,7 +9,9 @@ class AttributeController extends Controller
 {
     //
     public function attribute_form(){
+        // $session_data = Session::get();
         return view('admin.add_attribute');
+    
     }
     
     public function setData(Request $request){
@@ -17,7 +19,12 @@ class AttributeController extends Controller
             'name' => $request->attr_name,
             'value' => $request->attribute_values
         ];
-      Session::put(' ', $data);
+        $attributes = array();
+        $attributes = session()->get('attributes');
+        $attributes[] = $data; 
+        // $attributes[] = $data;
+ 
+        Session::put('attributes',$attributes);
       return redirect()->route('admin_prod_form')->with('success','Attributes');
     //   return response()->json(['session successfully saved']);
     }
