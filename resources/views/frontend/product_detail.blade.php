@@ -83,9 +83,32 @@
                                 <p>{{ $product_detail['short_description'] }} </p>
                             </div>
                             <div class="product_variant color">
+                                @php
+                                    $attribute_name = unserialize($product_detail->attribute_name)
+                                @endphp
+                                @foreach ($attribute_name as $item)
+                                    <h3>{{ $item }}</h3>
+                                @endforeach
+                                @php
+                                    $attribute_value = unserialize($product_detail->attribute_values);
+                                @endphp
+                                @foreach ($attribute_value as $item)
+                                    @php
+                                        $collection = explode(',' , $item)
+                                    @endphp
+                                    <select class="niceselect_option" id="color" name="produc_color">
+                                        <option selected value="1">choose in option</option>
+                                        @foreach ($collection as $element)
+                                            <option  value="1">{{$element}}</option>
+                                        @endforeach
+                                    </select>
+                                @endforeach
+                            </div>
+                            <div class="product_variant color">
                                 <h3>Color</h3>
                                 <h4>{{ $product_detail->color }}</h4>
                             </div>
+                            
                             {{-- <div class="product_variant color">
                                 @php
                                     $attribute_name = unserialize($product_detail->attribute_name)
