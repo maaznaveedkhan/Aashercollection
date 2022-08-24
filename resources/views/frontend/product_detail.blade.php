@@ -1,5 +1,20 @@
 @extends('frontend.layouts.app')
 @section('content')
+@if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
     <!--breadcrumbs area start-->
     <div class="breadcrumbs_area product_bread">
         <div class="container">
@@ -149,23 +164,14 @@
 
                             </div>
                             <div class=" product_d_action">
-                                
                                 <ul>
                                     <li>
                                         <li>
-                                            <form id="wishlist-form" action="{{ route('logout') }}" method="POST"
-                                                class="d-none">
-                                                @csrf
-                                                <input name="user_id" type=" text" value="{{Auth::id()}}" />
-                                                <input name="product_id" type="text" value="{{$product_detail->id}}" />
-                                                <button type="submit">add to wishlist</button>
-                                            </form>
+                                            <a href="{{ route('add_to_wishlist',$product_detail->id) }}"> <i class="fa fa-heart-o"
+                                                aria-hidden="true"></i> Add to Wish List</a>
+                                            
                                         </li>
-                                        {{-- <form action="{{route('add_to_wishlist')}}" id="contact_form" method="post">
-                                            {{csrf_field()}}
-                                            <input name="user_id" type=" hidden" value="{{Auth::id()}}" />
-                                            <input name="product_id" type="hidden" value="{{$product_detail->id}}" />
-                                        </form> --}}
+                                        
                                         {{-- <a href="{{ route('add_to_wishlist',$product_detail->id) }}" title="Add to wishlist"><i class="fa fa-heart-o"
                                             aria-hidden="true"></i> Add to Wish List</a> --}}
                                     </li>

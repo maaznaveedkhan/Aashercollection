@@ -9,12 +9,12 @@ class Wishlist extends Model
 {
     use HasFactory;
     protected $table = "wishlists";
-    
+
     public function user(){
         return $this->belongsTo(User::class);
      }
      
-     public function product(){
-        return $this->belongsTo(Product::class);
+     public function products(){
+        return $this->belongsTo(Product::class, 'product_id', 'id');
      }
 }

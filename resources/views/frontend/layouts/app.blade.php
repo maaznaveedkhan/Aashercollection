@@ -64,6 +64,7 @@
                             </li>
                         </ul>
                     </li>
+                    <li><a href="{{ route('wishlist') }}">Wishlist</a></li>
                     {{-- <li class="language"><a href="#"><img src="{{ asset('frontend/img/logo/language.png') }}"
                                 alt="">
                             English <i class="ion-chevron-down"></i></a>
@@ -306,10 +307,11 @@
                                             </li>
                                         </ul>
                                     </li>
+                                    <li><a href="{{ route('wishlist') }}">Wishlist</a></li>
                                 @else
                                     <li class=""><a href="{{ route('login') }}">Login</a></li>
                                 @endauth
-
+                            
                                 {{-- <li class="language"><a href="#"><img
                                             src="{{ asset('frontend/img/logo/language.png') }}" alt="">
                                         English <i class="ion-chevron-down"></i></a>
@@ -899,7 +901,6 @@
                 // end of ajax call
             });
 
-            
             $(document).on('click', 'li', function(){
               
                 var value = $(this).text();

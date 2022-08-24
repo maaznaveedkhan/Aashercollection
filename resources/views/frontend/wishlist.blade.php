@@ -33,11 +33,23 @@
                                         <th class="product_thumb">Image</th>
                                         <th class="product_name">Product</th>
                                         <th class="product-price">Price</th>
-                                        <th class="product_quantity">Stock Status</th>
+                                        {{-- <th class="product_quantity">Stock Status</th> --}}
                                         <th class="product_total">Add To Cart</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($wishlists as $key => $item)
+                                        
+                                        <tr>
+                                            <td class="product_remove"><a href="{{ route('remove_from_wishlist',$item['id']) }}">X</a></td>
+                                            <td class="product_thumb">
+                                                <a href="#"><img src="{{ asset('images/product_images'.$item->product_thumbnail) }}" alt=""></a>
+                                            </td>
+                                            <td class="product_name"><a href="#">{{ $item->name }}</a></td>
+                                            <td class="product-price">{{ $item->discounted_price }}</td>
+                                            <td class="product_total"><a href="{{ route('add.to.cart',$item->id) }}">Add To Cart</a></td>
+                                        </tr>
+                                    @endforeach
                                     <tr>
                                         <td class="product_remove"><a href="#">X</a></td>
                                         <td class="product_thumb">
@@ -47,8 +59,6 @@
                                         <td class="product-price">£65.00</td>
                                         <td class="product_quantity">In Stock</td>
                                         <td class="product_total"><a href="#">Add To Cart</a></td>
-
-
                                     </tr>
 
                                     <tr>

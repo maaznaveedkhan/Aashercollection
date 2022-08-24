@@ -46,7 +46,8 @@ Route::get('terms&conditions', [App\Http\Controllers\AboutController::class, 'te
 Route::get('faq', [App\Http\Controllers\AboutController::class, 'faq'])->name('faq');
 Route::get('search', [App\Http\Controllers\ProductController::class, 'search'])->name('search');
 Route::get('wishlist', [App\Http\Controllers\WishlistController::class, 'wishlist'])->name('wishlist');
-Route::post('add_to_wishlist', [App\Http\Controllers\WishlistController::class, 'store'])->name('add_to_wishlist');
+Route::get('add_to_wishlist/{id}', [App\Http\Controllers\WishlistController::class, 'add_to_wishlist'])->name('add_to_wishlist');
+Route::get('remove_from_wishlist/{id}', [App\Http\Controllers\WishlistController::class, 'remove_from_wishlist'])->name('remove_from_wishlist');
 Route::group(['middleware' => ['auth']], function () {
     //Checkout
     Route::get('checkout', [App\Http\Controllers\OrderController::class, 'checkout'])->name('checkout');
