@@ -28,7 +28,7 @@
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Add Product</h6>
                    
-                    {{-- <a class="btn" href="{{ route('admin_attribute_form') }}">Add Attribute</a> --}}
+                    <a class="btn" href="{{ route('admin_attribute_form') }}">Add Attribute</a>
                     {{-- <a class="btn" href="{{ route('admin_attribute_form') }}">Remove Attribute</a> --}}
                     <form method="POST" action="{{ route('add_product') }}" enctype="multipart/form-data">
                         @csrf
@@ -73,31 +73,36 @@
                         <div class="mb-3">
                             <div class="images-preview-div"> </div>
                         </div>
-                        {{-- <div class="mb-3">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for=""><h5 class="font-weight-bold text-black">Attribute Name</h5></label>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for=""><h5 class="font-weight-bold text-black">Attribute Values</h5></label>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="row">
-                                @foreach (session()->get('attributes') as $item)
-                                    <div class="col-md-6">   
-                                        {{$item['name']}}
-                                        <hr>
+                        
+                        @if (!empty(session()->get('attributes') ))
+                            <div class="mb-3">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for=""><h5 class="font-weight-bold text-black">Attribute Name</h5></label>
                                     </div>
                                     <div class="col-md-6">
-                                        {{$item['value']}}
-                                        <hr>
+                                        <label for=""><h5 class="font-weight-bold text-black">Attribute Values</h5></label>
                                     </div>
-                                @endforeach                               
+
+                                </div>
                             </div>
-                        </div> --}}
+                            <div class="mb-3">
+                                <div class="row">
+                                    @foreach (session()->get('attributes') as $item)
+                                        <div class="col-md-6">   
+                                            {{$item['name']}}
+                                            <hr>
+                                        </div>
+                                        <div class="col-md-6">
+                                            {{$item['value']}}
+                                            <hr>
+                                        </div>
+                                    @endforeach                               
+                                </div>
+                            </div>
+                        @else
+                            
+                        @endif
                         <div class="mb-3">
                             <label for="longdescription" class="form-label">Select Gender</label>
                             <select name="gender" required class="form-select form-select-sm mb-3"

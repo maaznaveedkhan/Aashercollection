@@ -20,9 +20,9 @@ class ProductController extends Controller
 
     public function prod_form()
     {
-        $session_data = Session::get('attributes');
+        // $session_data = Session::get('attributes');
         $categories = Category::all();
-        return view('admin.add_product', compact('categories','session_data'));
+        return view('admin.add_product', compact('categories'));
     }
 
     public function add_product(Request $request)
@@ -76,6 +76,7 @@ class ProductController extends Controller
         $product->product_images = json_encode($data);
         // dd($product);
         $product->save();
+        Session::forget('attibutes');
         // return unserialize($product->attribute_values);
         return redirect()
             ->route('admin_products')
@@ -119,7 +120,7 @@ class ProductController extends Controller
         $product->product_images = json_encode($data);
         // dd($product);
         $product->save();
-
+        
         return redirect()
             ->route('admin_products')
             ->with('success', 'Product has been Updated!');

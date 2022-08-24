@@ -82,7 +82,7 @@
                             <div class="product_desc">
                                 <p>{{ $product_detail['short_description'] }} </p>
                             </div>
-                            <div class="product_variant color">
+                            {{-- <div class="product_variant color">
                                 @php
                                     $attribute_name = unserialize($product_detail->attribute_name)
                                 @endphp
@@ -99,11 +99,11 @@
                                     <select class="niceselect_option" id="color" name="produc_color">
                                         <option selected value="1">choose in option</option>
                                         @foreach ($collection as $element)
-                                            <option  value="1">{{$element}}</option>
+                                            <option  value="{{$element}}">{{$element}}</option>
                                         @endforeach
                                     </select>
                                 @endforeach
-                            </div>
+                            </div> --}}
                             <div class="product_variant color">
                                 <h3>Color</h3>
                                 <h4>{{ $product_detail->color }}</h4>
@@ -148,14 +148,31 @@
                                 </form> --}}
 
                             </div>
-                            {{-- <div class=" product_d_action">
+                            <div class=" product_d_action">
+                                
                                 <ul>
-                                    <li><a href="#" title="Add to wishlist"><i class="fa fa-heart-o"
-                                                aria-hidden="true"></i> Add to Wish List</a></li>
+                                    <li>
+                                        <li>
+                                            <form id="wishlist-form" action="{{ route('logout') }}" method="POST"
+                                                class="d-none">
+                                                @csrf
+                                                <input name="user_id" type=" text" value="{{Auth::id()}}" />
+                                                <input name="product_id" type="text" value="{{$product_detail->id}}" />
+                                                <button type="submit">add to wishlist</button>
+                                            </form>
+                                        </li>
+                                        {{-- <form action="{{route('add_to_wishlist')}}" id="contact_form" method="post">
+                                            {{csrf_field()}}
+                                            <input name="user_id" type=" hidden" value="{{Auth::id()}}" />
+                                            <input name="product_id" type="hidden" value="{{$product_detail->id}}" />
+                                        </form> --}}
+                                        {{-- <a href="{{ route('add_to_wishlist',$product_detail->id) }}" title="Add to wishlist"><i class="fa fa-heart-o"
+                                            aria-hidden="true"></i> Add to Wish List</a> --}}
+                                    </li>
                                     <li><a href="#" title="Add to Compare"><i class="fa fa-sliders"
                                                 aria-hidden="true"></i> Compare this Product</a></li>
                                 </ul>
-                            </div> --}}
+                            </div>
 
                         </form>
                         <div class="priduct_social">

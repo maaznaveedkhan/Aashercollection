@@ -52,7 +52,16 @@
                         <ul class="dropdown_links">
                             {{-- <li><a href="wishlist.html">My Wish List </a></li> --}}
                             <li><a href="{{ route('home') }}">My Account </a></li>
-                            <li><a href="{{ route('logout') }}">Log Out</a></li>
+                            <li><a class="" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                    class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
                         </ul>
                     </li>
                     {{-- <li class="language"><a href="#"><img src="{{ asset('frontend/img/logo/language.png') }}"
@@ -75,7 +84,7 @@
                 </ul>
             </div>
             <div class="search_bar">
-                {{-- <form id="search_form" action="{{ route('search') }}" method="GET">
+                <form id="search_form" action="{{ route('search') }}" method="GET">
                     <select class="select_option" name="select">
                         <option selected value="1">All Categories</option>
                         @foreach ($categories as $item)
@@ -86,7 +95,7 @@
                     <input name="product" id="product" placeholder="Search entire store here..." type="text">
                     <button type="submit" id="search_button"><i class="ion-ios-search-strong"></i></button>
                 </form>
-                <div id="product_list"></div> --}}
+                <div id="product_list"></div>
             </div>
             <div class="cart_area">
                 <div class="middel_links">
@@ -102,7 +111,9 @@
                     <!--mini cart-->
                         <div class="mini_cart">
                             @if (! Session :: has ('cart') || empty (Session :: get ('cart')))
-                                <p>Not Products Found...</p>
+                                {{-- <div class="card_item top">
+                                    <p>Not Products Found...</p>
+                                </div> --}}
                             @else
                                 @if (session('cart'))
                                     @foreach (session('cart') as $id => $details)
