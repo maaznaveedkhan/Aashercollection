@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('short_description')->nullable();
             $table->longText('long_description')->nullable();
+            $table->longText('datasheet')->nullable();
             $table->string('price');
             $table->string('discounted_price')->nullable();
             $table->string('product_thumbnail')->nullable();

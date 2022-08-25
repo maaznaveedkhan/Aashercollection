@@ -63,9 +63,9 @@
                                 <tr>
                                     <td class="first-column">Product</td>
                                     <td class="product-image-title">
-                                        <a href="#" class="image"><img src="{{ asset('images/product_images/'.$product['product_thumbnail']) }}" alt="Compare Product"></a>
-                                        <a href="#" class="category">{{ $product['category->name'] }}</a>
-                                        <a href="#" class="title">{{ $product['name'] }}</a>
+                                        <a href="#" class="image"><img src="{{ asset('frontend/img/product/product4.jpg') }}" alt="Compare Product"></a>
+                                        <a href="#" class="category">Furniture</a>
+                                        <a href="#" class="title">Rinosin title</a>
                                     </td>
                                     <td class="product-image-title">
                                         <a href="#" class="image"><img src="{{ asset('frontend/img/product/product8.jpg') }}" alt="Compare Product"></a>
@@ -81,7 +81,7 @@
                                 <tr>
                                     <td class="first-column">Description</td>
                                     <td class="pro-desc">
-                                        <p>{{ $product['short_description'] }}</p>
+                                        <p>Eye glasses are very important for thos whos have some difficult in their eye to see every hing clearly and perfectly</p>
                                     </td>
                                     <td class="pro-desc">
                                         <p>Eye glasses are very important for thos whos have some difficult in their eye to see every hing clearly and perfectly</p>
@@ -92,7 +92,7 @@
                                 </tr>
                                 <tr>
                                     <td class="first-column">Price</td>
-                                    <td class="pro-price">Rs. {{ $product['discounted_price'] }}</td>
+                                    <td class="pro-price">$295</td>
                                     <td class="pro-price">$275</td>
                                     <td class="pro-price">$395</td>
                                 </tr>
@@ -155,6 +155,29 @@
 <!-- main-content-wrap end -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script type="text/javascript">
+    $(document).ready(function(){
+        $('#name').on('keyup',function () {
+            var query = $(this).val();
+            $.ajax({
+                url:'{{ route('compare_search') }}',
+                type:'GET',
+                data:{'name':query},
+                success:function (data) {
+                    $('#product_list').html(data);
+                }
+            })
+        });
+            $("li").click(function(){
+                alert("The paragraph was clicked.");
+            });
+        $(document).on('click', 'li', function(){
+            var value = $(this).text();
+            $('#name').val(value);
+            $('#product_list').html("");
+        });
+    });
+</script>   
+<script type="text/javascript">
     $(document).ready(function () {
      
         $('#product1').on('keyup',function() {
@@ -198,25 +221,30 @@
                 data:{'product':query},
                
                 success:function (data) {
-                  
                     $('#compared_products2').html(data);
                 }
             })
             // end of ajax call
+            $('#find_product').click(function(e){
+            e.preventDefault();
+            alert("This product was clicked.");
+            });
         });
 
         
+
         $(document).on('click', 'li', function(){
           
             var value = $(this).text();
             $('#product2').val(value);
             $('#compared_products2').html("");
         });
+        
     });
 </script>
 <script type="text/javascript">
     $(document).ready(function () {
-     
+        
         $('#product3').on('keyup',function() {
             var query = $(this).val(); 
             $.ajax({
@@ -242,6 +270,14 @@
             $('#product3').val(value);
             $('#compared_products3').html("");
         });
+
+        $('#find_product').click(function(e){
+            e.preventDefault();
+            alert("This product was clicked.");
+        });
+
+        
     });
 </script>
+
 @endsection

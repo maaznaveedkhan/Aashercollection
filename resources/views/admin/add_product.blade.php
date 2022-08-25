@@ -44,7 +44,10 @@
                         <div class="mb-3">
                             <label for="longdescription" class="form-label">Long Description</label>
                             <textarea name="long_description" class="ckeditor form-control" required id="" cols="30" rows="10"></textarea>
-                            {{-- <input type="text" name="long_description" required class="form-control" id="exampleInputPassword1"> --}}
+                        </div>
+                        <div class="mb-3">
+                            <label for="longdescription" class="form-label">Data Sheet</label>
+                            <textarea name="datasheet" class="ckeditor form-control" required id="" cols="30" rows="10"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="longdescription" class="form-label">Select Category</label>

@@ -49,7 +49,8 @@ Route::get('wishlist', [App\Http\Controllers\WishlistController::class, 'wishlis
 Route::get('add_to_wishlist/{id}', [App\Http\Controllers\WishlistController::class, 'add_to_wishlist'])->name('add_to_wishlist');
 Route::get('remove_from_wishlist/{id}', [App\Http\Controllers\WishlistController::class, 'remove_from_wishlist'])->name('remove_from_wishlist');
 Route::get('compare/{id}', [App\Http\Controllers\WishlistController::class, 'compare'])->name('compare');
-Route::get('compare_search', [App\Http\Controllers\WishlistController::class, 'search'])->name('compare_search');
+Route::get('compare_search', [App\Http\Controllers\WishlistController::class, 'autosearch'])->name('compare_search');
+Route::get('find_product{id}', [App\Http\Controllers\WishlistController::class, 'find_product'])->name('find_product');
 Route::group(['middleware' => ['auth']], function () {
     //Checkout
     Route::get('checkout', [App\Http\Controllers\OrderController::class, 'checkout'])->name('checkout');
@@ -67,6 +68,7 @@ Route::group(['middleware' => ['user', 'auth']], function () {
     Route::post('update_info/{id}', [App\Http\Controllers\UserInfoController::class, 'add_info'])->name('update_info');
     Route::get('user/my_orders', [App\Http\Controllers\OrderController::class, 'orders'])->name('my_orders');
     Route::get('user/order_detail/{id}', [App\Http\Controllers\OrderController::class, 'order_detail'])->name('order_detail');
+    Route::post('post_review', [App\Http\Controllers\ReviewController::class, 'post_review'])->name('post_review');
 });
 // Admin Routes
 Route::group(['middleware' => ['admin', 'auth']], function () {

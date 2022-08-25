@@ -10,19 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class WishlistController extends Controller
 {
-    //
-    // public function WishlistPage()
-    // {
-    //     $user = Auth::user();
-    //     $products = [];
-    //     $myWishlist = $user->wishlists()->with('product')->get();
-    //     foreach($myWishlist as $wish) {
-    //         $products[] = $wish->product;
-    //     }
-    //     return view('/wishlist')
-    //     ->with('products', $products)
-    //     ->with('photo');
-    // }
+   
 
     public function wishlist(){
         
@@ -69,30 +57,59 @@ class WishlistController extends Controller
     }
     
     public function search(Request $request){
-        // return $request;
         if($request->ajax()) {
-            $data = Product::where('name', 'LIKE', $request->product.'%')->get(); 
-            return $data;          
-            // $output = '';
+            if($request->product == ''){
+                return '';
+            }
+            $data = Product::where('name', 'LIKE', $request->product.'%')
+                ->get();
+            
+            $output = '';
            
-            // if (count($data)>0) {
+            if (count($data)>0) {
               
-            //     $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1">';
+                $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1">';
               
-            //     foreach ($data as $row){
-                   
-            //         $output .= '<li class="list-group-item">'.$row->name.'</li>';
-            //     }
+                foreach ($data as $row){
+                    // $url = route('find_product',$row->id);
+                    $output .= '<li class="list-group-item"><a id="product_find" href="">'.$row->name.'</a></li>';
+                }
               
-            //     $output .= '</ul>';
-            // }
-            // else {
+                $output .= '</ul>';
+
+            }
+            else {
              
-            //     $output .= '<li class="list-group-item">'.'No results'.'</li>';
-            // }
+                $output .= '<li class="list-group-item">'.'No results'.'</li>';
+            }
            
-            // dd($data);
+            return $output;
         }
+    }
+
+    public function find_product($id){
+        $product = Product::findorFail($id);
+        return $product;
+    }
+
+    public function autosearch(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Product::where('name','LIKE',$request->product.'%')->get();
+            $output = '';
+            if (count($data)>0) {
+                $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1">';
+                foreach ($data as $row) {
+                    $output .= '<li class="list-group-item">'.$row->name.'</li>';
+                }
+                $output .= '</ul>';
+            }else {
+                $output .= '<li class="list-group-item">'.'No Data Found'.'</li>';
+            }
+            return $output;
+        }
+        
+        return view('frontend.compare');  
     }
 
     public function compare($id){

@@ -53,6 +53,7 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->short_description = $request->short_description;
         $product->long_description = $request->long_description;
+        $product->datasheet = $request->datasheet;
         $product->price = $request->price;
         $product->discounted_price = $request->discounted_price;
         $product->discount_in_percentage = (($product->price - $product->discounted_price)*100) /$product->price ;
@@ -112,6 +113,7 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->short_description = $request->short_description;
         $product->long_description = $request->long_description;
+        $product->datasheet = $request->datasheet;
         $product->price = $request->price;
         $product->discounted_price = $request->discounted_price;
         $product->size = $request->size;

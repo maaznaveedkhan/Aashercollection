@@ -212,14 +212,14 @@
                                     <a class="active" data-bs-toggle="tab" href="#info" role="tab"
                                         aria-controls="info" aria-selected="false">More info</a>
                                 </li>
-                                {{-- <li>
+                                 <li>
                                     <a data-bs-toggle="tab" href="#sheet" role="tab" aria-controls="sheet"
                                         aria-selected="false">Data sheet</a>
                                 </li>
-                                <li>
+                               <li>
                                     <a data-bs-toggle="tab" href="#reviews" role="tab" aria-controls="reviews"
                                         aria-selected="false">Reviews</a>
-                                </li> --}}
+                                </li>
                             </ul>
                         </div>
                         <div class="tab-content">
@@ -230,7 +230,10 @@
                             </div>
 
                             <div class="tab-pane fade" id="sheet" role="tabpanel">
-                                <div class="product_d_table">
+                                <div class="product_info_content">
+                                    <p>{!! $product_detail['datasheet'] !!}</p>
+                                </div>
+                                {{-- <div class="product_d_table">
                                     <form action="#">
                                         <table>
                                             <tbody>
@@ -258,7 +261,7 @@
                                         unmistakable signature style. All the beautiful pieces are made in Italy and
                                         manufactured with the greatest attention. Now Fashion extends to a range of
                                         accessories including shoes, hats, belts and more!</p>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="tab-pane fade" id="reviews" role="tabpanel">
                                 <div class="product_info_content">
@@ -288,22 +291,24 @@
                                     </div>
                                 </div>
                                 <div class="product_review_form">
-                                    <form action="#">
+                                    <form action="{{ route('post_review') }}" method="POST">
+                                        @csrf
                                         <h2>Add a review </h2>
                                         <p>Your email address will not be published. Required fields are marked </p>
                                         <div class="row">
+                                            <input type="hidden" name="product_id" value="{{$product_detail['id']}}" id="">
                                             <div class="col-12">
                                                 <label for="review_comment">Your review </label>
-                                                <textarea name="comment" id="review_comment"></textarea>
+                                                <textarea name="description" required id="review_comment"></textarea>
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <label for="author">Name</label>
-                                                <input id="author" type="text">
+                                                <input id="author" name="name" required type="text">
 
                                             </div>
                                             <div class="col-lg-6 col-md-6">
                                                 <label for="email">Email </label>
-                                                <input id="email" type="text">
+                                                <input id="email" name="email" required type="email">
                                             </div>
                                         </div>
                                         <button type="submit">Submit</button>

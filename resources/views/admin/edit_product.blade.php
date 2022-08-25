@@ -41,12 +41,14 @@
                         </div>
                         <div class="mb-3">
                             <label for="longdescription" class="form-label">Long Description</label>
-                            <input type="text" name="long_description" value="{{ $product->long_description }}"
-                                class="form-control" id="exampleInputPassword1">
+                            <textarea name="long_description" value="{{ $product->long_description }}" class="ckeditor form-control" required id="" cols="30" rows="10"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="longdescription" class="form-label">Data Sheet</label>
+                            <textarea name="datasheet" value="{{ $product->datasheet }}" class="ckeditor form-control" required id="" cols="30" rows="10"></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="longdescription" class="form-label">Select Category</label>
-                            <label for="longdescription" class="form-label">Long Description</label>
                             <select name="category_id" class="form-select form-select-sm mb-3"
                                 aria-label=".form-select-sm example">
                                 <option selected>Select Category </option>
