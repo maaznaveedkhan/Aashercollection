@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Wishlist;
 use Illuminate\Http\Request;
@@ -10,31 +11,31 @@ use Illuminate\Support\Facades\Auth;
 class WishlistController extends Controller
 {
     //
+    // public function WishlistPage()
+    // {
+    //     $user = Auth::user();
+    //     $products = [];
+    //     $myWishlist = $user->wishlists()->with('product')->get();
+    //     foreach($myWishlist as $wish) {
+    //         $products[] = $wish->product;
+    //     }
+    //     return view('/wishlist')
+    //     ->with('products', $products)
+    //     ->with('photo');
+    // }
+
     public function wishlist(){
+        
         $user = Auth::user();
-        $wishlists = Wishlist::with('products')->where("user_id", "=", $user->id)->orderby('id', 'desc')->get()->toArray();
-    // dd($wishlists);
-    return $wishlists[1];
+        // $wishlist = Wishlist::with('products')->where("user_id", "=", $user->id)->get()->toArray();
+        // dd($wishlist);
+        $wishlists = Wishlist::where("user_id", "=", $user->id)->orderby('id', 'desc')->get();
+        // dd($wishlists);
+        // return $wishlists[1];
         return view('frontend.wishlist',compact('user','wishlists'));
     }
 
-    // public function add_to_wishlist(Request $request)
-    // {
-    // //Validating title and body field
-    //     // $this->validate($request, array(
-    //     //     'user_id'=>'required',
-    //     //     'product_id' =>'required',
-    //     // ));
-       
-    //     $wishlist = new Wishlist;
-
-    //     $wishlist->user_id = $request->user_id;
-    //     $wishlist->product_id = $request->product_id;
-    //     dd($wishlist);
-    //     $wishlist->save();
-
-    //     return redirect()->back()->with('success',' Added to your wishlist.');
-    // }
+    
 
     public function add_to_wishlist($id)
     {
@@ -67,7 +68,40 @@ class WishlistController extends Controller
         return redirect()->back()->with('success','Product has been removed from wishlist wishlist') ;
     }
     
-    
+    public function search(Request $request){
+        // return $request;
+        if($request->ajax()) {
+            $data = Product::where('name', 'LIKE', $request->product.'%')->get(); 
+            return $data;          
+            // $output = '';
+           
+            // if (count($data)>0) {
+              
+            //     $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1">';
+              
+            //     foreach ($data as $row){
+                   
+            //         $output .= '<li class="list-group-item">'.$row->name.'</li>';
+            //     }
+              
+            //     $output .= '</ul>';
+            // }
+            // else {
+             
+            //     $output .= '<li class="list-group-item">'.'No results'.'</li>';
+            // }
+           
+            // dd($data);
+        }
+    }
 
+    public function compare($id){
+
+        $product = Product::findorFail($id);
+        $categories = Category::all();
+        $product = Product::where('id',  $product->id)->first();
+
+        return view('frontend.compare', compact('product','categories'));
+    }
 
 }

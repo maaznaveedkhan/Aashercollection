@@ -1,5 +1,8 @@
 @extends('frontend.layouts.app')
 @section('content')
+@php
+    use App\Models\Product;
+@endphp
 <!--breadcrumbs area start-->
 <div class="breadcrumbs_area other_bread">
     <div class="container">
@@ -39,50 +42,25 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($wishlists as $key => $item)
-                                        
-                                        <tr>
-                                            <td class="product_remove"><a href="{{ route('remove_from_wishlist',$item['id']) }}">X</a></td>
-                                            <td class="product_thumb">
-                                                <a href="#"><img src="{{ asset('images/product_images'.$item->product_thumbnail) }}" alt=""></a>
-                                            </td>
-                                            <td class="product_name"><a href="#">{{ $item->name }}</a></td>
-                                            <td class="product-price">{{ $item->discounted_price }}</td>
-                                            <td class="product_total"><a href="{{ route('add.to.cart',$item->id) }}">Add To Cart</a></td>
-                                        </tr>
+                                        @php
+                                            $item_id = $item->product_id;
+                                            $products = Product::where('id',$item_id)->get();
+                                        @endphp
+                                       {{-- {{ dd($products)}}  --}}
+                                         @foreach ($products as $element)
+                                            {{-- {{ dd($element)}}  --}}
+                                             <tr>
+                                                <td class="product_remove"><a href="{{ route('remove_from_wishlist',$element['id']) }}">X</a></td>
+                                                <td class="product_thumb">
+                                                    <a href="#"><img height="50" width="50" src="{{ asset('images/product_images/'.$element->product_thumbnail) }}" alt=""></a>
+                                                </td>
+                                                <td class="product_name"><a href="#">{{ $element->name }}</a></td>
+                                                <td class="product-price">Rs. {{ $element->discounted_price }}</td>
+                                                <td class="product_total"><a href="{{ route('add.to.cart',$element->id) }}">Add To Cart</a></td>
+                                            </tr> 
+                                        @endforeach
                                     @endforeach
-                                    <tr>
-                                        <td class="product_remove"><a href="#">X</a></td>
-                                        <td class="product_thumb">
-                                            <a href="#"><img src="assets/img/s-product/product.jpg" alt=""></a>
-                                        </td>
-                                        <td class="product_name"><a href="#">Handbag fringilla</a></td>
-                                        <td class="product-price">£65.00</td>
-                                        <td class="product_quantity">In Stock</td>
-                                        <td class="product_total"><a href="#">Add To Cart</a></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td class="product_remove"><a href="#">X</a></td>
-                                        <td class="product_thumb">
-                                            <a href="#"><img src="assets/img/s-product/product2.jpg" alt=""></a>
-                                        </td>
-                                        <td class="product_name"><a href="#">Handbags justo</a></td>
-                                        <td class="product-price">£90.00</td>
-                                        <td class="product_quantity">In Stock</td>
-                                        <td class="product_total"><a href="#">Add To Cart</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="product_remove"><a href="#">X</a></td>
-                                        <td class="product_thumb">
-                                            <a href="#"><img src="assets/img/s-product/product3.jpg" alt=""></a>
-                                        </td>
-                                        <td class="product_name"><a href="#">Handbag elit</a></td>
-                                        <td class="product-price">£80.00</td>
-                                        <td class="product_quantity">In Stock</td>
-                                        <td class="product_total"><a href="#">Add To Cart</a></td>
-
-
-                                    </tr>
+                                    
 
                                 </tbody>
                             </table>

@@ -166,16 +166,17 @@
                             <div class=" product_d_action">
                                 <ul>
                                     <li>
+                                        @auth
                                         <li>
                                             <a href="{{ route('add_to_wishlist',$product_detail->id) }}"> <i class="fa fa-heart-o"
                                                 aria-hidden="true"></i> Add to Wish List</a>
                                             
                                         </li>
-                                        
+                                        @endauth
                                         {{-- <a href="{{ route('add_to_wishlist',$product_detail->id) }}" title="Add to wishlist"><i class="fa fa-heart-o"
                                             aria-hidden="true"></i> Add to Wish List</a> --}}
                                     </li>
-                                    <li><a href="#" title="Add to Compare"><i class="fa fa-sliders"
+                                    <li><a href="{{ route('compare',$product_detail->id) }}" title="Add to Compare"><i class="fa fa-sliders"
                                                 aria-hidden="true"></i> Compare this Product</a></li>
                                 </ul>
                             </div>

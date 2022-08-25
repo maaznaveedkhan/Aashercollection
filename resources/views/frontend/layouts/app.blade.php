@@ -84,7 +84,7 @@
                     </li> --}}
                 </ul>
             </div>
-            <div class="search_bar">
+            {{-- <div class="search_bar">
                 <form id="search_form" action="{{ route('search') }}" method="GET">
                     <select class="select_option" name="select">
                         <option selected value="1">All Categories</option>
@@ -97,7 +97,7 @@
                     <button type="submit" id="search_button"><i class="ion-ios-search-strong"></i></button>
                 </form>
                 <div id="product_list"></div>
-            </div>
+            </div> --}}
             <div class="cart_area">
                 <div class="middel_links">
                     <ul>

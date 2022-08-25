@@ -8,13 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Wishlist extends Model
 {
     use HasFactory;
-    protected $table = "wishlists";
+    // protected $table = "wishlists";
 
     public function user(){
         return $this->belongsTo(User::class);
-     }
-     
-     public function products(){
-        return $this->belongsTo(Product::class, 'product_id', 'id');
-     }
+    }
+    
+    public function products(){
+        return $this->belongsTo(Product::class,'product_id');
+    }
 }

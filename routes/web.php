@@ -48,6 +48,8 @@ Route::get('search', [App\Http\Controllers\ProductController::class, 'search'])-
 Route::get('wishlist', [App\Http\Controllers\WishlistController::class, 'wishlist'])->name('wishlist');
 Route::get('add_to_wishlist/{id}', [App\Http\Controllers\WishlistController::class, 'add_to_wishlist'])->name('add_to_wishlist');
 Route::get('remove_from_wishlist/{id}', [App\Http\Controllers\WishlistController::class, 'remove_from_wishlist'])->name('remove_from_wishlist');
+Route::get('compare/{id}', [App\Http\Controllers\WishlistController::class, 'compare'])->name('compare');
+Route::get('compare_search', [App\Http\Controllers\WishlistController::class, 'search'])->name('compare_search');
 Route::group(['middleware' => ['auth']], function () {
     //Checkout
     Route::get('checkout', [App\Http\Controllers\OrderController::class, 'checkout'])->name('checkout');
