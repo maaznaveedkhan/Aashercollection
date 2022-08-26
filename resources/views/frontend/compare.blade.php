@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 @section('content')
-{{-- <style>
+<style>
    input[type=text] {
     width: 100%;
     box-sizing: border-box;
@@ -13,6 +13,35 @@
     background-repeat: no-repeat;
     padding: 12px 20px 12px 40px;
     outline: none;
+}
+</style>
+{{-- <style>
+    #search {
+   border-radius: 20px;
+  height: 35px;
+  width: 250px;
+  z-index: 1;
+  outline: none;
+  padding-right: 50px;
+}
+
+#search-input-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+#search-input-wrapper::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  right: 10px;
+  background: url("https://i.ibb.co/D1dvJTV/icons8-search.gif") no-repeat center;
+  background-size: 23px auto;
+  height: 30px;
+  width: 30px;
 }
 </style> --}}
 <!--breadcrumbs area start-->
@@ -45,28 +74,25 @@
                                 <tr>
                                    <td></td>
                                     <td>
-                                        {{-- <form id="search_form" action="{{ route('compare_search') }}" method="GET">
-                                            <input type="text" name="search" placeholder="Search by list name">
-                                        </form> --}}
+                                        <form id="search_form" action="{{ route('compare_search') }}" method="GET">
+                                            <input type="hidden" name="search" placeholder="Search by list name">
+                                        </form>
                                         {{-- <div id="compared_products2"></div>  --}}
                                     </td>
                                     <td>
-                                        {{-- <div class="search_bar"> --}}
-                                            {{-- <form id="search_form" action="{{ route('compare_search') }}" method="GET">
-                                                <input name="product" id="product2" placeholder="Search entire store here..." type="text">
-                                            </form> --}}
+                                        {{-- <div class="search-bar-container"> --}}
                                             <form id="search_form" action="{{ route('compare_search') }}" method="GET">
                                                 <input name="product" id="product2" placeholder="Search entire store here..." type="text">
-                                                <button type="submit" id="search_button"><i class="ion-ios-search-strong"></i></button>
+                                                {{-- <button type="submit" id="search_button"><i class="ion-ios-search-strong"></i></button> --}}
                                             </form>
                                         {{-- </div> --}}
-                                        <div id="compared_products2"></div> 
+                                        <div id="compared_products2" style=""></div> 
                                     </td>
                                     <td>
                                         {{-- <div class="search_bar"> --}}
                                             <form id="search_form3" action="{{ route('compare_search') }}" method="GET">
                                                 <input name="product" id="product3" placeholder="Search entire store here..." type="text">
-                                                <button type="submit" id="search_button"><i class="ion-ios-search-strong"></i></button>
+                                                {{-- <button type="submit" id="search_button"><i class="ion-ios-search-strong"></i></button> --}}
                                             </form>
                                         {{-- </div> --}}
                                         <div id="compared_products3"></div> 
@@ -189,7 +215,8 @@
         });
             
         $(document).on('click', 'li', function(){
-            
+            // let value = query === "" ? "none" : "block";
+
             var value = $(this).text();
             $('#product2').val(value);
             $('#compared_products2').html("");

@@ -57,26 +57,32 @@ class WishlistController extends Controller
     }
     
     public function search(Request $request){
+        // $search = $request->product;
+        
+
+        $categories = Category::all();
+        $products = Product::where('name', 'LIKE', $request->product.'%')
+                ->paginate(15);
+        
         if($request->ajax()) {
             if($request->product == ''){
                 return '';
             }
             $data = Product::where('name', 'LIKE', $request->product.'%')
                 ->get();
-            
+           
             $output = '';
            
             if (count($data)>0) {
               
-                $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1">';
+                $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1;overflow: scroll;height: 5rem;">';
               
                 foreach ($data as $row){
-                    // $url = route('find_product',$row->id);
-                    $output .= '<li class="list-group-item"><a id="product_find" href="">'.$row->name.'</a></li>';
+                    $url = route('product_detail',$row->id);
+                    $output .= '<li class="list-group-item"><a href="'.$url.'">'.$row->name.'</a></li>';
                 }
               
                 $output .= '</ul>';
-
             }
             else {
              
@@ -85,6 +91,7 @@ class WishlistController extends Controller
            
             return $output;
         }
+        return view('frontend.search_results', compact('products','categories'));
     }
 
     public function find_product(Request $request){
@@ -101,7 +108,7 @@ class WishlistController extends Controller
             $data = Product::where('name','LIKE',$request->product.'%')->get();
             $output = '';
             if (count($data)>0) {
-                $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1;">';
+                $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1;overflow: scroll;height: 5rem;">';
                 foreach ($data as $row) {
                     // $id = $row->id;
 

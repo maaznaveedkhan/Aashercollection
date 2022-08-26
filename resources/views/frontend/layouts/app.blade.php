@@ -48,23 +48,28 @@
 
             <div class="top_right">
                 <ul>
-                    <li class="top_links"><a href="#">My Account <i class="ion-chevron-down"></i></a>
-                        <ul class="dropdown_links">
-                            {{-- <li><a href="wishlist.html">My Wish List </a></li> --}}
-                            <li><a href="{{ route('home') }}">My Account </a></li>
-                            <li><a class="" href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                    class="d-none">
-                                    @csrf
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
-                    <li><a href="{{ route('wishlist') }}">Wishlist</a></li>
+                    @auth
+                        <li class="top_links"><a href="#">My Account <i class="ion-chevron-down"></i></a>
+                            <ul class="dropdown_links">
+                                {{-- <li><a href="wishlist.html">My Wish List </a></li> --}}
+                                <li><a href="{{ route('home') }}">My Account </a></li>
+                                <li><a class="" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                        class="d-none">
+                                        @csrf
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="{{ route('wishlist') }}">Wishlist</a></li>
+                    @else
+                        <li><a href="{{ route('login') }}">Login</a></li>
+                    @endauth
+                    
                     {{-- <li class="language"><a href="#"><img src="{{ asset('frontend/img/logo/language.png') }}"
                                 alt="">
                             English <i class="ion-chevron-down"></i></a>
@@ -85,26 +90,41 @@
                 </ul>
             </div>
             <div class="search_bar">
-                <form id="search_form" action="{{ route('search') }}" method="GET">
+                <form action="#">
                     <select class="select_option" name="select" onchange="window.location.href=this.options[this.selectedIndex].value;">
                         <option selected value="1">All Categories</option>
                         @foreach ($categories as $item)
                             <option value="{{ route('popular_categories',$item->id) }}">{{ $item->title }}</option>
                         @endforeach
-                        
                     </select>
                     <input name="product" id="product" placeholder="Search entire store here..." type="text">
                     <button type="submit" id="search_button"><i class="ion-ios-search-strong"></i></button>
                 </form>
                 <div id="product_list"></div>
             </div>
+            
+            {{-- <div class="search_bar">
+                <select class="select_option" name="select" onchange="window.location.href=this.options[this.selectedIndex].value;">
+                    <option selected value="1">All Categories</option>
+                    @foreach ($categories as $item)
+                        <option value="{{ route('popular_categories',$item->id) }}">{{ $item->title }}</option>
+                    @endforeach
+                    
+                </select>
+                <form id="search_form" action="{{ route('search') }}" method="GET">
+                    
+                    <input name="product" id="product" placeholder="Search entire store here..." type="text">
+                    <button type="submit" id="search_button"><i class="ion-ios-search-strong"></i></button>
+                </form>
+                <div id="product_list"></div>
+            </div> --}}
             <div class="cart_area">
-                <div class="middel_links">
+                {{-- <div class="middel_links">
                     <ul>
                         <li><a href="{{ route('login') }}">Login</a></li>
                     </ul>
 
-                </div>
+                </div> --}}
                 <div class="cart_link">
                     {{-- <a href="#"><i class="fa fa-shopping-basket"></i>2 item(s)</a> --}}
                     <a href="#"><i
@@ -217,24 +237,11 @@
                                     @foreach ($categories as $item)
                                     <li><a href="{{ route('popular_categories',$item->id) }}">{{ $item->title }}</a></li>
                                     @endforeach
-                                    {{-- <li><a href="product-details.html">product details</a></li>
-                                    <li><a href="product-sidebar.html">product sidebar</a></li>
-                                    <li><a href="product-grouped.html">product grouped</a></li>
-                                    <li><a href="variable-product.html">product variable</a></li> --}}
                                 </ul>
                             </li>
                         </ul>
                     </li>
-                    {{-- <li class="menu-item-has-children">
-                        <a href="#">blog</a>
-                        <ul class="sub-menu">
-                            <li><a href="blog.html">blog</a></li>
-                            <li><a href="blog-details.html">blog details</a></li>
-                            <li><a href="blog-sidebar.html">blog Sidebar</a></li>
-                            <li><a href="blog-fullwidth.html">blog fullwidth</a></li>
-                        </ul>
-
-                    </li> --}}
+                   
                     <li class="menu-item-has-children">
                         <a href="#">pages </a>
                         <ul class="sub-menu">
@@ -312,24 +319,7 @@
                                     <li class=""><a href="{{ route('login') }}">Login</a></li>
                                 @endauth
                             
-                                {{-- <li class="language"><a href="#"><img
-                                            src="{{ asset('frontend/img/logo/language.png') }}" alt="">
-                                        English <i class="ion-chevron-down"></i></a>
-                                    <ul class="dropdown_language">
-                                        <li><a href="#"><img src="{{ asset('frontend/img/logo/cigar.jpg') }}"
-                                                    alt="">
-                                                French</a></li>
-                                        <li><a href="#"><img
-                                                    src="{{ asset('frontend/img/logo/language2.png') }}"
-                                                    alt="">German</a></li>
-                                    </ul>
-                                </li>
-                                <li class="currency"><a href="#">USD <i class="ion-chevron-down"></i></a>
-                                    <ul class="dropdown_currency">
-                                        <li><a href="#">EUR</a></li>
-                                        <li><a href="#">BRL</a></li>
-                                    </ul>
-                                </li> --}}
+                                
 
                             </ul>
                         </div>
@@ -350,8 +340,9 @@
                                     <input name="product" id="product" placeholder="Search entire store here..." type="text">
                                     <button type="submit" id="search_button"><i class="ion-ios-search-strong"></i></button>
                                 </form>
+                                <div id="product_list"></div> 
                             </div>
-                            <div id="product_list"></div> 
+                            
                         </div>
                         <div class="col-lg-6">
                             <div class="logo">
@@ -604,6 +595,40 @@
             </div>
         </div>
         <!--header bottom end-->
+        <div class="footer_wrapper">
+            <div class="footer_wrapper_item">
+                <div class="footer_wrapper_icon">
+                    <i class="fa fa-home"></i>
+                </div>
+                <div class="footer_wrapper_text">
+                    <a href="">Home</a>
+                </div>
+            </div>
+            <div class="footer_wrapper_item">
+                <div class="footer_wrapper_icon">
+                    <i class="fa fa-home"></i>
+                </div>
+                <div class="footer_wrapper_text">
+                    <a href="">Home</a>
+                </div>
+            </div>
+            <div class="footer_wrapper_item">
+                <div class="footer_wrapper_icon">
+                    <i class="fa fa-home"></i>
+                </div>
+                <div class="footer_wrapper_text">
+                    <a href="">Home</a>
+                </div>
+            </div>
+            <div class="footer_wrapper_item">
+                <div class="footer_wrapper_icon">
+                    <i class="fa fa-home"></i>
+                </div>
+                <div class="footer_wrapper_text">
+                    <a href="">Home</a>
+                </div>
+            </div>
+        </div>
     </header>
     <!--header area end-->
     @yield('content')
