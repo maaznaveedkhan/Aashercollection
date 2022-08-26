@@ -86,10 +86,10 @@
             </div>
             <div class="search_bar">
                 <form id="search_form" action="{{ route('search') }}" method="GET">
-                    <select class="select_option" name="select">
+                    <select class="select_option" name="select" onchange="window.location.href=this.options[this.selectedIndex].value;">
                         <option selected value="1">All Categories</option>
                         @foreach ($categories as $item)
-                            <option value=""><a href="{{ route('popular_categories',$item->id) }}">{{ $item->title }}</a></option>
+                            <option value="{{ route('popular_categories',$item->id) }}">{{ $item->title }}</option>
                         @endforeach
                         
                     </select>

@@ -87,9 +87,12 @@ class WishlistController extends Controller
         }
     }
 
-    public function find_product($id){
-        $product = Product::findorFail($id);
-        return $product;
+    public function find_product(Request $request){
+        if($request->ajax()) {
+            $product = Product::findorFail($request->product_id);
+            return response($product);
+        }
+        
     }
 
     public function autosearch(Request $request)
@@ -98,9 +101,15 @@ class WishlistController extends Controller
             $data = Product::where('name','LIKE',$request->product.'%')->get();
             $output = '';
             if (count($data)>0) {
-                $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1">';
+                $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1;">';
                 foreach ($data as $row) {
-                    $output .= '<li class="list-group-item">'.$row->name.'</li>';
+                    // $id = $row->id;
+
+                    $output .= '<li class="list-group-item">
+                    <a pro_id="'.$row->id.'" id="'.$row->id.'" class="search">'.$row->name.'</a>
+                    
+                   
+                    </li>';
                 }
                 $output .= '</ul>';
             }else {
@@ -108,7 +117,7 @@ class WishlistController extends Controller
             }
             return $output;
         }
-        
+
         return view('frontend.compare');  
     }
 

@@ -50,7 +50,8 @@ Route::get('add_to_wishlist/{id}', [App\Http\Controllers\WishlistController::cla
 Route::get('remove_from_wishlist/{id}', [App\Http\Controllers\WishlistController::class, 'remove_from_wishlist'])->name('remove_from_wishlist');
 Route::get('compare/{id}', [App\Http\Controllers\WishlistController::class, 'compare'])->name('compare');
 Route::get('compare_search', [App\Http\Controllers\WishlistController::class, 'autosearch'])->name('compare_search');
-Route::get('find_product{id}', [App\Http\Controllers\WishlistController::class, 'find_product'])->name('find_product');
+Route::get('find_product', [App\Http\Controllers\WishlistController::class, 'find_product'])->name('find_product');
+
 Route::group(['middleware' => ['auth']], function () {
     //Checkout
     Route::get('checkout', [App\Http\Controllers\OrderController::class, 'checkout'])->name('checkout');
