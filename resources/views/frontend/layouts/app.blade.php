@@ -47,59 +47,102 @@
             </div>
 
             <div class="top_right">
+
                 <ul>
-                    @auth
-                        <li class="top_links"><a href="#">My Account <i class="ion-chevron-down"></i></a>
-                            <ul class="dropdown_links">
-                                {{-- <li><a href="wishlist.html">My Wish List </a></li> --}}
-                                <li><a href="{{ route('home') }}">My Account </a></li>
-                                <li><a class="" href="{{ route('logout') }}"
-                                    onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                        class="d-none">
-                                        @csrf
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a href="{{ route('wishlist') }}">Wishlist</a></li>
-                    @else
-                        <li><a href="{{ route('login') }}">Login</a></li>
-                    @endauth
-                    <li class="language"><a href="#"><img src="{{ asset('frontend/img/logo/language.png') }}"
-                                alt="">
-                            English <i class="ion-chevron-down"></i></a>
-                        <ul class="dropdown_language">
-                            <li><a href="#"><img src="{{ asset('frontend/img/logo/cigar.jpg') }}" alt="">
-                                    French</a></li>
-                            <li><a href="#"><img src="{{ asset('frontend/img/logo/language2.png') }}"
-                                        alt="">German</a>
+                    <li class="top_links"><a href="#">My Account <i class="ion-chevron-down"></i></a>
+
+                        <ul class="dropdown_links">
+
+                            {{-- <li><a href="wishlist.html">My Wish List </a></li> --}}
+
+                            <li><a href="{{ route('home') }}">My Account </a></li>
+
+                            <li><a class="" href="{{ route('logout') }}"
+
+                                onclick="event.preventDefault();
+
+                                    document.getElementById('logout-form').submit();">
+
+                                {{ __('Logout') }}
+
+                                </a>
+
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
+
+                                    class="d-none">
+
+                                    @csrf
+
+                                </form>
                             </li>
                         </ul>
                     </li>
-                    <li class="currency"><a href="#">USD <i class="ion-chevron-down"></i></a>
-                        <ul class="dropdown_currency">
-                            <li><a href="#">EUR</a></li>
-                            <li><a href="#">BRL</a></li>
+                    @auth
+                    <li><a href="{{ route('wishlist') }}">Wishlist</a></li>
+                    @endauth
+
+                    <li class="language"><a href="#"><img src="{{ asset('frontend/img/logo/language.png') }}"
+
+                                alt="">
+
+                            English <i class="ion-chevron-down"></i></a>
+
+                        <ul class="dropdown_language">
+
+                            <li><a href="#"><img src="{{ asset('frontend/img/logo/cigar.jpg') }}" alt="">
+
+                                    French</a></li>
+
+                            <li><a href="#"><img src="{{ asset('frontend/img/logo/language2.png') }}"
+
+                                        alt="">German</a>
+
+                            </li>
+
                         </ul>
+
                     </li>
+
+                    <li class="currency"><a href="#">USD <i class="ion-chevron-down"></i></a>
+
+                        <ul class="dropdown_currency">
+
+                            <li><a href="#">EUR</a></li>
+
+                            <li><a href="#">BRL</a></li>
+
+                        </ul>
+
+                    </li>
+
                 </ul>
+
             </div>
+
             <div class="search_bar">
+
                 <form action="#">
+
                     <select class="select_option" name="select" onchange="window.location.href=this.options[this.selectedIndex].value;">
+
                         <option selected value="1">All Categories</option>
+
                         @foreach ($categories as $item)
+
                             <option value="{{ route('popular_categories',$item->id) }}">{{ $item->title }}</option>
+
                         @endforeach
+
                     </select>
+
                     <input name="product" id="product" placeholder="Search entire store here..." type="text">
+
                     <button type="submit" id="search_button"><i class="ion-ios-search-strong"></i></button>
+
                 </form>
+
                 <div id="product_list"></div>
+
             </div>
             
             {{-- <div class="search_bar">
@@ -118,12 +161,14 @@
                 <div id="product_list"></div>
             </div> --}}
             <div class="cart_area">
-                {{-- <div class="middel_links">
+                <div class="middel_links">
                     <ul>
                         <li><a href="{{ route('login') }}">Login</a></li>
+                        <li>/</li>
+                        <li><a href="{{ route('register') }}">Register</a></li>
                     </ul>
 
-                </div> --}}
+                </div>
                 <div class="cart_link">
                     {{-- <a href="#"><i class="fa fa-shopping-basket"></i>2 item(s)</a> --}}
                     <a href="#"><i
@@ -149,7 +194,8 @@
 
                                             </div>
                                             <div class="cart_remove">
-                                                <a href="#"><i class="ion-android-close"></i></a>
+                                                <button class="btn btn-danger btn-sm remove-from-cart"><i class="fa fa-trash-o"></i></button>
+                                                {{-- <a href="{{ route('remove.from.cart') }}"><i class="ion-android-close"></i></a> --}}
                                             </div>
                                         </div>
                                     @endforeach
@@ -181,7 +227,7 @@
                                                     <td class="text-left">Sub-Total :</td>
                                                     <td class="text-right">{{ $sub_total }}</td>
                                                 </tr>
-                                                <tr>
+                                                {{-- <tr>
                                                     @php $sub_total = 0 @endphp
                                                     @if(session('cart'))
                                                         @foreach ((array) session('cart') as $id => $details)
@@ -190,7 +236,7 @@
                                                     @endif
                                                     <td class="text-left">Total :</td>
                                                     <td class="text-right">{{ $sub_total }}</td>
-                                                </tr>
+                                                </tr> --}}
                                             </tbody>
                                         </table>
                                     </div>
@@ -348,7 +394,7 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="logo">
-                                <a href="{{ route('/') }}"><img height="280" width="280" src="{{ asset('frontend/img/logo.jpg') }}"
+                                <a href="{{ route('/') }}"><img height="200" width="250" src="{{ asset('frontend/img/logo_latest.jpg') }}"
                                         alt=""></a>
                             </div>
                         </div>
@@ -384,7 +430,13 @@
                                                             <span>{{ $details['quantity'] }}x Rs.{{ $details['price'] }}</span>
                                                         </div>
                                                         <div class="cart_remove">
-                                                            <a href="#"><i class="ion-android-close"></i></a>
+                                                            {{-- <form action="{{ route('remove.from.cart') }}" method="POST">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <button type="submit"><i class="ion-android-close"></i></button>
+                                                            </form>
+                                                            <a href="{{ route('remove.from.cart') }}"><i class="ion-android-close"></i></a> --}}
+                                                            <button class="btn btn-danger btn-sm remove-from-cart"><i class="fa fa-trash-o"></i></button>
                                                         </div>
                                                     </div>
                                                 @endforeach
@@ -401,7 +453,7 @@
                                                         <td class="text-left">Sub-Total :</td>
                                                         <td class="text-right">{{ $sub_total }}</td>
                                                     </tr>
-                                                    <tr>
+                                                    {{-- <tr>
                                                         @php $sub_total = 0 @endphp
                                                         @if(session('cart'))
                                                             @foreach ((array) session('cart') as $id => $details)
@@ -410,7 +462,7 @@
                                                         @endif
                                                         <td class="text-left">Total :</td>
                                                         <td class="text-right">{{ $sub_total }}</td>
-                                                    </tr>
+                                                    </tr> --}}
                                                 </tbody>
                                             </table>
                                         </div>
@@ -738,7 +790,7 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6">
                         <div class="copyright_area">
-                            <p> &copy; 2022 <strong> Aasheir Collection </strong> </p>
+                            <p> &copy; 2022 <strong> Aasher Collection </strong> </p>
                         </div>
                     </div>
                     {{-- <div class="col-lg-6 col-md-6">
@@ -941,7 +993,29 @@
                 $('#product').val(value);
                 $('#product_list').html("");
             });
+
+            $(".remove-from-cart").click(function (e) {
+                e.preventDefault();
+        
+                var ele = $(this);
+        
+                if(confirm("Are you sure want to remove?")) {
+                    $.ajax({
+                        url: '{{ route('remove.from.cart') }}',
+                        method: "DELETE",
+                        data: {
+                            _token: '{{ csrf_token() }}', 
+                            id: ele.parents("tr").attr("data-id")
+                        },
+                        success: function (response) {
+                            window.location.reload();
+                        }
+                    });
+                }
+            });
+
         });
+        
     </script>>
 </body>
 

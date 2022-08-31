@@ -113,27 +113,34 @@
                                         $attribute_name = unserialize($product_detail->attribute_name);
                                     @endphp
                                     @if (!empty($attribute_name))
-                                        @foreach ($attribute_name as $title)
-                                            {{-- <input type="hidden" name="attribute_name[]" value="{{$item}}"> --}}
-                                            <h3>{{ $title }}</h3><br>
-                                        @endforeach
+                                        <ul >
+                                            @foreach ($attribute_name as $title)
+                                            <li>
+                                                <h3>{{ $title }}</h3>
+                                            </li>
+                                            @endforeach
+                                        </ul>
                                         @php
                                             $attribute_value = unserialize($product_detail->attribute_values);
                                         @endphp 
                                     @endif
                                     @if (!empty($attribute_value))
-                                        @foreach ($attribute_value as $item)
-                                            @php
-                                                $collection = explode(',' , $item);
-                                            @endphp
-                                            
-                                            <select class="niceselect_option" required name="{{$title}}">
-                                                <option option="">choose in option</option>
-                                                @foreach ($collection as $element)
-                                                    <option  value="{{$element}}">{{$element}}</option>
+                                            <ul>
+                                                @foreach ($attribute_value as $item)
+                                                @php
+                                                    $collection = explode(',' , $item);
+                                                @endphp
+                                                <li  style="padding-top: 0.75rem;"> 
+                                                    <select class="niceselect_option" required name="{{$title}}"><br>
+                                                    <option option="">choose in option</option>
+                                                    @foreach ($collection as $element)
+                                                        <option  value="{{$element}}">{{$element}}</option>
+                                                    @endforeach
+                                                    </select>
+                                                </li>
                                                 @endforeach
-                                            </select>
-                                        @endforeach
+                                            </ul>
+                                        
                                     @endif
                                 </div>
                                 <div class="product_variant quantity">
