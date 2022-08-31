@@ -69,8 +69,7 @@
                     @else
                         <li><a href="{{ route('login') }}">Login</a></li>
                     @endauth
-                    
-                    {{-- <li class="language"><a href="#"><img src="{{ asset('frontend/img/logo/language.png') }}"
+                    <li class="language"><a href="#"><img src="{{ asset('frontend/img/logo/language.png') }}"
                                 alt="">
                             English <i class="ion-chevron-down"></i></a>
                         <ul class="dropdown_language">
@@ -86,7 +85,7 @@
                             <li><a href="#">EUR</a></li>
                             <li><a href="#">BRL</a></li>
                         </ul>
-                    </li> --}}
+                    </li>
                 </ul>
             </div>
             <div class="search_bar">
@@ -172,7 +171,10 @@
                                         <table>
                                             <tbody>
                                                 <tr>
-                                                    @php $sub_total = 0 @endphp
+                                                    @php 
+                                                    $sub_total = 0 
+                                                    // $shipping = 0
+                                                    @endphp
                                                     @foreach ((array) session('cart') as $id => $details)
                                                         @php $sub_total += $details['price'] * $details['quantity'] @endphp
                                                     @endforeach
@@ -596,6 +598,26 @@
         </div>
         <!--header bottom end-->
         <div class="footer_wrapper">
+           <div class="row">
+                <div class="col-md-3">
+                    <i class="fa fa-home"></i>
+                    <a href="">Home</a>
+                </div>
+                <div class="col-md-3">
+                    <i class="fa fa-home"></i>
+                    <a href="">Home</a>
+                </div>
+                <div class="col-md-3">
+                    <i class="fa fa-home"></i>
+                    <a href="">Home</a>
+                </div>
+                <div class="col-md-3">
+                    <i class="fa fa-home"></i>
+                    <a href="">Home</a>
+                </div>
+           </div>
+       </div>
+        {{-- <div class="footer_wrapper">
             <div class="footer_wrapper_item">
                 <div class="footer_wrapper_icon">
                     <i class="fa fa-home"></i>
@@ -628,7 +650,7 @@
                     <a href="">Home</a>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </header>
     <!--header area end-->
     @yield('content')

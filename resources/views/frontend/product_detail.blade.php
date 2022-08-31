@@ -52,15 +52,17 @@
                                 @php
                                     $images = json_decode($product_detail->product_images)
                                 @endphp
-                                @foreach ($images as $item)
-                                <li>
-                                    <a href="#" class="elevatezoom-gallery active" data-update=""
-                                        data-image="{{ asset('images/product_images/' . $item) }}"
-                                        data-zoom-image="{{ asset('images/product_images/' . $item) }}">
-                                        <img src="{{ asset('images/product_images/' . $item) }}" alt="zo-th-1" />
-                                    </a>
-                                </li>
-                                @endforeach
+                                @if (!empty($images))
+                                    @foreach ($images as $item)
+                                        <li>
+                                            <a href="#" class="elevatezoom-gallery active" data-update=""
+                                                data-image="{{ asset('images/product_images/' . $item) }}"
+                                                data-zoom-image="{{ asset('images/product_images/' . $item) }}">
+                                                <img src="{{ asset('images/product_images/' . $item) }}" alt="zo-th-1" />
+                                            </a>
+                                        </li>
+                                    @endforeach
+                                @endif
 
                                 </li>
                                 {{-- <li>
@@ -77,7 +79,7 @@
                 </div>
                 <div class="col-lg-7 col-md-7">
                     <div class="product_d_right">
-                        <form action="#">
+                        {{-- <form action="#"> --}}
 
                             <h1>{{ $product_detail['name'] }}</h1>
                             <div class=" product_ratting">
@@ -97,72 +99,50 @@
                             <div class="product_desc">
                                 <p>{{ $product_detail['short_description'] }} </p>
                             </div>
-                            {{-- <div class="product_variant color">
-                                @php
-                                    $attribute_name = unserialize($product_detail->attribute_name)
-                                @endphp
-                                @foreach ($attribute_name as $item)
-                                    <h3>{{ $item }}</h3>
-                                @endforeach
-                                @php
-                                    $attribute_value = unserialize($product_detail->attribute_values);
-                                @endphp
-                                @foreach ($attribute_value as $item)
+                            <form action="{{ route('add.to.cart',$product_detail['id'])}}" method="GET">
+                                <input type="hidden" name="product_id" value="{{$product_detail['id']}}">
+                                <input type="hidden" name="product_name" value="{{$product_detail['name']}}">
+                                @if (!empty($product_detail['discounted_price']))
+                                    <input type="hidden" name="product_price" value="{{$product_detail['discounted_price']}}">
+                                @else
+                                    <input type="hidden" name="product_price" value="{{$product_detail['price']}}">
+                                @endif
+                                <input type="hidden" name="delivery_charges" value="{{$product_detail['delivery_charges']}}">
+                                <div class="product_variant color">
                                     @php
-                                        $collection = explode(',' , $item)
+                                        $attribute_name = unserialize($product_detail->attribute_name);
                                     @endphp
-                                    <select class="niceselect_option" id="color" name="produc_color">
-                                        <option selected value="1">choose in option</option>
-                                        @foreach ($collection as $element)
-                                            <option  value="{{$element}}">{{$element}}</option>
+                                    @if (!empty($attribute_name))
+                                        @foreach ($attribute_name as $title)
+                                            {{-- <input type="hidden" name="attribute_name[]" value="{{$item}}"> --}}
+                                            <h3>{{ $title }}</h3><br>
                                         @endforeach
-                                    </select>
-                                @endforeach
-                            </div> --}}
-                            <div class="product_variant color">
-                                <h3>Color</h3>
-                                <h4>{{ $product_detail->color }}</h4>
-                            </div>
-                            
-                            {{-- <div class="product_variant color">
-                                @php
-                                    $attribute_name = unserialize($product_detail->attribute_name)
-                                @endphp
-                                @foreach ($attribute_name as $item)
-                                    <h3>{{ $item }}</h3>
-                                @endforeach
-                                
-                                <select class="niceselect_option" id="color" name="produc_color">
-                                    <option selected value="1">choose in option</option>
-                                    @php
-                                        $attribute_values = unserialize($product_detail->attribute_values)
-                                    @endphp
-                                    @foreach ($attribute_values as $item)
-                                    <option value="3">{{ $item }}</option>
-                                    @endforeach
-                                    
-                                    <option value="3">choose in option3</option>
-                                    <option value="4">choose in option4</option>
-                                </select>
-                            </div> --}}
-                            <div class="product_variant size">
-                                <h3>size</h3>
-                                <h4>{{ $product_detail->size }}</h4>
-                                {{-- <select class="niceselect_option" id="color1" name="produc_color">
-                                    <option selected value="1">size</option>
-                           
-                                </select> --}}
-                            </div>
-                            <div class="product_variant quantity">
-                                {{-- <label>quantity</label>
-                                <input min="1" max="100" value="" type="number"> --}}
-                                <a class="button" href="{{ route('add.to.cart', $product_detail->id) }}">Add to Cart</a>
-                                {{-- <form action="{{ route('add.to.cart', $product_detail->id) }}">
-                                    <button class="button" type="">add
-                                        to cart</button>
-                                </form> --}}
-
-                            </div>
+                                        @php
+                                            $attribute_value = unserialize($product_detail->attribute_values);
+                                        @endphp 
+                                    @endif
+                                    @if (!empty($attribute_value))
+                                        @foreach ($attribute_value as $item)
+                                            @php
+                                                $collection = explode(',' , $item);
+                                            @endphp
+                                            
+                                            <select class="niceselect_option" required name="{{$title}}">
+                                                <option option="">choose in option</option>
+                                                @foreach ($collection as $element)
+                                                    <option  value="{{$element}}">{{$element}}</option>
+                                                @endforeach
+                                            </select>
+                                        @endforeach
+                                    @endif
+                                </div>
+                                <div class="product_variant quantity">
+                                    {{-- <label>quntity</label>
+                                    <input min="1" max="100" value="" type="number"> --}}
+                                    <button class="button" type="submit">Add to Cart</button>
+                                    <a class="button" style="margin-left: 1rem;" href="{{ route('checkout') }}">Buy Now</a>
+                                </div>
+                            </form>
                             <div class=" product_d_action">
                                 <ul>
                                     <li>
@@ -181,7 +161,7 @@
                                 </ul>
                             </div>
 
-                        </form>
+                        {{-- </form> --}}
                         <div class="priduct_social">
                             <h3>Share on:</h3>
                             <ul>
@@ -593,4 +573,14 @@
         </div>
     </section>
     <!--product section area end-->
+<script>
+    function submitForm(){ 
+    // Call submit() method on <form id='myform'>
+    document.getElementById('myform').submit(); 
+    } 
+// $('#myform').on('change', function(e){
+//     e.preventDefault();
+//     form.submit();
+// });
+</script>
 @endsection

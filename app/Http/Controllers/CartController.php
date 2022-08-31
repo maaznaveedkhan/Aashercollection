@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
     //
+    public function add_attribute_session(Request $request){
+        return $request;
+        // return 'function is working';
+    }
     public function cart()
     {
         return view('frontend.cart');
@@ -24,24 +28,28 @@ class CartController extends Controller
      *
      * @return response()
      */
-    public function addToCart($id)
+    public function addToCart($id, Request $request)
     {
         $product = Product::findOrFail($id);
 
         $cart = session()->get('cart', []);
-
+        
         if (isset($cart[$id])) {
             $cart[$id]['quantity']++;
         } else {
             $cart[$id] = [
-                "name" => $product->name,
+                "name" => $request->product_name,
                 "quantity" => 1,
-                "price" => $product->disocunted_price,
+                "price" => $request->product_price,
+                "delivery_charges" => $request->delivery_charges,
                 "image" => $product->product_thumbnail
+                // "attribute_name" =>  implode(',', $request->attrbiute_name),
+                
             ];
         }
 
         session()->put('cart', $cart);
+        // return $request;
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 

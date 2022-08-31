@@ -40,6 +40,7 @@
                                     <tbody>
                                         @php $sub_total = 0 @endphp
                                         @php $total = 0 @endphp
+                                        @php $shipping = 0 @endphp
                                         @if(session('cart'))
                                             @foreach(session('cart') as $id => $details)
                                                 @php $sub_total += $details['price'] * $details['quantity'] @endphp
@@ -111,12 +112,15 @@
                                     </div>
                                     <div class="cart_subtotal ">
                                         <p>Shipping</p>
-                                        <p class="cart_amount"><span>Flat Rate:</span> Rs. 300</p>
+                                        @foreach(session('cart') as $id => $details)
+                                            @php $shipping +=$details['delivery_charges'] @endphp
+                                        @endforeach
+                                        <p class="cart_amount"><span>Flat Rate:</span> Rs. {{ $shipping }}</p>
                                     </div>
                                     <a href="#">Calculate shipping</a>
 
                                     <div class="cart_subtotal">
-                                        @php $total += $sub_total + 300 @endphp
+                                        @php $total += $sub_total + $shipping @endphp
                                         <p>Total</p>
                                         <p class="cart_amount">Rs. {{ $total }}</p>
                                     </div>

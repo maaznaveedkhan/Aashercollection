@@ -51,11 +51,12 @@ Route::get('remove_from_wishlist/{id}', [App\Http\Controllers\WishlistController
 Route::get('compare/{id}', [App\Http\Controllers\WishlistController::class, 'compare'])->name('compare');
 Route::get('compare_search', [App\Http\Controllers\WishlistController::class, 'autosearch'])->name('compare_search');
 Route::get('find_product', [App\Http\Controllers\WishlistController::class, 'find_product'])->name('find_product');
-
+Route::get('checkout', [App\Http\Controllers\OrderController::class, 'checkout'])->name('checkout');
+Route::post('placeorder', [App\Http\Controllers\OrderController::class, 'placeorder'])->name('placeorder');
+Route::post('add_attribute_session',[App\Http\Controllers\CartController::class,'add_attribute_session'])->name('add_attribute_session');
 Route::group(['middleware' => ['auth']], function () {
     //Checkout
-    Route::get('checkout', [App\Http\Controllers\OrderController::class, 'checkout'])->name('checkout');
-    Route::post('placeorder', [App\Http\Controllers\OrderController::class, 'placeorder'])->name('placeorder');
+    
 });
 
 Auth::routes();

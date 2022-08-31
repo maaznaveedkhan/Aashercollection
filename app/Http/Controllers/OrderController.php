@@ -83,13 +83,17 @@ class OrderController extends Controller
     }
 
     public function checkout(){
-        $user_id = Auth::user()->id;
-        $user_info = UserInfo::where('user_id', $user_id)->first();
-        return view('frontend.checkout',compact('user_info'));
+        if(Session::get('cart'))
+        {
+            return view('frontend.checkout');
+        }
+        return redirect()->back()->with('success','No Products found!');
+        
     }
 
     public function placeorder(Request $request){
-      $oldCart = Session::get('cart');
+       
+        $oldCart = Session::get('cart');
     
        
        $total = 0;
@@ -120,7 +124,7 @@ class OrderController extends Controller
                 'order_id' => $order->order_number,
                 'product_id' => $productId,
                 'quantity' => $item['quantity'],
-                'price' => $item['price'] * $item['quantity']
+                'price' => $item['price'] * $item['quantity'],
             ];
             // $total = $total + ($item['price'] * $item['quantity']);
         }
@@ -189,10 +193,10 @@ class OrderController extends Controller
     public function admin_order_detail($id){
         $orders = Order::where('id', $id)->first();
         $order_id = $orders->order_number;
-          $details = OrderItem::where('order_id', $order_id)->get();    //for an order with the same id we can have multiple products => array
+        $details = OrderItem::where('order_id', $order_id)->get();    //for an order with the same id we can have multiple products => array
              $product_id = OrderItem::where('order_id', $order_id)->get(['product_id']);    //accessing the product from the linked table
 
-         $items = array();
+        $items = array();
         $products = array();
         foreach($details as $detail){
             $items[] = $detail->product_id;    //an array with all the details from the specific order

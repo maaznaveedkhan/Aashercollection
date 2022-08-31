@@ -90,45 +90,29 @@
                                     </div> --}}
                                     <div class="col-12 mb-20">
                                         <label> Name</label>
-                                        <input type="text" name="name" value="{{ $user_info['name'] }}">
+                                        <input type="text" name="name" value="">
                                     </div>
-                                    {{-- <div class="col-12 mb-20">
-                                        <label for="country">country <span>*</span></label>
-                                        <select class="niceselect_option" name="cuntry" id="country">
-                                            <option value="2">bangladesh</option>
-                                            <option value="3">Algeria</option>
-                                            <option value="4">Afghanistan</option>
-                                            <option value="5">Ghana</option>
-                                            <option value="6">Albania</option>
-                                            <option value="7">Bahrain</option>
-                                            <option value="8">Colombia</option>
-                                            <option value="9">Dominican Republic</option>
-
-                                        </select>
-                                    </div> --}}
+                                   
                                     <div class="col-12 mb-20">
                                         <label>Street address  <span>*</span></label>
-                                        <input placeholder="House number and street name" value="{{ $user_info['address'] }}" name="address" type="text">
+                                        <input placeholder="House number and street name" value="" name="address" type="text">
                                     </div>
-                                    {{-- <div class="col-12 mb-20">
-                                        <input placeholder="Apartment, suite, unit etc. (optional)" type="text">
-                                    </div> --}}
                                     <div class="col-12 mb-20">
                                         <label>Town / City <span>*</span></label>
-                                        <input name="city"  value="{{ $user_info['city'] }}" type="text">
+                                        <input name="city"  value="" type="text">
                                     </div>
                                     <div class="col-12 mb-20">
                                         <label>Postal Code <span>*</span></label>
-                                        <input type="text" name="postal_code"  value="{{ $user_info['postal_code'] }}">
+                                        <input type="text" name="postal_code"  value="">
                                     </div>
                                     <div class="col-lg-6 mb-20">
                                         <label>Phone<span>*</span></label>
-                                        <input type="text" name="phone"  value="{{ $user_info['phone'] }}">
+                                        <input type="text" name="phone"  value="">
 
                                     </div>
                                     <div class="col-lg-6 mb-20">
                                         <label> Email Address   <span>*</span></label>
-                                        <input type="text" name="email"  value="{{ $user_info['email'] }}">
+                                        <input type="text" name="email"  value="">
                                     </div>
                                     {{-- <div class="col-12 mb-20">
                                         <input id="account" type="checkbox" data-bs-target="createp_account" />
@@ -215,24 +199,24 @@
                                     </div>
                                 </div>
                         </form>
-                    
                     {{-- @endif --}}
                     </div>
                     <div class="col-lg-6 col-md-6">
                         <form action="#">
                             <h3>Your order</h3>
-                            <div class="order_table table-responsive">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>Product</th>
-                                            <th>Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @php $sub_total = 0 @endphp
-                                        @php $total = 0 @endphp
-                                        @if(session('cart'))
+                            @php $sub_total = 0 @endphp
+                            @php $total = 0 @endphp
+                            @php $shipping = 0 @endphp
+                            @if(!empty(session('cart')))
+                                <div class="order_table table-responsive">
+                                    <table>
+                                        <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
                                             @foreach(session('cart') as $id => $details)
                                                 @php $sub_total += $details['price'] * $details['quantity'] @endphp
                                                 <tr data-id="{{ $id }}">
@@ -254,26 +238,38 @@
                                                     <td class="product_total">Rs. {{ $details['price'] * $details['quantity'] }}</td>
                                                 </tr> --}}
                                             @endforeach
-                                        @endif
-
-                                    </tbody>
-                                    <tfoot>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Cart Subtotal</th>
+                                                <td>Rs. {{ $sub_total }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Shipping</th>
+                                                @foreach(session('cart') as $id => $details)
+                                                    @php $shipping +=$details['delivery_charges'] @endphp
+                                                @endforeach
+                                                <td><strong>{{ $shipping }}</strong></td>
+                                            </tr>
+                                            <tr class="order_total">
+                                                @php $total += $sub_total + $shipping @endphp
+                                                <th>Order Total</th>
+                                                <td><strong>Rs. {{ $total }}</strong></td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            @else
+                            <div class="order_table table-responsive">
+                                <table>
+                                    <thead>
                                         <tr>
-                                            <th>Cart Subtotal</th>
-                                            <td>Rs. {{ $sub_total }}</td>
+                                            No products were selected!
                                         </tr>
-                                        <tr>
-                                            <th>Shipping</th>
-                                            <td><strong>Rs. 300</strong></td>
-                                        </tr>
-                                        <tr class="order_total">
-                                            @php $total += $sub_total + 300 @endphp
-                                            <th>Order Total</th>
-                                            <td><strong>Rs. {{ $total }}</strong></td>
-                                        </tr>
-                                    </tfoot>
+                                    </thead>
                                 </table>
                             </div>
+                            @endif
                             {{-- <div class="payment_method">
                                <div class="panel-default">
                                     <input id="payment" name="check_method" type="radio" data-bs-target="createp_account" />

@@ -15037,28 +15037,32 @@ textarea:-ms-input-placeholder {
         padding: 5px 15px;
         background: #fff;
         align-items: center;
-        display: inline-block;
-        -webkit-box-shadow: 0 -2px 5px -2px rgb(0 0 0 / 20%);
+        display: flex;
+        /* -webkit-box-shadow: 0 -2px 5px -2px rgb(0 0 0 / 20%);
         -moz-box-shadow: 0 -2px 5px -2px rgba(0, 0, 0, .2);
         -ms-box-shadow: 0 -2px 5px -2px rgba(0, 0, 0, .2);
         -o-box-shadow: 0 -2px 5px -2px rgba(0, 0, 0, .2);
-        box-shadow: 0 -2px 5px -2px #0003;
+        box-shadow: 0 -2px 5px -2px #0003; */
     }
     .footer_wrapper_item {
         align-items: center;
-        width: 25%;
+        width: 24%;
         justify-content: center;
         display: inline-block;
     }
     .footer_wrapper_icon {
         align-items: center;
         width: 100%;
-        display: flex;
     }
     .footer_wrapper_text {
         align-items: center;
         width: 100%;
-        display: flex;
+    }
+}
+
+@media screen and (min-width: 401px) {
+    .footer_wrapper {
+        display: none;
     }
 }
 
