@@ -94,15 +94,14 @@ class OrderController extends Controller
     public function placeorder(Request $request){
        
         $oldCart = Session::get('cart');
-    
+        
        
-       $total = 0;
-       $total_quantity = 0;
-       foreach ($oldCart as $productId => $item) {
-        $total = $total + ($item['price'] * $item['quantity']);
+        $total = 0;
+        $total_quantity = 0;
+        foreach ($oldCart as $productId => $item) {
+        $total = $total + ($item['price'] * $item['quantity'] + $item['delivery_charges']);
         $total_quantity = $total_quantity + $item['quantity'] ;
-       }
-    
+        }
         
         $order_number= dechex(time());
         $order = new Order;
@@ -116,15 +115,29 @@ class OrderController extends Controller
         $order->total = $total;
         $order->item_count = $total_quantity;
         $order->save();
-    
+        $attribute_name = array();
+        foreach(session()->get('cart') as $item){
+            $attribute_name[]= $item['attribute_name'];
+         };
+         $attribute_name_array = $attribute_name;
+         $product_attribute_name = serialize($attribute_name_array);
+         $attribute_values = array();
+        foreach(session()->get('cart') as $item){
+           $attribute_values[]= $item['attribute_values'];
+        };
+        $attribute_value_array = $attribute_values;
+        $product_attribute_values = serialize($attribute_value_array);
         $orderProducts = [];
         foreach ($oldCart as $productId => $item) {
             $orderProducts[] = [
-                'user_id' => Auth::user()->id,
+                // 'user_id' => Auth::user()->id,
                 'order_id' => $order->order_number,
                 'product_id' => $productId,
                 'quantity' => $item['quantity'],
                 'price' => $item['price'] * $item['quantity'],
+                'attr_name'=> $request->attr_name, 
+                'attribute_values'=> $product_attribute_values 
+                
             ];
             // $total = $total + ($item['price'] * $item['quantity']);
         }
@@ -142,6 +155,7 @@ class OrderController extends Controller
                     'address' => $request->address,
                     'postal_code' => $request->postal_code,
                     'created_at'=>Carbon::now(),
+                    
                 ]
             );
         }else{

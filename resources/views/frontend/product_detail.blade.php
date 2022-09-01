@@ -1,5 +1,8 @@
 @extends('frontend.layouts.app')
 @section('content')
+<?php
+    $attributy ='';
+?>
 @if (count($errors) > 0)
     <div class="alert alert-danger">
         <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -109,15 +112,21 @@
                                 @endif
                                 <input type="hidden" name="delivery_charges" value="{{$product_detail['delivery_charges']}}">
                                 <div class="product_variant color">
+                                    
                                     @php
                                         $attribute_name = unserialize($product_detail->attribute_name);
+                                        
                                     @endphp
                                     @if (!empty($attribute_name))
                                         <ul >
-                                            @foreach ($attribute_name as $title)
+                                            @foreach ($attribute_name as $key => $title)
+                                            <?php
+                                                $attributy = $title;?> 
                                             <li>
                                                 <h3>{{ $title }}</h3>
                                             </li>
+                                            <h1  style="background-color:green;display:none" id="gettext{{$key}}">{{$attributy}}</h1>
+                                            <p style="display: none" id="totalCounter">{{count($attribute_name)}}</p>
                                             @endforeach
                                         </ul>
                                         @php
@@ -125,21 +134,25 @@
                                         @endphp 
                                     @endif
                                     @if (!empty($attribute_value))
-                                            <ul>
-                                                @foreach ($attribute_value as $item)
-                                                @php
-                                                    $collection = explode(',' , $item);
-                                                @endphp
-                                                <li  style="padding-top: 0.75rem;"> 
-                                                    <select class="niceselect_option" required name="{{$title}}"><br>
-                                                    <option option="">choose in option</option>
-                                                    @foreach ($collection as $element)
-                                                        <option  value="{{$element}}">{{$element}}</option>
-                                                    @endforeach
-                                                    </select>
-                                                </li>
-                                                @endforeach
-                                            </ul>
+                                        <ul>
+                                            @foreach ($attribute_value as $key => $item)
+                                         
+                                            @php
+                                                $collection = explode(',' , $item);
+                                            @endphp
+                                            <li  style="padding-top: 0.75rem;"> 
+                                                <input type="hidden" name="attr_name[]" id="fill{{$key}}" value="">
+                                                <input type="hidden" name="attr_values[]" id="at_val" value="">
+                                                <select class="niceselect_option" required id="putme{{$key}}" name="" onchange="getval(this);">
+                                                <option option="">choose in option</option>
+                                                @foreach ($collection as $element)
+                                                    <option  value="{{$element}}">{{$element}}</option>
+                                                @endforeach 
+                                                
+                                                </select>
+                                            </li>
+                                            @endforeach
+                                        </ul>
                                         
                                     @endif
                                 </div>
@@ -580,6 +593,7 @@
         </div>
     </section>
     <!--product section area end-->
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 <script>
     function submitForm(){ 
     // Call submit() method on <form id='myform'>
@@ -589,5 +603,53 @@
 //     e.preventDefault();
 //     form.submit();
 // });
+   var counter = $('#totalCounter').text();
+//    console.log(counter);
+    var att_values = [];
+    var val_at =[];
+    for(i=0; i<counter; i++){
+        var attribute_name = $(`#gettext${i}`).text();
+        var putme = $(`#putme${i}`).attr("name", attribute_name);
+        var fill = $(`#fill${i}`).attr("value", attribute_name);
+        var selected = $(`#putme${i}`).find(":selected").val();
+        $(`#putme${i}`).on('change', function() {
+            alert( this.value );
+    });
+    console.log(selected);
+    function getval(sel)
+    {
+        const searchIndex = att_values.findIndex((att_values) => att_values.id==sel.id);
+        if(searchIndex != -1){
+            var newArray = att_values.filter((item) => item.id !== sel.id);
+            att_values = newArray;
+            var obj = {id:sel.id, value:sel.value};
+            att_values.push(obj);
+            }else{
+                var obj = {id:sel.id, value:sel.value};
+            att_values.push(obj);
+           
+        }
+        // var at_val = [];
+        // for(a=0; a<counter; a++){
+        //     var at_val = $(`#at_val${a}`).attr("value", att_values);
+        // }
+        
+        val_at = [];
+        for(a=0; a<att_values.length; a++){
+            val_at.push(att_values[a].value)
+        }
+        $('#at_val').attr("value", val_at);
+        // console.log(at_val);
+        
+        console.log('att_values', att_values[0].value);
+        console.log('val at ', val_at);
+    }
+    
+   }
+
+   
+   
+
 </script>
+{{-- {{ dd($attributy) }} --}}
 @endsection

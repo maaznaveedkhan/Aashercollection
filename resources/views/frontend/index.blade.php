@@ -18,42 +18,6 @@
                     </div>
                 </div>
                 @endforeach
-                {{-- <div class="col-lg-4 col-md-6">
-                    <div class="banner_area">
-                        <div class="banner_thumb">
-                            <a href="shop.html"><img src="{{ asset('frontend/img/bg/banner29.jpg') }}" alt="#"></a>
-                            <div class="banner_content">
-                               <h1>#For Women</h1>
-                               <p>Sale 10% Off Almost Everything</p>
-                                <a href="shop.html">Discover Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="banner_area">
-                        <div class="banner_thumb">
-                            <a href="shop.html"><img src="{{ asset('frontend/img/bg/banner30.jpg') }}" alt="#"></a>
-                            <div class="banner_content">
-                               <h1>#Accessories</h1>
-                               <p>Sale 40% Off Almost Everything</p>
-                                <a href="shop.html">Discover Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="banner_area bottom">
-                        <div class="banner_thumb">
-                            <a href="shop.html"><img src="{{ asset('frontend/img/bg/banner31.jpg') }}" alt="#"></a>
-                            <div class="banner_content">
-                               <h1># For Men</h1>
-                               <p>Big Sale Off Final Sale Items. Caught in the moment!</p>
-                                <a href="shop.html">Discover Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
         </div>
     </section>
@@ -130,18 +94,18 @@
                                                         @php
                                                             $images = json_decode($item->product_images);
                                                         @endphp
-                                                            <img height="50px" width="50px" class="img-fluid" src="{{ asset('images/product_images/'.$images[0]) }}" alt="">
+                                                            <img class="img-fluid" src="{{ asset('images/product_images/'.$images[0]) }}" alt="">
                                                         {{-- {{ dd($images[1]) }} --}}
                                                     </a>
                                                     <div class="product_action">
                                                         <div class="hover_action">
                                                         <a  href="{{ route('product_detail',$item->id) }}"><i class="fa fa-plus"></i></a>
                                                         <div class="action_button">
-                                                            <ul>
+                                                            {{-- <ul>
                                                                 <li><a title="add to cart" href="{{ route('add.to.cart',$item->id) }}"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
-                                                                {{-- <li><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-                                                                <li><a href="compare.html" title="Add to Compare"><i class="fa fa-sliders" aria-hidden="true"></i></a></li> --}}
-                                                            </ul>
+                                                                <li><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
+                                                                <li><a href="compare.html" title="Add to Compare"><i class="fa fa-sliders" aria-hidden="true"></i></a></li>
+                                                            </ul> --}}
                                                         </div>
                                                     </div>
                                                     </div>

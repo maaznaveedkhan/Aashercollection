@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('order_id')->index();
             $table->unsignedBigInteger('product_id')->index();
             $table->unsignedInteger('quantity');
+            $table->string('attribute_name')->nullable();
+            $table->string('attribute_values')->nullable();
             $table->decimal('price', 20, 2);
             $table->foreign('order_id')->references('order_number')->on('orders')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');

@@ -30,10 +30,11 @@ class CartController extends Controller
      */
     public function addToCart($id, Request $request)
     {
+        return $request;
         $product = Product::findOrFail($id);
 
         $cart = session()->get('cart', []);
-        
+        // $attributes = $request->attributes;
         if (isset($cart[$id])) {
             $cart[$id]['quantity']++;
         } else {
@@ -42,14 +43,14 @@ class CartController extends Controller
                 "quantity" => 1,
                 "price" => $request->product_price,
                 "delivery_charges" => $request->delivery_charges,
-                "image" => $product->product_thumbnail
-                // "attribute_name" =>  implode(',', $request->attrbiute_name),
-                
+                "image" => $product->product_thumbnail,
+                'attribute_name' =>$request->attribute_name,
+                'attribute_values' =>$request->attribute_values,
             ];
         }
-
-        session()->put('cart', $cart);
         // return $request;
+        session()->put('cart', $cart);
+        
         return redirect()->back()->with('success', 'Product added to cart successfully!');
     }
 
