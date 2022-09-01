@@ -13,11 +13,8 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    //
-    public function add_attribute_session(Request $request){
-        return $request;
-        // return 'function is working';
-    }
+   
+
     public function cart()
     {
         return view('frontend.cart');
@@ -30,7 +27,13 @@ class CartController extends Controller
      */
     public function addToCart($id, Request $request)
     {
-        return $request;
+        $names = $request->attr_name;
+        // $imp_names = implode(',',$names);
+        // return $names;
+        $values = $request->attr_values;
+        array_pop($values);
+        // $imp_values = implode(',',$values);
+        //  return $values;
         $product = Product::findOrFail($id);
 
         $cart = session()->get('cart', []);
@@ -44,8 +47,8 @@ class CartController extends Controller
                 "price" => $request->product_price,
                 "delivery_charges" => $request->delivery_charges,
                 "image" => $product->product_thumbnail,
-                'attribute_name' =>$request->attribute_name,
-                'attribute_values' =>$request->attribute_values,
+                'attribute_name' => implode(',', $names),
+                'attribute_values' =>implode(',',$values),
             ];
         }
         // return $request;

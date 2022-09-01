@@ -45,6 +45,8 @@
                            <th scope="col">Product Name</th>
                            <th scope="col">Product Image</th>
                            <th>Quantity</th>
+                           <th>Attribute Names</th>
+                           <th>Attribute Value</th>
                            <th>Price</th>
                            <th>Date</th>
                         </tr>
@@ -52,15 +54,24 @@
                      <tbody>
                         @foreach($products as $product)
                         <tr>
+                           {{-- {{ dd($product) }} --}}
                            <td>
                               <a href="{{route('product_detail',$product->id)}}" style="text-decoration:none;"><p>{{ $product->name }}</p></a>
                            </td>
-                           <td><a href=""><img src="{{asset('images/product_images/'.$product['product_thumbnail']) }}" width="100" height="100"></a></td>
+                           <td>
+                              <a href=""><img src="{{asset('images/product_images/'.$product['product_thumbnail']) }}" width="100" height="100"></a>
+                           </td>
                            @foreach($details as $detail)
-                                 @if($product->id == $detail->product_id) 
-                                    <td><p>{{ $detail->quantity }} buc</p></td>
-                                 @endif
-                           @endforeach 
+                              @if($product->id == $detail->product_id) 
+                                 <td><p>{{ $detail->quantity }} buc</p></td>
+                              @endif
+                              @php
+                                  $attnam = $detail['attribute_name'];
+                                  $attval = $detail['attribute_values']
+                              @endphp
+                              <td>{{ $detail['attribute_name'] }}</td>
+                              <td>{{ $detail['attribute_values'] }}</td>
+                           @endforeach
                            <td>
                               <p>Rs. {{$product->price}} </p>
                            </td>

@@ -111,22 +111,22 @@ class OrderController extends Controller
         $order->email = $request->email;
         $order->address = $request->address;
         $order->city = $request->city;
-        $order->user_id = Auth::user()->id;
+        // $order->user_id = Auth::user()->id;
         $order->total = $total;
         $order->item_count = $total_quantity;
         $order->save();
-        $attribute_name = array();
-        foreach(session()->get('cart') as $item){
-            $attribute_name[]= $item['attribute_name'];
-         };
-         $attribute_name_array = $attribute_name;
-         $product_attribute_name = serialize($attribute_name_array);
-         $attribute_values = array();
-        foreach(session()->get('cart') as $item){
-           $attribute_values[]= $item['attribute_values'];
-        };
-        $attribute_value_array = $attribute_values;
-        $product_attribute_values = serialize($attribute_value_array);
+        // $attribute_name = array();
+        // foreach(session()->get('cart') as $item){
+        //     $attribute_name[]= $item['attribute_name'];
+        //  };
+        //  $attribute_name_array = $attribute_name;
+        //  $product_attribute_name = serialize($attribute_name_array);
+        //  $attribute_values = array();
+        // foreach(session()->get('cart') as $item){
+        //    $attribute_values[]= $item['attribute_values'];
+        // };
+        // $attribute_value_array = $attribute_values;
+        // $product_attribute_values = serialize($attribute_value_array);
         $orderProducts = [];
         foreach ($oldCart as $productId => $item) {
             $orderProducts[] = [
@@ -135,8 +135,8 @@ class OrderController extends Controller
                 'product_id' => $productId,
                 'quantity' => $item['quantity'],
                 'price' => $item['price'] * $item['quantity'],
-                'attr_name'=> $request->attr_name, 
-                'attribute_values'=> $product_attribute_values 
+                'attribute_name'=> $item['attribute_name'] , 
+                'attribute_values'=> $item['attribute_values']
                 
             ];
             // $total = $total + ($item['price'] * $item['quantity']);
@@ -208,7 +208,7 @@ class OrderController extends Controller
         $orders = Order::where('id', $id)->first();
         $order_id = $orders->order_number;
         $details = OrderItem::where('order_id', $order_id)->get();    //for an order with the same id we can have multiple products => array
-             $product_id = OrderItem::where('order_id', $order_id)->get(['product_id']);    //accessing the product from the linked table
+        $product_id = OrderItem::where('order_id', $order_id)->get(['product_id']);    //accessing the product from the linked table
 
         $items = array();
         $products = array();

@@ -29,7 +29,12 @@
                             <li>/</li>
                             <li>product details</li>
                         </ul>
+
                     </div>
+                    {{-- @php
+                        return
+                    @endphp--}}
+                    {{-- {{ dd(session()->all()); }}  --}}
                 </div>
             </div>
         </div>
@@ -97,7 +102,12 @@
                                 </ul>
                             </div>
                             <div class="product_price">
-                                <span class="current_price">Rs. {{ $product_detail['discounted_price'] }}</span>
+                                @if (!empty($product_detail['discounted_price']))
+                                    <span class="current_price">Rs. {{ $product_detail['discounted_price'] }}</span>
+                                @else
+                                    <span class="current_price">Rs. {{ $product_detail['price'] }}</span>
+                                @endif
+                                
                             </div>
                             <div class="product_desc">
                                 <p>{{ $product_detail['short_description'] }} </p>
@@ -112,10 +122,8 @@
                                 @endif
                                 <input type="hidden" name="delivery_charges" value="{{$product_detail['delivery_charges']}}">
                                 <div class="product_variant color">
-                                    
                                     @php
                                         $attribute_name = unserialize($product_detail->attribute_name);
-                                        
                                     @endphp
                                     @if (!empty($attribute_name))
                                         <ul >
@@ -165,17 +173,12 @@
                             </form>
                             <div class=" product_d_action">
                                 <ul>
+                                    @auth
                                     <li>
-                                        @auth
-                                        <li>
-                                            <a href="{{ route('add_to_wishlist',$product_detail->id) }}"> <i class="fa fa-heart-o"
-                                                aria-hidden="true"></i> Add to Wish List</a>
-                                            
-                                        </li>
-                                        @endauth
-                                        {{-- <a href="{{ route('add_to_wishlist',$product_detail->id) }}" title="Add to wishlist"><i class="fa fa-heart-o"
-                                            aria-hidden="true"></i> Add to Wish List</a> --}}
+                                        <a href="{{ route('add_to_wishlist',$product_detail->id) }}"> <i class="fa fa-heart-o"
+                                            aria-hidden="true"></i> Add to Wish List</a>
                                     </li>
+                                    @endauth
                                     <li><a href="{{ route('compare',$product_detail->id) }}" title="Add to Compare"><i class="fa fa-sliders"
                                                 aria-hidden="true"></i> Compare this Product</a></li>
                                 </ul>
@@ -233,35 +236,6 @@
                                 <div class="product_info_content">
                                     <p>{!! $product_detail['datasheet'] !!}</p>
                                 </div>
-                                {{-- <div class="product_d_table">
-                                    <form action="#">
-                                        <table>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="first_child">Compositions</td>
-                                                    <td>Polyester</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="first_child">Styles</td>
-                                                    <td>Girly</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="first_child">Properties</td>
-                                                    <td>Short Dress</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </form>
-                                </div>
-                                <div class="product_info_content">
-                                    <p>Fashion has been creating well-designed collections since 2010. The brand offers
-                                        feminine designs delivering stylish separates and statement dresses which have since
-                                        evolved into a full ready-to-wear collection in which every item is a vital part of
-                                        a woman's wardrobe. The result? Cool, easy, chic looks with youthful elegance and
-                                        unmistakable signature style. All the beautiful pieces are made in Italy and
-                                        manufactured with the greatest attention. Now Fashion extends to a range of
-                                        accessories including shoes, hats, belts and more!</p>
-                                </div> --}}
                             </div>
                             <div class="tab-pane fade" id="reviews" role="tabpanel">
                                 <div class="product_info_content">
@@ -595,14 +569,6 @@
     <!--product section area end-->
     <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
 <script>
-    function submitForm(){ 
-    // Call submit() method on <form id='myform'>
-    document.getElementById('myform').submit(); 
-    } 
-// $('#myform').on('change', function(e){
-//     e.preventDefault();
-//     form.submit();
-// });
    var counter = $('#totalCounter').text();
 //    console.log(counter);
     var att_values = [];
@@ -627,7 +593,6 @@
             }else{
                 var obj = {id:sel.id, value:sel.value};
             att_values.push(obj);
-           
         }
         // var at_val = [];
         // for(a=0; a<counter; a++){
@@ -638,9 +603,12 @@
         for(a=0; a<att_values.length; a++){
             val_at.push(att_values[a].value)
         }
-        $('#at_val').attr("value", val_at);
-        // console.log(at_val);
-        
+        var test = val_at;
+        var at = $('#at_val').attr("value", "");
+        var chk = $('#at_val').attr("value", test);
+       
+        console.log(test);
+        // alert(at);
         console.log('att_values', att_values[0].value);
         console.log('val at ', val_at);
     }

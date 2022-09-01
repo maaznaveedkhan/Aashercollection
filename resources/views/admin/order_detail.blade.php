@@ -14,10 +14,12 @@
     @if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
+
     </div>
     @endif
     <div class="row g-4">
         <div class="col-12">
+        
             <div class="bg-light rounded h-100 p-4">
                 <h3 class="text-center">{{ __('Order no.') }} {{$orders['order_number']}}</h3>
                 <div class="row">
@@ -63,11 +65,17 @@
                             @foreach($products as $product)
                                <tr>
                                   <td>
-                                     <a href="" style="text-decoration:none;"><p>{{ $product->name }}</p></a>
+                                    
+                                     <a href="" style="color: black"><p>{{ $product->name }}</p></a>
                                   </td>
                                   <td><a href=""><img src="{{asset('images/product_images/'.$product['product_thumbnail']) }}" width="100" height="100"></a></td>
                                   <td>
-                                     <p>Rs. {{$product->price}} </p>
+                                    @if (!empty($product['disounted_price']))
+                                       <p>Rs. {{$product['disounted_price']}} </p>
+                                    @else
+                                       <p>Rs. {{$product['price']}} </p>
+                                    @endif
+                                     
                                   </td>
                                     @foreach($details as $detail)
                                         @if($product->id == $detail->product_id) 
