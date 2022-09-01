@@ -77,11 +77,17 @@
                                     @endif
                                      
                                   </td>
-                                    @foreach($details as $detail)
-                                        @if($product->id == $detail->product_id) 
-                                            <td><p>{{ $detail->quantity }} buc</p></td>
-                                        @endif
-                                   @endforeach 
+                                 @foreach($details as $detail)
+                                    @if($product->id == $detail->product_id) 
+                                       <td><p>{{ $detail->quantity }} buc</p></td>
+                                    @endif
+                                    @php
+                                       $attnam = $detail['attribute_name'];
+                                       $attval = $detail['attribute_values']
+                                    @endphp
+                                    <td>{{ $detail['attribute_name'] }}</td>
+                                    <td>{{ $detail['attribute_values'] }}</td>
+                                 @endforeach 
                                   <td>
                                      <p>{{$orders['created_at']}}</p>
                                   </td>

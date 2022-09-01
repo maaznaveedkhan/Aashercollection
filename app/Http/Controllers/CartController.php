@@ -27,13 +27,32 @@ class CartController extends Controller
      */
     public function addToCart($id, Request $request)
     {
+        
         $names = $request->attr_name;
         // $imp_names = implode(',',$names);
         // return $names;
         $values = $request->attr_values;
-        array_pop($values);
-        // $imp_values = implode(',',$values);
-        //  return $values;
+        if($names != "" && $values != ""){
+            array_pop($values);
+            $product = Product::findOrFail($id);
+
+            $cart = session()->get('cart', []);
+            // $attributes = $request->attributes;
+            if (isset($cart[$id])) {
+                $cart[$id]['quantity']++;
+            } else {
+                $cart[$id] = [
+                    "name" => $request->product_name,
+                    "quantity" => 1,
+                    "price" => $request->product_price,
+                    "delivery_charges" => $request->delivery_charges,
+                    "image" => $product->product_thumbnail,
+                    'attribute_name' => implode(',', $names),
+                    'attribute_values' =>implode(',',$values),
+                ];
+            }
+        }
+
         $product = Product::findOrFail($id);
 
         $cart = session()->get('cart', []);
@@ -46,9 +65,7 @@ class CartController extends Controller
                 "quantity" => 1,
                 "price" => $request->product_price,
                 "delivery_charges" => $request->delivery_charges,
-                "image" => $product->product_thumbnail,
-                'attribute_name' => implode(',', $names),
-                'attribute_values' =>implode(',',$values),
+                "image" => $product->product_thumbnail
             ];
         }
         // return $request;
