@@ -15,35 +15,6 @@
     outline: none;
 }
 </style>
-{{-- <style>
-    #search {
-   border-radius: 20px;
-  height: 35px;
-  width: 250px;
-  z-index: 1;
-  outline: none;
-  padding-right: 50px;
-}
-
-#search-input-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-#search-input-wrapper::after {
-  content: "";
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-  right: 10px;
-  background: url("https://i.ibb.co/D1dvJTV/icons8-search.gif") no-repeat center;
-  background-size: 23px auto;
-  height: 30px;
-  width: 30px;
-}
-</style> --}}
 <!--breadcrumbs area start-->
 <div class="breadcrumbs_area">
     <div class="container">   

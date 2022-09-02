@@ -28,7 +28,8 @@
                 <div class="bg-light rounded h-100 p-4">
                     <h6 class="mb-4">Add Product</h6>
                    
-                    <a class="btn" href="{{ route('admin_attribute_form') }}">Add Attribute</a>
+                    <a class="btn btn-outline-primary" href="{{ route('admin_attribute_form') }}">Add Attribute</a>
+                    <p>Add Attribute before adding product if has any!*</p>
                     {{-- <a class="btn" href="{{ route('admin_attribute_form') }}">Remove Attribute</a> --}}
                     <form method="POST" action="{{ route('add_product') }}" enctype="multipart/form-data">
                         @csrf
@@ -123,14 +124,14 @@
                             <label for="size" class="form-label">Discounted Price</label>
                             <input type="text" required name="discounted_price" class="form-control" id="exampleInputPassword1">
                         </div>
-                        <div class="mb-3">
+                        {{-- <div class="mb-3">
                             <label for="size" class="form-label">Size</label>
                             <input type="text" required name="size" class="form-control" id="exampleInputPassword1">
                         </div>
                         <div class="mb-3">
                             <label for="size" class="form-label">Color</label>
                             <input type="text" required name="color" class="form-control" id="exampleInputPassword1">
-                        </div>
+                        </div> --}}
                         <div class="mb-3">
                             <label for="size" class="form-label">Delivery Charges</label>
                             <input type="text" required name="delivery_charges" class="form-control" id="exampleInputPassword1">

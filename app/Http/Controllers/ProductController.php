@@ -138,14 +138,15 @@ class ProductController extends Controller
     public function destroy($id)
     {
         $product = Product::find($id);
-
-        unlink('images/product_images/' . $product->product_thumbnail);
+        unlink( public_path('images/product_images/'. $product->product_thumbnail));
+        
+        // unlink('public/images/product_images/' . $product->product_thumbnail);
 
         Product::where('id', $product->id)->delete();
-
+        
         return redirect()
             ->route('admin_products')
-            ->with('danger', 'Produs sters cu succes !');
+            ->with('success', 'Produs has been deleted!');
     }
 
     //Front End
@@ -156,20 +157,6 @@ class ProductController extends Controller
         return view('frontend.product_detail', compact('product_detail','products'));
     }
 
-    // public function search(Request $request){
-    //     // Get the search value from the request
-    //     $search = $request->input('search');
-    //     $categories = Category::all();
-    
-    //     // Search in the title and body columns from the posts table
-    //     $products = Product::query()
-    //         ->where('name', 'LIKE', "%{$search}%")
-    //         ->orWhere('short_description', 'LIKE', "%{$search}%")
-    //         ->paginate(10);
-        
-    //     // Return the search view with the resluts compacted
-    //     return view('frontend.search_results', compact('products','categories'));
-    // }
     public function search(Request $request){
         // $search = $request->product;
         

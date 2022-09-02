@@ -25,18 +25,6 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    // public function index()
-    // {
-    //     // return 'home controller';
-    //     if (Auth::user()->role == 1) {
-    //         return redirect()->route('admin_dashboard');
-    //     } elseif (Auth::user()->role == 0) {
-    //         return redirect()->route('user_dashboard');
-    //     } else {
-    //         return 'Credentials are not matched!';
-    //     }
-    // }
-
     public function index()
     {
         // return 'home controller';

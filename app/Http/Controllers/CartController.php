@@ -27,36 +27,21 @@ class CartController extends Controller
      */
     public function addToCart($id, Request $request)
     {
-        
+        $names = '';
+        $values = '';
         $names = $request->attr_name;
-        // $imp_names = implode(',',$names);
-        // return $names;
         $values = $request->attr_values;
-        if($names != "" && $values != ""){
-            array_pop($values);
-            $product = Product::findOrFail($id);
-
-            $cart = session()->get('cart', []);
-            // $attributes = $request->attributes;
-            if (isset($cart[$id])) {
-                $cart[$id]['quantity']++;
-            } else {
-                $cart[$id] = [
-                    "name" => $request->product_name,
-                    "quantity" => 1,
-                    "price" => $request->product_price,
-                    "delivery_charges" => $request->delivery_charges,
-                    "image" => $product->product_thumbnail,
-                    'attribute_name' => implode(',', $names),
-                    'attribute_values' =>implode(',',$values),
-                ];
-            }
+        if(!is_null($names) && !is_null($values)){
+            $names = implode(',', $names);
+            $values = implode(',',$values);
+        }else{
+            $names = null;
+            $values = null;
         }
-
+        
         $product = Product::findOrFail($id);
 
         $cart = session()->get('cart', []);
-        // $attributes = $request->attributes;
         if (isset($cart[$id])) {
             $cart[$id]['quantity']++;
         } else {
@@ -65,7 +50,9 @@ class CartController extends Controller
                 "quantity" => 1,
                 "price" => $request->product_price,
                 "delivery_charges" => $request->delivery_charges,
-                "image" => $product->product_thumbnail
+                "image" => $product->product_thumbnail,
+                "attribute_name" => $names,
+                "attribute_values" => $values
             ];
         }
         // return $request;
@@ -157,29 +144,14 @@ class CartController extends Controller
                 foreach (session('cart') as $id => $details) {
                     $total += $details['price'] * $details['quantity'];
                     $items += $details['quantity'];
-                    // find vendor id through product
                     $order_number =  dechex(time());
                     $product_id = Product::find($id);
-                    // $vendor_id = UserInfo::where('shop_id',$shop_id->shop_id )->first();
                     $order_item = new OrderItem();
-                    // $order_item->shop_id = $product_id;
-                    // $order_item->vendor_id = $vendor_id->user_id;
                     $order_item->order_id = $order_number;
                     $order_item->product_id = $product_id->id;
                     $order_item->quantity =  $details['quantity'];
                     $order_item->price = $details['price'] * $details['quantity'];
-                    // $order_item->user_id = Auth::id();;
-                    // $order_item->discount = 0;
-                    // $order_item->item_count = $items;
-                    // // $order_item->payment_method = $request->payment_method;
-                    // $order_item->name = $request->name;
-                    // $order_item->city = $request->city;
-                    // $order_item->postal_code = $request->postal_code;
-                    // $order_item->address = $request->address;
-                    // $order_item->email  = $request->email;
-                    // $order_item->phone_number  = $request->phone;
-                    // $order_item->notes  = $request->notes;
-                    // dd($order_item);
+        
                     $order_item->save();
                 }
             $cart = session()->get('cart');

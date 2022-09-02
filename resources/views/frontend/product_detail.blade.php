@@ -73,14 +73,6 @@
                                 @endif
 
                                 </li>
-                                {{-- <li>
-                                    <a href="#" class="elevatezoom-gallery active" data-update=""
-                                        data-image="assets/img/product/product2.jpg"
-                                        data-zoom-image="assets/img/product/product2.jpg">
-                                        <img src="assets/img/s-product/product4.jpg" alt="zo-th-1" />
-                                    </a>
-
-                                </li> --}}
                             </ul>
                         </div>
                     </div>

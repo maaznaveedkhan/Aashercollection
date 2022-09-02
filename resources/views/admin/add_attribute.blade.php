@@ -79,84 +79,11 @@
             // console.log(attributes);
             });
             
-            
-
-
-
-            // $(document).on('click', '#set_session', function(){
-            //     $.ajax({ 
-            //     url: "{{ route('session.create') }}",
-            //     data: {'name': name, 
-            //             'value': optValue
-            //             },
-            //     type: 'get',
-            //     success: function(response){
-            //         console.log(response);
-            //     }
-            //     });
-            // });
         });
         // var btnAddAttribute = document.querySelector('#btnAddAttribute');
         const btnAdd = document.querySelector('#btnAdd');
         const btnRemove = document.querySelector('#btnRemove');
         const sb = document.querySelector('#list');
         const name = document.querySelector('#name');
-        // const attribute_name = document.querySelector('#attribute_name');
-
-        // btnAddAttribute.onclick =(e)=>{
-        //     alert('working');
-        //     e.preventDefault();
-        //     // validate the option
-        //     if (attribute_name.value == '') {
-        //         alert('Please enter attribute name.');
-        //         return;
-        //     }
-        //     // create a new option
-        //     const option = new Option(attribute_name.value, attribute_name.value);
-        //     // add it to the list
-        //     sb.add(option, undefined);
-
-        //     // reset the value of the input
-        //     attribute_name.value = '';
-        //     attribute_name.focus();
-        // }
-
-        // btnAdd.onclick = (e) => {
-        //     e.preventDefault();
-
-        //     // validate the option
-        //     if (name.value == '') {
-        //         alert('Please enter the name.');
-        //         return;
-        //     }
-        //     // create a new option
-        //     const option = new Option(name.value, name.value);
-        //     // add it to the list
-        //     sb.add(option, undefined);
-
-        //     // reset the value of the input
-        //     name.value = '';
-        //     name.focus();
-        // };
-
-        // // remove selected option
-        // btnRemove.onclick = (e) => {
-        //     e.preventDefault();
-
-        //     // save the selected option
-        //     let selected = [];
-
-        //     for (let i = 0; i < sb.options.length; i++) {
-        //         selected[i] = sb.options[i].selected;
-        //     }
-
-        //     // remove all selected option
-        //     let index = sb.options.length;
-        //     while (index--) {
-        //         if (selected[index]) {
-        //             sb.remove(index);
-        //         }
-        //     }
-        // };
     </script>
 @endsection

@@ -46,8 +46,7 @@
                             <button data-role="grid_list" type="button"  class="btn-list" data-bs-toggle="tooltip" title="List"></button>
                         </div>
                         <div class="page_amount">
-                            {{-- <p>Showing {{($products->currentpage()-1)*$products->perpage()+1}}-{{$products->currentpage()*$products->perpage()}}
-                                of  {{$products->total()}} results</p> --}}
+
                         </div>
                     </div>
                      <!--shop toolbar end-->

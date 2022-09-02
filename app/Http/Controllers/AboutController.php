@@ -39,14 +39,6 @@ class AboutController extends Controller
 
     public function add_about(Request $request)
     {
-        // return $request;
-        // $validatedData = $request->validate([
-        //     'image' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
-        //     'product_images' => 'required|image|mimes:jpg,png,jpeg,gif,svg',
-
-        //    ]);
-
-       
         $about = new About();
         if ($request->hasFile('image')) {
             $file = $request->file('image');

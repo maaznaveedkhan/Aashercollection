@@ -114,51 +114,19 @@ class OrderController extends Controller
         if (Auth::check()) {
             $order->user_id = Auth::user()->id;
         }
-        $order->user_id = Auth::user()->id;
+        // $order->user_id = Auth::user()->id;
         $order->total = $total;
         $order->item_count = $total_quantity;
         $order->save();
-        // $attribute_name = array();
-        // foreach(session()->get('cart') as $item){
-        //     $attribute_name[]= $item['attribute_name'];
-        //  };
-        //  $attribute_name_array = $attribute_name;
-        //  $product_attribute_name = serialize($attribute_name_array);
-        //  $attribute_values = array();
-        // foreach(session()->get('cart') as $item){
-        //    $attribute_values[]= $item['attribute_values'];
-        // };
-        // $attribute_value_array = $attribute_values;
-        // $product_attribute_values = serialize($attribute_value_array);
-        
         $orderProducts = [];
         $attribute_name = "";
         $attribute_values = "";
-        if (Auth::check()) {
-            $user_id = Auth::user()->id;
-        }
-        // dd($oldCart);
-        // foreach ($oldCart as $productId => $item) {
-
-        //     $orderProducts[] = [
-        //         // 'user_id' => Auth::user()->id,
-        //         'order_id' => $order->order_number,
-        //         'user_id' =>  $user_id ,
-        //         'product_id' => $productId,
-        //         'quantity' => $item['quantity'],
-        //         'price' => $item['price'] * $item['quantity'],
-        //         'attribute_name'=> $attribute_name, 
-        //         'attribute_values'=> $attribute_values
-                
-        //     ];
-        //     // $total = $total + ($item['price'] * $item['quantity']);
-        // }
+        
         foreach ($oldCart as $productId => $item) {
 
             if(!is_null($attribute_name) && !is_null($attribute_values)){
                 $attribute_name = $item['attribute_name'];
                 $attribute_values = $item['attribute_values'];
-                
             }else{
                 $attribute_name =null;
                 $attribute_values = null;
@@ -175,27 +143,6 @@ class OrderController extends Controller
             ];
             // $total = $total + ($item['price'] * $item['quantity']);
         }
-        // return $total;
-        // $user_id = Auth::user()->id;
-        // $user = UserInfo::where('user_id', $user_id)->first();
-        // if(empty( $user)){
-        //     DB::table('user_infos')->insert(
-        //         [   
-        //             'user_id'=>$user_id,
-        //             "name" => $request->name,
-        //             'email'  => $request->email,
-        //             'phone'  => $request->phone,
-        //             'city' => $request->city,
-        //             'address' => $request->address,
-        //             'postal_code' => $request->postal_code,
-        //             'created_at'=>Carbon::now(),
-                    
-        //         ]
-        //     );
-        // }else{
-            
-        // }       
-        // dd($user);
         OrderItem::insert($orderProducts);
         unset($oldCart);
         session()->put('cart', []);

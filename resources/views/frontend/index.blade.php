@@ -1,5 +1,20 @@
 @extends('frontend.layouts.app')
 @section('content')
+@if (count($errors) > 0)
+<div class="alert alert-danger">
+    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+    <ul>
+        @foreach ($errors->all() as $error)
+        <li>{{ $error }}</li>
+        @endforeach
+    </ul>
+</div>
+@endif
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
     <!--banner area start-->
     <section class="banner_section banner_section_eight">
         <div class="container-fluid">
@@ -60,28 +75,15 @@
                                 <li >
                                     <a class="{{ $item->id == 1 ? 'active' : '' }}" href="#home{{ $item->id }}" aria-controls="home{{$item->id}}" role="tab" aria-selected="true" data-bs-toggle="tab">{{ $item->title }}</a>
                                     
-                                    {{-- <a class="{{$key == 0 ? 'active':''}}" data-bs-toggle="tab" href="#{{ $key }}" role="tab" aria-controls="{{$key}}" aria-selected="{{$key == 0 ? 'true':''}}">{{ $item->title }}</a> --}}
                                 </li>
                                 @endforeach
-                                {{-- <li>
-                                    <a class="active" data-bs-toggle="tab" href="#clothing" role="tab" aria-controls="clothing" aria-selected="true">Women’s</a>
-                                </li>
-                                <li>
-                                    <a data-bs-toggle="tab" href="#handbag" role="tab" aria-controls="handbag" aria-selected="false">Men’s</a>
-                                </li>
-                                <li>
-                                    <a data-bs-toggle="tab" href="#shoes" role="tab" aria-controls="shoes" aria-selected="false">Kid's</a>
-                                </li>
-                                <li>
-                                    <a data-bs-toggle="tab" href="#accessories" role="tab" aria-controls="accessories" aria-selected="false">Shoes</a>
-                                </li> --}}
+                               
                             </ul>
                         </div>
                     </div>
                 </div>
                 <div class="tab-content">
                     @foreach ($categories as $key=>$item)
-                        {{-- <div class="tab-pane fade {{$key == 0 ? ' active' : ''}}" id="{{ $key }}" role="tabpanel"> --}}
                         <div role="tabpanel" class="tab-pane fade {{ $item->id == 1 ? 'active' : ''  }}" id="home{{ $item->id }}" class="show active">
                             <div class="product_container">
                                 <div class="row product_rows_column4">
@@ -101,11 +103,6 @@
                                                         <div class="hover_action">
                                                         <a  href="{{ route('product_detail',$item->id) }}"><i class="fa fa-plus"></i></a>
                                                         <div class="action_button">
-                                                            {{-- <ul>
-                                                                <li><a title="add to cart" href="{{ route('add.to.cart',$item->id) }}"><i class="fa fa-shopping-basket" aria-hidden="true"></i></a></li>
-                                                                <li><a href="wishlist.html" title="Add to Wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a></li>
-                                                                <li><a href="compare.html" title="Add to Compare"><i class="fa fa-sliders" aria-hidden="true"></i></a></li>
-                                                            </ul> --}}
                                                         </div>
                                                     </div>
                                                     </div>
@@ -194,36 +191,7 @@
                                                             </div>
                                                             <div class="variants_selects">
                                                                 <div class="variants_size">
-                                                                {{-- @php
-                                                                    $attribute_name = unserialize($item->attribute_name);
-                                                                @endphp --}}
-                                                                {{-- {{ dd(unserialize($item->attribute_name)) }} --}}
-                                                                {{-- @foreach (unserialize($item->attribute_name) as $object)
-                                                                    {{ $object }}
-                                                                @endforeach --}}
-                                                                {{-- <h3>{{ unserialize($item['attribute_name']) }}</h3> --}}
-                                                              
-                                                                {{-- @php
-                                                                    $attribute_value = unserialize($item->attribute_values);
-                                                                @endphp
-                                                                @foreach ($attribute_value as $item)
-                                                                    @php
-                                                                        $collection = explode(',' , $item)
-                                                                    @endphp
-                                                                    <select class="niceselect_option" id="color" name="produc_color">
-                                                                        <option selected value="1">choose in option</option>
-                                                                        @foreach ($collection as $element)
-                                                                            <option  value="{{$element}}">{{$element}}</option>
-                                                                        @endforeach
-                                                                    </select>
-                                                                @endforeach --}}
-                                                                    {{-- <h2>size</h2>
-                                                                    <p>{{ $item->size }}</p> --}}
                                                                 </div>
-                                                                {{-- <div class="variants_color">
-                                                                    <h2>color</h2>
-                                                                    <p>{{ $item->color }}</p>
-                                                                </div> --}}
                                                                 <div class="modal_add_to_cart">
                                                                     <form action="{{ route('add.to.cart',$item->id) }}">
                                                                         <input class=" quantity update-cart" min="1" max="100" value="1" type="number">

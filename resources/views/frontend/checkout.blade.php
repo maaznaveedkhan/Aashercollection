@@ -80,14 +80,6 @@
                             <h3>Billing Details</h3>
                             
                                 <div class="row">
-                                    {{-- <div class="col-lg-6 mb-20">
-                                        <label>First Name <span>*</span></label>
-                                        <input type="text">
-                                    </div>
-                                    <div class="col-lg-6 mb-20">
-                                        <label>Last Name  <span>*</span></label>
-                                        <input type="text">
-                                    </div> --}}
                                     <div class="col-12 mb-20">
                                         <label> Name</label>
                                         <input type="text" name="name" value="">
@@ -114,51 +106,17 @@
                                         <label> Email Address   <span>*</span></label>
                                         <input type="text" name="email"  value="">
                                     </div>
-                                    {{-- <div class="col-12 mb-20">
-                                        <input id="account" type="checkbox" data-bs-target="createp_account" />
-                                        <label for="account" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-controls="collapseOne">Create an account?</label>
 
-                                        <div id="collapseOne" class="collapse one" data-parent="#accordion">
-                                            <div class="card-body1">
-                                            <label> Account password   <span>*</span></label>
-                                                <input placeholder="password" type="password">
-                                            </div>
-                                        </div>
-                                    </div> --}}
                                     <div class="col-12 mb-20">
                                         <input id="address" type="checkbox" data-bs-target="createp_account" />
                                         <label class="righ_0" for="address" data-bs-toggle="collapse" data-bs-target="#collapsetwo" aria-controls="collapseOne">Ship to a different address?</label>
 
                                         <div id="collapsetwo" class="collapse one" data-parent="#accordion">
                                         <div class="row">
-                                                {{-- <div class="col-lg-6 mb-20">
-                                                    <label>First Name <span>*</span></label>
-                                                    <input type="text" name="f_name">
-                                                </div>
-                                                <div class="col-lg-6 mb-20">
-                                                    <label>Last Name  <span>*</span></label>
-                                                    <input type="text" >
-                                                </div> --}}
                                                 <div class="col-12 mb-20">
                                                     <label> Name</label>
                                                     <input type="text">
                                                 </div>
-                                                {{-- <div class="col-12 mb-20">
-                                                    <div class="select_form_select">
-                                                        <label for="countru_name">country <span>*</span></label>
-                                                        <select class="niceselect_option" name="cuntry" id="countru_name">
-                                                            <option value="2">bangladesh</option>
-                                                            <option value="3">Algeria</option>
-                                                            <option value="4">Afghanistan</option>
-                                                            <option value="5">Ghana</option>
-                                                            <option value="6">Albania</option>
-                                                            <option value="7">Bahrain</option>
-                                                            <option value="8">Colombia</option>
-                                                            <option value="9">Dominican Republic</option>
-
-                                                        </select>
-                                                    </div>
-                                                </div> --}}
                                                 <div class="col-12 mb-20">
                                                     <label>Street address  <span>*</span></label>
                                                     <input placeholder="House number and street name" type="text">
@@ -170,10 +128,6 @@
                                                     <label>Town / City <span>*</span></label>
                                                     <input  type="text">
                                                 </div>
-                                                {{-- <div class="col-12 mb-20">
-                                                    <label>State / County <span>*</span></label>
-                                                    <input type="text">
-                                                </div> --}}
                                                 <div class="col-lg-6 mb-20">
                                                     <label>Phone<span>*</span></label>
                                                     <input type="text">
