@@ -41,7 +41,7 @@
                                         @php $sub_total = 0 @endphp
                                         @php $total = 0 @endphp
                                         @php $shipping = 0 @endphp
-                                        @if(session('cart'))
+                                        @if(!empty(session('cart')))
                                             @foreach(session('cart') as $id => $details)
                                                 @php $sub_total += $details['price'] * $details['quantity'] @endphp
                                                 <tr data-id="{{ $id }}">
@@ -112,9 +112,11 @@
                                     </div>
                                     <div class="cart_subtotal ">
                                         <p>Shipping</p>
-                                        @foreach(session('cart') as $id => $details)
+                                        @if (session('cart'))
+                                            @foreach(session('cart') as $id => $details)
                                             @php $shipping +=$details['delivery_charges'] @endphp
-                                        @endforeach
+                                            @endforeach
+                                        @endif
                                         <p class="cart_amount"><span>Flat Rate:</span> Rs. {{ $shipping }}</p>
                                     </div>
                                     <a href="#">Calculate shipping</a>

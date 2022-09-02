@@ -45,9 +45,6 @@ Route::get('privacy_policy', [App\Http\Controllers\AboutController::class, 'priv
 Route::get('terms&conditions', [App\Http\Controllers\AboutController::class, 'terms'])->name('terms');
 Route::get('faq', [App\Http\Controllers\AboutController::class, 'faq'])->name('faq');
 Route::get('search', [App\Http\Controllers\ProductController::class, 'search'])->name('search');
-Route::get('wishlist', [App\Http\Controllers\WishlistController::class, 'wishlist'])->name('wishlist');
-Route::get('add_to_wishlist/{id}', [App\Http\Controllers\WishlistController::class, 'add_to_wishlist'])->name('add_to_wishlist');
-Route::get('remove_from_wishlist/{id}', [App\Http\Controllers\WishlistController::class, 'remove_from_wishlist'])->name('remove_from_wishlist');
 Route::get('compare/{id}', [App\Http\Controllers\WishlistController::class, 'compare'])->name('compare');
 Route::get('compare_search', [App\Http\Controllers\WishlistController::class, 'autosearch'])->name('compare_search');
 Route::get('find_product', [App\Http\Controllers\WishlistController::class, 'find_product'])->name('find_product');
@@ -56,7 +53,9 @@ Route::post('placeorder', [App\Http\Controllers\OrderController::class, 'placeor
 Route::post('add_attribute_session',[App\Http\Controllers\CartController::class,'add_attribute_session'])->name('add_attribute_session');
 Route::group(['middleware' => ['auth']], function () {
     //Checkout
-    
+    Route::get('wishlist', [App\Http\Controllers\WishlistController::class, 'wishlist'])->name('wishlist');
+    Route::get('add_to_wishlist/{id}', [App\Http\Controllers\WishlistController::class, 'add_to_wishlist'])->name('add_to_wishlist');
+    Route::get('remove_from_wishlist/{id}', [App\Http\Controllers\WishlistController::class, 'remove_from_wishlist'])->name('remove_from_wishlist');
 });
 
 Auth::routes();

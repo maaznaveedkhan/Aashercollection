@@ -7,12 +7,12 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend/img/logo_latest.jpg') }}">
 
     <!-- CSS
     ========================= -->
-
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Plugins CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/css/plugins.css') }}">
 
@@ -649,7 +649,7 @@
             </div>
         </div>
         <!--header bottom end-->
-        <div class="footer_wrapper">
+        {{-- <div class="footer_wrapper">
            <div class="row">
                 <div class="col-md-3">
                     <i class="fa fa-home"></i>
@@ -668,41 +668,39 @@
                     <a href="">Home</a>
                 </div>
            </div>
-       </div>
-        {{-- <div class="footer_wrapper">
-            <div class="footer_wrapper_item">
-                <div class="footer_wrapper_icon">
-                    <i class="fa fa-home"></i>
-                </div>
-                <div class="footer_wrapper_text">
-                    <a href="">Home</a>
-                </div>
-            </div>
-            <div class="footer_wrapper_item">
-                <div class="footer_wrapper_icon">
-                    <i class="fa fa-home"></i>
-                </div>
-                <div class="footer_wrapper_text">
-                    <a href="">Home</a>
-                </div>
-            </div>
-            <div class="footer_wrapper_item">
-                <div class="footer_wrapper_icon">
-                    <i class="fa fa-home"></i>
-                </div>
-                <div class="footer_wrapper_text">
-                    <a href="">Home</a>
-                </div>
-            </div>
-            <div class="footer_wrapper_item">
-                <div class="footer_wrapper_icon">
-                    <i class="fa fa-home"></i>
-                </div>
-                <div class="footer_wrapper_text">
-                    <a href="">Home</a>
-                </div>
-            </div>
-        </div> --}}
+       </div> --}}
+        {{-- <nav class="mobile-nav">
+            <a href="{{ route('/') }}" class="bloc-icon">
+                <i class="fas fa-home fa-2x"></i>
+            </a>
+            <a href="{{ route('cart') }}" class="bloc-icon">
+                <i class="fas fa-shopping-basket fa-2x"></i>
+            </a>
+            <a href="{{ route('wishlist') }}" class="bloc-icon">
+                <i class="fas fa-heart fa-2x"></i>
+            </a>
+            <a href="{{ route('home') }}" class="bloc-icon">
+                <i class="far fa-user-circle fa-2x"></i>
+            </a>
+        </nav> --}}
+        <nav class="mob_nav">
+            <a href="#" class="mob_nav__link">
+                <i class="fas fa-home"></i>
+                <span class="nav__text">Home</span>
+              </a>
+            <a href="#" class="mob_nav__link">
+                <i class="fas fa-shopping-basket"></i>
+                <span class="nav__text">Cart</span>
+            </a>
+            <a href="#" class="mob_nav__link">
+              <i class="fas fa-heart"></i>
+              <span class="nav__text">Wishlist</span>
+            </a>
+            <a href="#" class="mob_nav__link nav__link--active">
+                <i class="fas fa-user-circle "></i>
+                <span class="nav__text">Profile</span>
+              </a>
+        </nav>
     </header>
     <!--header area end-->
     @yield('content')
