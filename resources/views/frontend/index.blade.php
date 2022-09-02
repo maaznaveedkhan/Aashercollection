@@ -294,23 +294,7 @@
             });
         });
 
-        $(".remove-from-cart").on('input',function (e) {
-            e.preventDefault();
-            var ele = $(this);
-            if(confirm("Are you sure want to remove?")) {
-                $.ajax({
-                    url: '{{ route('remove.from.cart') }}',
-                    method: "DELETE",
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        id: ele.parents("tr").attr("data-id")
-                    },
-                    success: function (response) {
-                        window.location.reload();
-                    }
-                });
-            }
-        });
+
 
     });
     </script>

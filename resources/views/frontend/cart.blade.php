@@ -46,7 +46,7 @@
                                                 @php $sub_total += $details['price'] * $details['quantity'] @endphp
                                                 <tr data-id="{{ $id }}">
                                                     
-                                                    <td class="product_remove"><a href="#"><i class="fa fa-trash-o"></i></a>
+                                                    <td class="product_remove"><a href="{{ url('delete',$id) }}"><i class="fa fa-trash-o"></i></a>
                                                     </td>
                                                     <td class="product_thumb"  style="text-align:center; vertical-align:middle">
                                                         <a href="{{ url('product_detail') }}">
@@ -165,24 +165,6 @@
                     window.location.reload();
                 }
             });
-        });
-
-        $(".remove-from-cart").on('input',function (e) {
-            e.preventDefault();
-            var ele = $(this);
-            if(confirm("Are you sure want to remove?")) {
-                $.ajax({
-                    url: '{{ route('remove.from.cart') }}',
-                    method: "DELETE",
-                    data: {
-                        _token: '{{ csrf_token() }}',
-                        id: ele.parents("tr").attr("data-id")
-                    },
-                    success: function (response) {
-                        window.location.reload();
-                    }
-                });
-            }
         });
 
     });

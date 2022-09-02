@@ -53,7 +53,6 @@
 
                         <ul class="dropdown_links">
 
-                            {{-- <li><a href="wishlist.html">My Wish List </a></li> --}}
 
                             <li><a href="{{ route('home') }}">My Account </a></li>
 
@@ -145,21 +144,7 @@
 
             </div>
             
-            {{-- <div class="search_bar">
-                <select class="select_option" name="select" onchange="window.location.href=this.options[this.selectedIndex].value;">
-                    <option selected value="1">All Categories</option>
-                    @foreach ($categories as $item)
-                        <option value="{{ route('popular_categories',$item->id) }}">{{ $item->title }}</option>
-                    @endforeach
-                    
-                </select>
-                <form id="search_form" action="{{ route('search') }}" method="GET">
-                    
-                    <input name="product" id="product" placeholder="Search entire store here..." type="text">
-                    <button type="submit" id="search_button"><i class="ion-ios-search-strong"></i></button>
-                </form>
-                <div id="product_list"></div>
-            </div> --}}
+
             <div class="cart_area">
                 <div class="middel_links">
                     <ul>
@@ -170,15 +155,12 @@
 
                 </div>
                 <div class="cart_link">
-                    {{-- <a href="#"><i class="fa fa-shopping-basket"></i>2 item(s)</a> --}}
                     <a href="#"><i
                         class="fa fa-shopping-basket"></i>{{ count((array) session('cart')) }}item(s)</a>
                     <!--mini cart-->
                         <div class="mini_cart">
                             @if (! Session :: has ('cart') || empty (Session :: get ('cart')))
-                                {{-- <div class="card_item top">
-                                    <p>Not Products Found...</p>
-                                </div> --}}
+
                             @else
                                 @if (session('cart'))
                                     @foreach (session('cart') as $id => $details)
@@ -194,8 +176,15 @@
 
                                             </div>
                                             <div class="cart_remove">
-                                                <button class="btn btn-danger btn-sm remove-from-cart"><i class="fa fa-trash-o"></i></button>
-                                                {{-- <a href="{{ route('remove.from.cart') }}"><i class="ion-android-close"></i></a> --}}
+
+                                                {{-- <tr  data-id="{{ $id }}">
+                                                    <td class="actions" data-th="">
+                                                        <button class="btn btn-danger btn-sm remove-from-cart"><i class="fa fa-trash-o"></i></button>
+                                                    </td>
+                                                </tr> --}}
+                                         
+                                                {{-- <button class="btn btn-danger btn-sm remove-from-cart"><i class="fa fa-trash-o"></i></button> --}}
+                                                <a href="{{ url('delete',$id) }}"><i class="ion-android-close"></i></a>
                                             </div>
                                         </div>
                                     @endforeach
@@ -227,16 +216,6 @@
                                                     <td class="text-left">Sub-Total :</td>
                                                     <td class="text-right">{{ $sub_total }}</td>
                                                 </tr>
-                                                {{-- <tr>
-                                                    @php $sub_total = 0 @endphp
-                                                    @if(session('cart'))
-                                                        @foreach ((array) session('cart') as $id => $details)
-                                                            @php $sub_total += $details['price'] * $details['quantity'] @endphp
-                                                        @endforeach
-                                                    @endif
-                                                    <td class="text-left">Total :</td>
-                                                    <td class="text-right">{{ $sub_total }}</td>
-                                                </tr> --}}
                                             </tbody>
                                         </table>
                                     </div>
@@ -256,17 +235,7 @@
                 <ul class="offcanvas_main_menu">
                     <li class="menu-item-has-children">
                         <a href="{{ url('/') }}">Home</a>
-                        {{-- <ul class="sub-menu">
-                            <li><a href="index.html">Home 1</a></li>
-                            <li><a href="index-2.html">Home 2</a></li>
-                            <li><a href="index-3.html">Home 3</a></li>
-                            <li><a href="index-4.html">Home 4</a></li>
-                            <li><a href="index-5.html">Home 5</a></li>
-                            <li><a href="index-6.html">Home 6</a></li>
-                            <li><a href="index-7.html">Home 7</a></li>
-                            <li><a href="index-8.html">Home 8</a></li>
-                            <li><a href="index-9.html">Home 9</a></li>
-                        </ul> --}}
+
                     </li>
                     <li class="menu-item-has-children">
                         <a href="#">Shop</a>
@@ -400,14 +369,7 @@
                         </div>
                         <div class="col-lg-3">
                             <div class="cart_area">
-                                {{-- <div class="middel_links">
-                                    <ul>
-                                        <li><a href="{{ route('login') }}">Login</a></li>
-                                        <li>/</li>
-                                        <li><a href="login.html">Register</a></li>
-                                    </ul>
 
-                                </div> --}}
                                 <div class="cart_link">
                                     <a href="#"><i
                                             class="fa fa-shopping-basket"></i>{{ count((array) session('cart')) }}
@@ -430,13 +392,8 @@
                                                             <span>{{ $details['quantity'] }}x Rs.{{ $details['price'] }}</span>
                                                         </div>
                                                         <div class="cart_remove">
-                                                            {{-- <form action="{{ route('remove.from.cart') }}" method="POST">
-                                                                @csrf
-                                                                @method('delete')
-                                                                <button type="submit"><i class="ion-android-close"></i></button>
-                                                            </form>
-                                                            <a href="{{ route('remove.from.cart') }}"><i class="ion-android-close"></i></a> --}}
-                                                            <button class="btn btn-danger btn-sm remove-from-cart"><i class="fa fa-trash-o"></i></button>
+                                                            <a href="{{ url('delete',$id) }}"><i class="ion-android-close"></i></a>
+
                                                         </div>
                                                     </div>
                                                 @endforeach
@@ -453,16 +410,6 @@
                                                         <td class="text-left">Sub-Total :</td>
                                                         <td class="text-right">{{ $sub_total }}</td>
                                                     </tr>
-                                                    {{-- <tr>
-                                                        @php $sub_total = 0 @endphp
-                                                        @if(session('cart'))
-                                                            @foreach ((array) session('cart') as $id => $details)
-                                                                @php $sub_total += $details['price'] * $details['quantity'] @endphp
-                                                            @endforeach
-                                                        @endif
-                                                        <td class="text-left">Total :</td>
-                                                        <td class="text-right">{{ $sub_total }}</td>
-                                                    </tr> --}}
                                                 </tbody>
                                             </table>
                                         </div>
@@ -605,31 +552,6 @@
                                                 @endforeach
                                             </ul>
                                         </li>
-                                        {{-- <li class="mega_items"><a href="shop.html">shop <i
-                                                    class="fa fa-angle-down"></i></a>
-                                            <ul class="mega_menu">
-                                                <li><a href="#">Categories</a>
-                                                    <ul>
-                                                        @foreach ($categories as $item)
-                                                        <li><a href="{{ route('popular_categories',$item->id) }}">{{ $item->title }}</a></li>
-                                                        @endforeach
-                                                        
-                                                        <li><a href="shop-fullwidth-list.html">Full Width list</a></li>
-                                                        <li><a href="shop-right-sidebar.html">Right Sidebar </a></li>
-                                                        <li><a href="shop-right-sidebar-list.html"> Right Sidebar
-                                                                list</a></li>
-                                                        <li><a href="shop-list.html">List View</a></li>
-                                                    </ul>
-                                                </li>
-                                            </ul>
-                                        </li> --}}
-                                        {{-- <li><a href="blog.html">blog <i class="fa fa-angle-down"></i></a>
-                                            <ul class="sub_menu pages">
-                                                <li><a href="blog-details.html">blog details</a></li>
-                                                <li><a href="blog-sidebar.html">blog Sidebar</a></li>
-                                                <li><a href="blog-fullwidth.html">blog fullwidth</a></li>
-                                            </ul>
-                                        </li> --}}
                                         <li><a href="{{ route('about_us') }}">About us</a></li>
                                         <li><a href="{{ route('contact_us') }}">Contact Us</a></li>
                                         <li><a href="#">Information <i class="fa fa-angle-down"></i></a>
@@ -649,26 +571,7 @@
             </div>
         </div>
         <!--header bottom end-->
-        {{-- <div class="footer_wrapper">
-           <div class="row">
-                <div class="col-md-3">
-                    <i class="fa fa-home"></i>
-                    <a href="">Home</a>
-                </div>
-                <div class="col-md-3">
-                    <i class="fa fa-home"></i>
-                    <a href="">Home</a>
-                </div>
-                <div class="col-md-3">
-                    <i class="fa fa-home"></i>
-                    <a href="">Home</a>
-                </div>
-                <div class="col-md-3">
-                    <i class="fa fa-home"></i>
-                    <a href="">Home</a>
-                </div>
-           </div>
-       </div> --}}
+ 
         {{-- <nav class="mobile-nav">
             <a href="{{ route('/') }}" class="bloc-icon">
                 <i class="fas fa-home fa-2x"></i>
@@ -715,11 +618,9 @@
                             <div class="footer_menu">
                                 <ul>
                                     <li><a href="{{ route('about_us') }}">About Us</a></li>
-                                    {{-- <li><a href="#">Delivery Information</a></li> --}}
                                     <li><a href="{{ route('privacy_policy') }}">Privacy Policy</a></li>
                                     <li><a href="{{ route('terms') }}">Terms & Conditions</a></li>
                                     <li><a href="{{ route('contact_us') }}">Contact Us</a></li>
-                                    {{-- <li><a href="#">Returns</a></li> --}}
                                 </ul>
                             </div>
                         </div>
@@ -729,11 +630,6 @@
                             <h3>Extras</h3>
                             <div class="footer_menu">
                                 <ul>
-                                    {{-- <li><a href="#">Brands</a></li>
-                                    <li><a href="#">Gift Certificates</a></li>
-                                    <li><a href="#">Affiliate</a></li>
-                                    <li><a href="#">Specials</a></li>
-                                    <li><a href="contact.html">Site Map</a></li> --}}
                                     <li><a href="{{ route('home') }}">My Account</a></li>
                                 </ul>
                             </div>
@@ -807,7 +703,7 @@
     <!--footer area end-->
 
     <!-- modal area start-->
-    <div class="modal fade" id="modal_box" tabindex="-1" role="dialog" aria-hidden="true">
+    {{-- <div class="modal fade" id="modal_box" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -951,7 +847,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- modal area start-->
 
 
@@ -990,26 +886,6 @@
                 var value = $(this).text();
                 $('#product').val(value);
                 $('#product_list').html("");
-            });
-
-            $(".remove-from-cart").click(function (e) {
-                e.preventDefault();
-        
-                var ele = $(this);
-        
-                if(confirm("Are you sure want to remove?")) {
-                    $.ajax({
-                        url: '{{ route('remove.from.cart') }}',
-                        method: "DELETE",
-                        data: {
-                            _token: '{{ csrf_token() }}', 
-                            id: ele.parents("tr").attr("data-id")
-                        },
-                        success: function (response) {
-                            window.location.reload();
-                        }
-                    });
-                }
             });
 
         });

@@ -10,6 +10,7 @@ use App\Models\UserInfo;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
@@ -26,7 +27,7 @@ class CartController extends Controller
      * @return response()
      */
     public function addToCart($id, Request $request)
-    {
+    {  
         $names = '';
         $values = '';
         $names = $request->attr_name;
@@ -57,8 +58,12 @@ class CartController extends Controller
         }
         // return $request;
         session()->put('cart', $cart);
-        
-        return redirect()->back()->with('success', 'Product added to cart successfully!');
+        if($request->buy_now == "true"){
+            return redirect()->route('checkout')->with('success', 'Product added to cart successfully!');
+        }else{
+            return redirect()->back()->with('success', 'Product added to cart successfully!');
+        }
+
     }
 
     /**
@@ -81,20 +86,27 @@ class CartController extends Controller
      *
      * @return response()
      */
-    public function remove(Request $request)
-    {
-        if ($request->id) {
-            $cart = session()->get('cart');
-            if (isset($cart[$request->id])) {
-                unset($cart[$request->id]);
-                session()->put('cart', $cart);
-            }
-            session()->flash('success', 'Product removed successfully');
-        }
+    public function remove($id){
+        $cart = Session::get('cart');
+        unset($cart[$id]);
+        Session::put('cart', $cart);
+        return redirect()->back()->with('success','Item has been removed from cart');
     }
 
+    // public function remove(Request $request)
+    // {
+    //     // return $request;
+    //     if ($request->id) {
+           
+    //         $cart = session()->get('cart');
+    //         if (isset($cart[$request->id])) {
+    //             unset($cart[$request->id]);
+    //             session()->put('cart', $cart);
+    //         }
+    //         session()->flash('success', 'Product removed successfully');
+    //     }
+    // }
     
-
     public function placeorder(Request $request){
         // $cart = session('cart');
         // return $request;
@@ -160,8 +172,6 @@ class CartController extends Controller
             return redirect()->route('/')->with('success','Your Order Has been Recieved successfully');
         }
         return redirect()->route('/');
-
-
 
     }
 }

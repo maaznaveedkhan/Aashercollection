@@ -144,7 +144,7 @@
                                                 <input type="hidden" name="attr_name[]" id="fill{{$key}}" value="">
                                                 <input type="hidden" name="attr_values[]" id="at_val" value="">
                                                 <select class="niceselect_option" required id="putme{{$key}}" name="" onchange="getval(this);">
-                                                <option option="">choose in option</option>
+                                                <option option="" value="">choose in option</option>
                                                 @foreach ($collection as $element)
                                                     <option  value="{{$element}}">{{$element}}</option>
                                                 @endforeach 
@@ -155,14 +155,18 @@
                                         </ul>
                                         
                                     @endif
+                                        <input type="hidden" name="buy_now" id="buy_now" value="false">
                                 </div>
                                 <div class="product_variant quantity">
                                     {{-- <label>quntity</label>
                                     <input min="1" max="100" value="" type="number"> --}}
                                     <button class="button" type="submit">Add to Cart</button>
-                                    <a class="button" style="margin-left: 1rem;" href="{{ route('checkout') }}">Buy Now</a>
+                                    <button class="button" type="submit" onclick="change()"> Buy Now</button>
                                 </div>
                             </form>
+                            {{-- <form action="{{ route('buy_now',$product_detail['id']) }}">
+                                <button class="button" type="submit" > Buy Now</button>
+                            </form> --}}
                             <div class=" product_d_action">
                                 <ul>
                                     @auth
@@ -175,7 +179,6 @@
                                                 aria-hidden="true"></i> Compare this Product</a></li>
                                 </ul>
                             </div>
-
                         {{-- </form> --}}
                         <div class="priduct_social">
                             <h3>Share on:</h3>
@@ -606,10 +609,10 @@
     }
     
    }
-
+    function change(){
+	    var txt = "true";
+	    document.getElementById("buy_now").value = txt;
+    }
    
-   
-
 </script>
-{{-- {{ dd($attributy) }} --}}
 @endsection
