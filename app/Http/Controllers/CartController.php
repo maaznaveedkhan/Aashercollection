@@ -21,6 +21,12 @@ class CartController extends Controller
         return view('frontend.cart');
     }
 
+    public function unset(){
+        $cart = Session::get('cart');
+        unset($cart);
+        Session::put('cart',[]);
+        return redirect()->back()->with('success','Item has been removed from cart');
+    }
     /**
      * Write code on Method
      *
@@ -28,6 +34,18 @@ class CartController extends Controller
      */
     public function addToCart($id, Request $request)
     {  
+        $pro_id = 1;
+        $sess_cart =Session::get('cart');
+    //    return 'type of '. gettype($pro_id).'value '. $pro_id;
+        if($request->buy_now == "true" && $sess_cart!= null){
+          
+            foreach($sess_cart as $key =>$item){
+             $pro_id = $item['id'];
+             $pro_id = ( int ) $pro_id;
+             
+            }
+            return redirect()->back()->with(['prod_id'=>$pro_id, 'popup'=>true]);
+        }
         $names = '';
         $values = '';
         $names = $request->attr_name;
@@ -47,6 +65,7 @@ class CartController extends Controller
             $cart[$id]['quantity']++;
         } else {
             $cart[$id] = [
+                "id" =>$id,
                 "name" => $request->product_name,
                 "quantity" => 1,
                 "price" => $request->product_price,

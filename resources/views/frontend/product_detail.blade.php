@@ -143,7 +143,7 @@
                                             <li  style="padding-top: 0.75rem;"> 
                                                 <input type="hidden" name="attr_name[]" id="fill{{$key}}" value="">
                                                 <input type="hidden" name="attr_values[]" id="at_val" value="">
-                                                <select class="niceselect_option" required id="putme{{$key}}" name="" onchange="getval(this);">
+                                                <select class="niceselect_option" required="required" id="putme{{$key}}" name="" onchange="getval(this);">
                                                 <option option="" value="">choose in option</option>
                                                 @foreach ($collection as $element)
                                                     <option  value="{{$element}}">{{$element}}</option>
@@ -163,6 +163,7 @@
                                     <button class="button" type="submit">Add to Cart</button>
                                     <button class="button" type="submit" onclick="change()"> Buy Now</button>
                                 </div>
+
                             </form>
                             {{-- <form action="{{ route('buy_now',$product_detail['id']) }}">
                                 <button class="button" type="submit" > Buy Now</button>
@@ -190,7 +191,38 @@
                                 <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
                             </ul>
                         </div>
-
+                        <div class="box">
+                            <a class="button" id="popupi" href="#popup1" style="display: none;">Let me Pop up</a>
+                        </div>
+                        <div id="popup1" class="overlay">
+                            <div class="popup">
+                                <h4>You already have items in the cart!</h4>
+                                <a class="close" href="#">&times;</a>
+                                <div class="content">
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                <p>Continue to Checkout</p>
+                                            </td>
+                                            <td>
+                                                <a href="{{url('checkout')}}" class="btn btn-primary btn-sm">Continue </a>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p>Remove Items from cart</p>
+                                            </td>
+                                            <td>
+                                                <a href="{{url('unset')}}" class="btn btn-danger btn-sm">Remove Item</a>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                     
+                                     
+                                    
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -615,4 +647,18 @@
     }
    
 </script>
+<script>
+    @if($message = session('succes_message'))
+        swal("{{ $message }}");
+    @endif
+</script>
+@if (session('popup') )
+      @if (session('popup') == true)
+   
+      <script>
+          document.getElementById('popupi').click();
+      </script>
+      @endif  
+    
+@endif
 @endsection

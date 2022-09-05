@@ -39,6 +39,7 @@ Route::get('add-to-cart/{id}', [App\Http\Controllers\CartController::class, 'add
 Route::patch('update-cart', [App\Http\Controllers\CartController::class, 'update'])->name('update.cart');
 // Route::delete('remove-from-cart', [App\Http\Controllers\CartController::class, 'remove'])->name('remove.from.cart');
 Route::get('delete/{id}', [App\Http\Controllers\CartController::class, 'remove']);
+Route::get('unset', [App\Http\Controllers\CartController::class, 'unset']);
 Route::get('blogs', [App\Http\Controllers\BlogController::class, 'index'])->name('blogs');
 Route::get('blog_detail/{id}', [App\Http\Controllers\BlogController::class, 'blog_detail'])->name('blog_detail');
 Route::get('blog_type/{id}', [App\Http\Controllers\BlogController::class, 'blog_type'])->name('blog_type');
