@@ -87,6 +87,7 @@
         position: relative;
         border: 1px solid gray;
         transition: all 5s ease-in-out;
+        z-index: 60;
         }
 
         .popup h2 {
@@ -121,7 +122,6 @@
         }
         }
     </style>
-@include('sweetalert::alert')
 </head>
 
 <body>

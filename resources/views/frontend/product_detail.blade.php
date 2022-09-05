@@ -196,30 +196,27 @@
                         </div>
                         <div id="popup1" class="overlay">
                             <div class="popup">
-                                <h4>You already have items in the cart!</h4>
+                                <h4>Items already in cart!</h4>
                                 <a class="close" href="#">&times;</a>
                                 <div class="content">
                                     <table>
-                                        <tr>
+                                        <tr style="text-align: center;">
                                             <td>
                                                 <p>Continue to Checkout</p>
                                             </td>
                                             <td>
-                                                <a href="{{url('checkout')}}" class="btn btn-primary btn-sm">Continue </a>
+                                                <a href="{{url('checkout')}}" class="btn btn-sm" style="background-color: #FE7B40; border-radius: 20px; color: white; width: 5rem; text-align: center;">Continue </a>
                                             </td>
                                         </tr>
-                                        <tr>
+                                        <tr style="text-align: center;">
                                             <td>
                                                 <p>Remove Items from cart</p>
                                             </td>
                                             <td>
-                                                <a href="{{url('unset')}}" class="btn btn-danger btn-sm">Remove Item</a>
+                                                <a href="{{url('unset')}}" class="btn btn-sm" style="background-color: #FE7B40; border-radius: 20px; color: white; width: 5rem;  text-align: center;">Remove</a>
                                             </td>
                                         </tr>
                                     </table>
-                                     
-                                     
-                                    
                                 </div>
                             </div>
                         </div>
